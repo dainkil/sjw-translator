@@ -87,6 +87,38 @@ curl -s -X POST localhost:8080/api/v1/translations/sync \
   -H 'Content-Type: application/json' -d '{"text":"以金瑬爲承旨","year":1623}'
 ```
 
+API 문서(Swagger UI)는 <http://localhost:8080/> 에서 열린다.
+
+## 공개 엔드포인트
+
+SKALA EKS `skala-gj4`에 배포한다 (ADR-022 개정). 주소: `https://skala-gj4-sjw.skala-gj.com`
+— 루트를 열면 Swagger UI다. 가용성은 교육 과정 기간에 한정된다.
+
+공개 모드에서는 키가 두 개다. 축이 다르다:
+
+| 헤더 | 무엇 | 없으면 |
+|---|---|---|
+| `X-Api-Key` | 발급받은 테넌트 키. 일일 호출 상한이 여기 걸린다 | 401 `API_KEY_REQUIRED` |
+| `X-Llm-Key` | 본인 Gemini API 키. **저장·로깅하지 않는다** | 403 `BYOK_REQUIRED` (캐시 미스일 때만) |
+
+**본인 키를 받는 이유:** 운영자 무료 quota가 하루 20회(RPD 20 실측)라 공개하면 한 사람이 오전에
+소진한다. 번역 비용은 요청자 키로 나간다 (ADR-020).
+
+```bash
+# 캐시에 있는 문장 — X-Api-Key만으로 응답한다 (LLM을 부르지 않으므로)
+curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
+  -H 'X-Api-Key: sjw_...' \
+  -H 'Content-Type: application/json' -d '{"text":"以金瑬爲承旨","year":1623}'
+
+# 캐시에 없는 문장 — 본인 Gemini 키가 필요하다
+curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
+  -H 'X-Api-Key: sjw_...' -H 'X-Llm-Key: <본인 Gemini 키>' \
+  -H 'Content-Type: application/json' -d '{"text":"上曰予不敏","year":1623}'
+```
+
+비동기 잡·배치 생성은 운영자 키로 LLM을 호출하므로 `operator_access` 테넌트만 쓸 수 있다
+(없으면 403 `OPERATOR_ACCESS_REQUIRED`). 테넌트 키 발급은 `deploy/k8s/issue-key.sh`.
+
 ## 문서
 
 [설계서](PROJECT_PLAN.md) · [설계 결정 기록(ADR)](docs/adr/) · [실측 기록](docs/benchmarks.md) · [비용 모델](docs/cost-model.md) · [트러블슈팅](docs/troubleshooting.md) · [연구 방법론](research/README.md)

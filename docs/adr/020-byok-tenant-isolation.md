@@ -46,3 +46,34 @@ quota는 요청자의 것이어야 한다. 그 순간 시스템의 문제는 "�
 
 - 배치 BYOK 요구가 실제로 생기면: 키를 잡 수명 동안만 보관하는 세션 스코프 저장(암호화+TTL)을 설계.
 - 테넌트가 늘어 발급·회전 관리가 필요해지면 관리 API(키 재발급·폐기)를 추가.
+
+---
+
+## 개정 (공개 서빙 1차, 2026-09-28) — 공개 모드
+
+위 "default 테넌트는 공개 배포 시 비활성화해야 한다(M6 체크리스트)"를 **설정 스위치로 구현**했다.
+`sjw.public-mode` (`SJW_PUBLIC_MODE`, 기본 `false`, K8s ConfigMap에서 `true`).
+
+`TenantGuard`가 모드에 따라 세 지점에서 갈린다:
+
+| 지점 | 로컬 모드 (기본) | 공개 모드 |
+|---|---|---|
+| `X-Api-Key` 없음 | `default` 테넌트로 처리 | **401 `API_KEY_REQUIRED`** |
+| 캐시 미스 + `X-Llm-Key` 없음 | 운영자 키로 호출 | **403 `BYOK_REQUIRED`** |
+| 미등록 키 | 401 `UNKNOWN_API_KEY` | 401 `UNKNOWN_API_KEY` (동일) |
+
+여기에 모드와 무관한 축이 하나 더 붙었다 — **`tenant.operator_access`** (V5 마이그레이션, 기본 `false`,
+`default`만 `true`). 비동기 잡 생성과 배치 생성은 운영자 키로 LLM을 호출하므로 이 플래그가 없으면
+**403 `OPERATOR_ACCESS_REQUIRED`**. 즉 공개 사용자는 동기·SSE 경로만 쓸 수 있고, 그 비용은 본인 키로 나간다.
+
+**설계상 중요한 순서 하나:** BYOK 검사는 **캐시 조회 이후**에 있다. 캐시에 있는 문장은
+`X-Api-Key`만으로 200을 돌려준다 — LLM을 부르지 않으므로 요구할 키가 없다. 이것이 공개 데모의
+성립 근거다(키 없는 평가자가 실제 응답을 본다). 반대로 미스는 NER·LLM 작업이 시작되기 **전에**
+차단된다 (`PublicModeWebTest`가 `verify(service, never()).prepare(...)`로 고정).
+
+**실측 (2026-09-28, 로컬 compose + 가짜 provider):**
+키 없음 → 401 `API_KEY_REQUIRED` / 발급 키 + 미캐시 → 403 `BYOK_REQUIRED` /
+미등록 키 → 401 `UNKNOWN_API_KEY` / 비운영자 비동기 → 403 `OPERATOR_ACCESS_REQUIRED`.
+
+**남은 한계:** 키 발급이 수동이다 (`deploy/k8s/issue-key.sh`). 셀프서비스 발급 창구는 없고,
+사내 API와 같은 운영 방식이다. 테넌트가 늘면 위 재검토 조건의 관리 API가 먼저 필요해진다.
