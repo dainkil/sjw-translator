@@ -21,7 +21,7 @@ if [[ "$TENANT" == "default" ]]; then
   exit 2
 fi
 
-PSQL="${PSQL:-kubectl exec -i statefulset/postgres -- psql -U sjw -d sjw}"
+PSQL="${PSQL:-kubectl exec -i statefulset/sjw-postgres -- psql -U sjw -d sjw}"
 
 KEY="sjw_$(openssl rand -hex 24)"
 HASH="$(printf '%s' "$KEY" | shasum -a 256 | cut -d' ' -f1)"

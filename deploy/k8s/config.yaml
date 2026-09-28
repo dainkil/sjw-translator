@@ -1,13 +1,16 @@
 # 생산 기본값 (PROGRESS §5.0 3): v4 프롬프트(classpath 기본), L1 on, 승격 on, L2·라우팅 off, 공개 모드.
 # 비밀은 여기 두지 않는다 — sjw-secrets(create-secrets.sh).
+# 호스트명은 namePrefix(sjw-)가 붙은 Service 이름이다 — kustomize는 ConfigMap 값 문자열은
+# 고쳐주지 않으므로 여기서 직접 맞춘다. 공유 네임스페이스라 맨 이름(postgres·redis·ner)은
+# 다른 프로젝트와 충돌한다 (실측: svc/postgres는 rai 소유, 2026-09-28 생성 거부).
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: sjw-config
+  name: config
 data:
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sjw
-  SPRING_DATA_REDIS_HOST: redis
-  NER_URL: http://ner:8100
+  SPRING_DATASOURCE_URL: jdbc:postgresql://sjw-postgres:5432/sjw
+  SPRING_DATA_REDIS_HOST: sjw-redis
+  NER_URL: http://sjw-ner:8100
   NER_MODE: http
   KB_MODE: file
   KB_NAME: injo

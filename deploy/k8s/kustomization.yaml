@@ -6,6 +6,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: skala-gj4
 
+# 네임스페이스는 반 전체가 공유한다 — 맨 이름(api·ner·redis·postgres·worker)은 충돌한다.
+# 실측(2026-09-28): svc/postgres가 이미 rai 프로젝트 소유여서 생성이 거부됐고, 그 이름은
+# 엔드포인트 없는 남의 서비스로 해석돼 api가 DB에 닿지 못한다. 다른 수강생도 전부 접두·접미한다.
+# ConfigMap의 호스트명 문자열은 kustomize가 고쳐주지 않으므로 config.yaml에서 직접 맞춰 둔다.
+namePrefix: sjw-
+
 labels:
   - pairs:
       app.kubernetes.io/part-of: sjw
@@ -26,10 +32,10 @@ resources:
 images:
   - name: sjw-api
     newName: harbor.skala-gj.com/skala-gj4/sjw-api
-    newTag: unset-run-build-push-sh
+    newTag: 981bae1
   - name: sjw-worker
     newName: harbor.skala-gj.com/skala-gj4/sjw-worker
-    newTag: unset-run-build-push-sh
+    newTag: 981bae1
   - name: sjw-ner
     newName: harbor.skala-gj.com/skala-gj4/sjw-ner
-    newTag: unset-run-build-push-sh
+    newTag: 981bae1

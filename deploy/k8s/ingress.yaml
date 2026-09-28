@@ -3,7 +3,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sjw
+  name: ingress   # namePrefix가 붙어 sjw-ingress가 된다
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     # SSE(/translations/stream): 버퍼링하면 토큰이 한꺼번에 도착한다. 읽기 타임아웃은 SseEmitter(120s)보다 길게.
