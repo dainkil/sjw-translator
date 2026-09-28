@@ -105,7 +105,16 @@ curl -s localhost:8080/api/v1/translations/<jobId> # → SUCCEEDED + 번역
 >
 > 추가한 것: OpenAPI/Swagger UI(`/`가 문서로 리다이렉트 — 공개 주소 첫 화면이 404이던 문제),
 > Ingress 경로 `/api` → `/`, `.env.example`에 DB 비밀번호 항목 문서화,
-> `argocd-app.yaml`에 "kubectl로는 적용 불가" 실측 주석.
+> `argocd-app.yaml`에 "kubectl로는 적용 불가" 실측 주석,
+> `kustomization.yaml`의 이미지 자리표시자를 `latest` → `unset-run-build-push-sh`
+> (`latest`는 Harbor에 없는데도 정상 태그처럼 보여 ImagePullBackOff 원인이 안 드러난다).
+>
+> **데모 경로 (`deploy/preheat-cache.py`).** 공개 모드에서 캐시 미스는 403이라, 평가자에게
+> Gemini 키 발급을 요구하면 그 시점에 이탈한다. 반면 캐시 히트는 `X-Api-Key`만으로 200이다
+> (BYOK 검사가 캐시 조회 뒤에 있으므로 — ADR-020 개정). 골든셋 앞쪽 몇 문장을 미리 적재해
+> 키 하나로 시연 가능하게 한다. L1 TTL 30일. 실측(공개 모드 로컬): 적재된 문장 →
+> `HIT L1_EXACT` 200(BYOK 없이), 미적재 문장 → 403 `BYOK_REQUIRED`.
+> `--dry-run`으로 대상 확인, `--verify`로 예열 상태 점검(미스·실패 0이어야 시연 가능).
 
 **결정 (사용자, 2026-09-23):** 추가 실험을 기다리지 않고 지금 품질(M3.5-S2 v4 프롬프트)로 외부 사용자에게 서빙한다.
 계획서 §13("공개 호스팅은 M6 이후")보다 앞당긴 것이며, 범위를 공개에 꼭 필요한 최소분으로 좁혔다.

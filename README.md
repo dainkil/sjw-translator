@@ -119,6 +119,10 @@ curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
 비동기 잡·배치 생성은 운영자 키로 LLM을 호출하므로 `operator_access` 테넌트만 쓸 수 있다
 (없으면 403 `OPERATOR_ACCESS_REQUIRED`). 테넌트 키 발급은 `deploy/k8s/issue-key.sh`.
 
+데모용 문장 몇 개는 미리 번역해 캐시에 넣어 둔다 (`deploy/preheat-cache.py`). 그 문장들은
+Gemini 키 없이 `X-Api-Key`만으로 응답하므로, 키 하나만 받으면 파이프라인의 실제 출력
+(번역 + 링크된 인물 + 불확실 구간 + 토큰·지연 메타)을 그대로 볼 수 있다.
+
 ## 문서
 
 [설계서](PROJECT_PLAN.md) · [설계 결정 기록(ADR)](docs/adr/) · [실측 기록](docs/benchmarks.md) · [비용 모델](docs/cost-model.md) · [트러블슈팅](docs/troubleshooting.md) · [연구 방법론](research/README.md)
