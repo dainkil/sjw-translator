@@ -20,13 +20,16 @@ resources:
   - worker.yaml
   - ingress.yaml
 
+# 자리표시자는 일부러 존재하지 않는 태그다. latest로 두면 Harbor에 없는데도 정상 태그처럼 보여서
+# ImagePullBackOff의 원인이 드러나지 않는다 — 이 값이면 파드 이벤트에 태그명이 그대로 찍혀
+# "build-push.sh를 아직 안 돌렸다"가 바로 읽힌다. build-push.sh가 git short SHA로 교체한다.
 images:
   - name: sjw-api
     newName: harbor.skala-gj.com/skala-gj4/sjw-api
-    newTag: latest   # build-push.sh가 git short SHA로 교체
+    newTag: unset-run-build-push-sh
   - name: sjw-worker
     newName: harbor.skala-gj.com/skala-gj4/sjw-worker
-    newTag: latest
+    newTag: unset-run-build-push-sh
   - name: sjw-ner
     newName: harbor.skala-gj.com/skala-gj4/sjw-ner
-    newTag: latest
+    newTag: unset-run-build-push-sh
