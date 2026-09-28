@@ -25,6 +25,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     // /actuator/prometheus (§5.0 1-4) — 레지스트리가 없으면 엔드포인트가 404다
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    // OpenAPI 스펙 + Swagger UI (§5.0 Step 4) — 공개 엔드포인트의 진입점.
+    // 2.8.6은 Boot 3 대상이지만 Boot 4.1.1에서 /v3/api-docs·/swagger-ui 모두 200으로 실측 확인했다.
+    // BOM이 관리하지 않는 좌표라 버전을 직접 고정한다.
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'

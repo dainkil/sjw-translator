@@ -135,3 +135,9 @@ management:
     health:
       probes:
         enabled: true   # /actuator/health/liveness·readiness — K8s probe용
+      group:
+        # 기본 readiness 그룹은 readinessState 하나뿐이라 DB·Redis가 죽어도 Ready로 트래픽을 받는다
+        # (요청 시점에 5xx). 의존성을 포함해 준비되지 않은 파드는 Service에서 빠지게 한다.
+        # liveness에는 넣지 않는다 — 외부 의존성 장애로 파드를 재시작시키면 복구만 늦어진다.
+        readiness:
+          include: readinessState,db,redis

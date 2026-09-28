@@ -3,6 +3,7 @@ package dev.sjw.common.failure;
 import dev.sjw.common.ner.NerUnavailableException;
 import dev.sjw.common.translate.LlmParseException;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FailureClassifier {
+
+    // 숫자 상태 코드는 단어 경계로 찾는다. contains("500")은 "5000ms"에도 걸려서,
+    // 하드 타임아웃이 SERVER_ERROR로 오분류됐다 (2026-09-28 실측: timeout-ms 5000·15000에서
+    // 504 LLM_TIMEOUT 대신 502 LLM_UPSTREAM_ERROR. 7000ms에서는 정상 — §5.0 1-3 수용 기준 위반).
+    private static final Pattern CODE_429 = Pattern.compile("\\b429\\b");
+    private static final Pattern CODE_404 = Pattern.compile("\\b404\\b");
+    private static final Pattern CODE_503 = Pattern.compile("\\b503\\b");
+    private static final Pattern CODE_500 = Pattern.compile("\\b500\\b");
 
     public ErrorClass classify(Throwable e) {
         if (find(e, LlmParseException.class) != null) {
@@ -22,7 +31,7 @@ public class FailureClassifier {
         }
         String msg = messages(e).toLowerCase(Locale.ROOT);
 
-        if (msg.contains("429") || msg.contains("resource_exhausted")) {
+        if (CODE_429.matcher(msg).find() || msg.contains("resource_exhausted")) {
             if (msg.contains("spending cap")) {
                 return ErrorClass.SPEND_CAP;
             }
@@ -37,11 +46,12 @@ public class FailureClassifier {
                 || msg.contains("unauthenticated")) {
             return ErrorClass.AUTH_FAILED;
         }
-        if (msg.contains("404") || msg.contains("not_found") || msg.contains("no longer available")) {
+        if (CODE_404.matcher(msg).find() || msg.contains("not_found")
+                || msg.contains("no longer available")) {
             return ErrorClass.MODEL_UNAVAILABLE;
         }
-        if (msg.contains("503") || msg.contains("unavailable") || msg.contains("500")
-                || msg.contains("internal")) {
+        if (CODE_503.matcher(msg).find() || msg.contains("unavailable")
+                || CODE_500.matcher(msg).find() || msg.contains("internal")) {
             return ErrorClass.SERVER_ERROR;
         }
         if (msg.contains("timed out") || msg.contains("timeout")) {

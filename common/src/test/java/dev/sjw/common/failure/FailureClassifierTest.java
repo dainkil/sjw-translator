@@ -74,6 +74,28 @@ class FailureClassifierTest {
     }
 
     @Test
+    void 타임아웃_값의_숫자가_상태코드로_오인되지_않는다() {
+        // 2026-09-28 실측 회귀: contains("500")이 "5000ms"에 걸려 504가 아니라 502가 나갔다.
+        // 하드 타임아웃을 5000·15000으로 두면 재현된다 — §5.0 1-3의 "넘기면 TIMEOUT" 위반.
+        for (int ms : new int[] {500, 1500, 5000, 15000, 50000, 7000, 60000}) {
+            var e = new RuntimeException("Request timed out after " + ms
+                    + "ms [fake provider, model: fake-flash-lite]");
+            assertEquals(ErrorClass.TIMEOUT, c.classify(e), ms + "ms 타임아웃");
+        }
+    }
+
+    @Test
+    void 상태코드는_단어경계로_찾는다() {
+        // 진짜 상태 코드는 계속 잡혀야 한다 (단어 경계 도입의 반대 방향 회귀)
+        assertEquals(ErrorClass.SERVER_ERROR, c.classify(new RuntimeException("500 Internal Server Error")));
+        assertEquals(ErrorClass.SERVER_ERROR, c.classify(new RuntimeException("[503] backend overloaded")));
+        assertEquals(ErrorClass.MODEL_UNAVAILABLE, c.classify(new RuntimeException("HTTP 404 on models/x")));
+        // 숫자 안에 묻힌 코드는 상태 코드가 아니다
+        assertEquals(ErrorClass.UNKNOWN, c.classify(new RuntimeException("processed 4290 tokens")));
+        assertEquals(ErrorClass.UNKNOWN, c.classify(new RuntimeException("latency 5031ms")));
+    }
+
+    @Test
     void 잘못된_키는_AUTH_FAILED() {
         // Developer API가 잘못된 키에 돌려주는 본문 형태 (400 INVALID_ARGUMENT + reason API_KEY_INVALID)
         var e = new RuntimeException("400 Bad Request: API key not valid. Please pass a valid API key. "
