@@ -19,7 +19,10 @@ spec:
     - host: skala-gj4-sjw.skala-gj.com
       http:
         paths:
-          - path: /api
+          # `/api`만 열면 루트가 nginx 404라 공개 주소의 첫 화면이 없다. `/`로 넓혀
+          # Swagger UI(/swagger-ui, /v3/api-docs)와 루트 리다이렉트까지 닿게 한다.
+          # actuator는 관리 포트(9080)에 있고 Service가 8080만 노출하므로 이 확장으로도 새지 않는다.
+          - path: /
             pathType: Prefix
             backend:
               service:
