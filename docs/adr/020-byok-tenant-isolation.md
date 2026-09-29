@@ -71,6 +71,17 @@ quota는 요청자의 것이어야 한다. 그 순간 시스템의 문제는 "�
 성립 근거다(키 없는 평가자가 실제 응답을 본다). 반대로 미스는 NER·LLM 작업이 시작되기 **전에**
 차단된다 (`PublicModeWebTest`가 `verify(service, never()).prepare(...)`로 고정).
 
+**그리고 비대칭이 하나 있다 — 조회는 허용하되 적재는 안 한다.** BYOK로 만든 번역은 공용 캐시에
+넣지 않는다 (`TranslationController`: `byok == null`일 때만 `storeL1`/`storeL2`). 요청자가 자기
+quota를 써서 산 번역을 다른 테넌트가 공짜로 받아가는 모양이 되기 때문이다. 캐시는 공용 자원이고
+BYOK 호출의 비용은 사적이라, 둘을 합치면 무임승차가 성립한다.
+
+대가는 **공개 모드에서는 API로 캐시를 채울 수 없다**는 것이다 — 미스는 BYOK 게이트에 막히고,
+BYOK는 적재되지 않는다. 그래서 데모용 예열은 **비동기(배치) 경로**로 한다: 워커는 운영자 키로
+번역하므로 `JobProcessor`가 적재한다. `deploy/preheat-cache.py`가 `operator_access` 테넌트로
+배치를 만드는 이유가 이것이다. (2026-09-29에 동기+BYOK로 예열을 시도해 LLM 5회를 쓰고
+캐시가 비는 것을 실측했다.)
+
 **실측 (2026-09-28, 로컬 compose + 가짜 provider):**
 키 없음 → 401 `API_KEY_REQUIRED` / 발급 키 + 미캐시 → 403 `BYOK_REQUIRED` /
 미등록 키 → 401 `UNKNOWN_API_KEY` / 비운영자 비동기 → 403 `OPERATOR_ACCESS_REQUIRED`.

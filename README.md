@@ -155,4 +155,4 @@ curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
 
 ## 문서
 
-[설계서](PROJECT_PLAN.md) · [설계 결정 기록(ADR)](docs/adr/) · [실측 기록](docs/benchmarks.md) · [비용 모델](docs/cost-model.md) · [트러블슈팅](docs/troubleshooting.md) · [연구 방법론](research/README.md)
+[설계서](PROJECT_PLAN.md) · [설계 결정 기록(ADR)](docs/adr/) · [재현성 정책](docs/adr/024-artifact-reproducibility.md) · [실측 기록](docs/benchmarks.md) · [비용 모델](docs/cost-model.md) · [트러블슈팅](docs/troubleshooting.md) · [연구 방법론](research/README.md)

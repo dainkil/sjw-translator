@@ -68,6 +68,14 @@
   Apple Silicon에서 빌드하므로 반대 방향 제약이 생겼다 — `--platform linux/amd64` 강제
   (`deploy/k8s/build-push.sh`). 빼면 `exec format error`.
 
+**네임스페이스가 공유라는 점이 이름 규칙을 강제한다.** `skala-gj4`는 반 전체가 쓴다. 매니페스트가
+`api`·`postgres`·`redis` 같은 맨 이름을 쓰면 충돌한다 — 실제로 `svc/postgres`가 같은 계정의 이전
+프로젝트(`rai`) 소유여서 첫 apply가 거부됐다(`clusterIPs: may not change once set`). 불변 필드가
+막아줬지만, 막히지 않았다면 더 나빴다: 그 이름은 엔드포인트 없는 남의 서비스로 해석되므로
+파드가 전부 떠도 api가 자기 DB에 닿지 못하는 **조용한 오작동**이 된다. `kustomization.yaml`의
+`namePrefix: sjw-`로 전부 접두한다. ConfigMap의 호스트명은 문자열이라 kustomize가 고쳐주지
+않으므로 `config.yaml`에서 직접 맞춘다 — 이 둘이 어긋나면 같은 실패로 돌아온다.
+
 **한계 (정직하게):**
 - **가용성이 과정 기간에 한정된다.** 과정이 끝나면 네임스페이스가 회수될 수 있다. 영구 데모가
   아니며, 포트폴리오 링크로 쓸 때 이 사실을 함께 적어야 한다.

@@ -106,6 +106,11 @@ curl -s localhost:8080/api/v1/translations/<jobId> # → SUCCEEDED + 번역
 > 추가한 것: OpenAPI/Swagger UI(`/`가 문서로 리다이렉트 — 공개 주소 첫 화면이 404이던 문제),
 > Ingress 경로 `/api` → `/`, `.env.example`에 DB 비밀번호 항목 문서화,
 > `argocd-app.yaml`에 "kubectl로는 적용 불가" 실측 주석,
+> **ADR-024(산출물 재현성)** — 점검해 보니 "같은 환경이면 똑같이 만들 수 있다"가 성립하지 않았다:
+> HF 모델 리비전 미고정, 서빙 의존성이 `>=`(2026-09-29 빌드가 transformers를 4.x가 아닌 5.17.0으로
+> 받았다), `uv.lock`은 export 환경만 고정. 층을 나눠 정리했다 — 층 1은 Harbor 이미지 다이제스트
+> (강한 보장), 층 2는 소스 재빌드(리비전·핀·지문 검증). `export_onnx.py`가 산출 지문을 검증하고
+> 불일치면 exit 1 한다. 고정 후 재빌드 실측: `onnx-d66923a5` 동일.
 > `kustomization.yaml`의 이미지 자리표시자를 `latest` → `unset-run-build-push-sh`
 > (`latest`는 Harbor에 없는데도 정상 태그처럼 보여 ImagePullBackOff 원인이 안 드러난다).
 >
