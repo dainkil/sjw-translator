@@ -119,9 +119,39 @@ curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
 비동기 잡·배치 생성은 운영자 키로 LLM을 호출하므로 `operator_access` 테넌트만 쓸 수 있다
 (없으면 403 `OPERATOR_ACCESS_REQUIRED`). 테넌트 키 발급은 `deploy/k8s/issue-key.sh`.
 
-데모용 문장 몇 개는 미리 번역해 캐시에 넣어 둔다 (`deploy/preheat-cache.py`). 그 문장들은
-Gemini 키 없이 `X-Api-Key`만으로 응답하므로, 키 하나만 받으면 파이프라인의 실제 출력
-(번역 + 링크된 인물 + 불확실 구간 + 토큰·지연 메타)을 그대로 볼 수 있다.
+### 바로 해보기 (Gemini 키 불필요)
+
+골든셋 앞 5문장은 미리 번역해 캐시에 넣어 두었다(`deploy/preheat-cache.py`). 캐시 히트는
+BYOK 없이 응답하므로 아래를 그대로 붙여넣으면 실제 출력이 나온다.
+
+```bash
+curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
+  -H 'X-Api-Key: <데모 키>' \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"○ 吏曹參議鄭太和上疏。疏辭缺, 批答缺","year":1638}'
+```
+
+```json
+{
+  "translatedText": "이조참의 정태화가 상소하였다. 소사(상소의 내용)는 빠졌고, 비답(임금의 답변)도 빠졌다.",
+  "entities": [
+    { "surface": "鄭太和", "type": "PER", "kbId": "M_0005933",
+      "resolvedName": "정태화", "confidence": 0.9948, "linkStage": "SINGLE" }
+  ],
+  "meta": {
+    "model": "gemini-3.1-flash-lite", "kbVersion": "injo-fffabc78",
+    "promptVersion": "main-4a1cb192", "cacheHit": "L1_EXACT",
+    "latencyMs": { "cache": 1, "total": 1 }
+  }
+}
+```
+
+`entities`가 KB 주입의 실물이다 — `鄭太和`를 인물 `M_0005933`(정태화)로 확정했기 때문에 LLM이
+이름을 지어내지 않는다. 캐시 미스일 때의 지연 분해는 `{"ner":197,"link":0,"prompt":19,"llm":1802}`로,
+외부 LLM 호출은 전체의 일부다.
+
+데모 키는 일일 50회 상한이며 캐시 히트만 가능하다 — 캐시에 없는 문장은 요청자의 `X-Llm-Key`가
+필요하므로 이 키만으로는 운영자 quota를 소모시킬 수 없다.
 
 ## 문서
 
