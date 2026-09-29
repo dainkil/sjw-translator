@@ -66,6 +66,30 @@ LLM 단독 번역은 드문 한자로 된 조선 인물의 이름을 그럴듯�
 | NER **ONNX INT8 + CPU** | 전체 지연의 99.7% 이상이 외부 LLM으로, GPU 도입 효과가 없음 |
 | **Redis Streams 비동기 큐** | 외부 LLM 지연에 요청 스레드가 묶이지 않도록 분리 |
 
+### 시스템 구성
+
+요청은 동기(`/sync`·SSE)와 비동기(큐) 두 경로로 갈리고, 대량 번역은 큐를 탑니다. 배포 단위는 5개입니다.
+
+```
+        동기: 캐시 조회 → (미스면) NER → KB 링킹 → 프롬프트 조립 → LLM → 품질 게이트
+클라이언트 ─→ API ─┤
+        비동기: job 발행(202) → Redis Streams → Worker가 같은 파이프라인 + 체크포인트·재시도
+```
+
+| 구성 요소 | 역할 | 기술 |
+|---|---|---|
+| **API** | 요청 수신, 테넌트·키 검증, 동기 번역과 SSE, 배치 생성·조회 | Spring Boot, Spring AI |
+| **Worker** | 큐 소비, 배치 진행, 실패 분류·재시도·서킷, 적응형 호출 속도 제어 | Spring Boot, Resilience4j |
+| **NER 서버** | 인명·지명 추출 (자체 모델) | Python, FastAPI, ONNX Runtime |
+| **PostgreSQL** | job·배치 원장, 비용 기록, 테넌트 | Flyway 마이그레이션 |
+| **Redis** | 작업 큐 + DLQ, 번역 캐시, 테넌트 예산 카운터 | Redis Streams |
+
+로컬은 Docker Compose 한 줄로, 공개 배포는 동일 이미지를 Kubernetes에 올립니다(워커는 1대 고정 —
+아래 참조). 산출물 재현 방식은 [ADR-024](docs/adr/024-artifact-reproducibility.md)에 있습니다.
+
+**측정해서 안 늘린 것:** 배치 처리량은 워커 1대와 2대가 같았습니다(23.4 vs 23.1 jobs/min, 중복 호출 0건).
+상한이 외부 API 호출 한도라 스케일아웃할 축이 없어, 워커를 1대로 고정하고 그 근거를 남겼습니다.
+
 ## 5. 트러블슈팅과 한계
 
 | 문제 | 해결 |
@@ -87,22 +111,22 @@ curl -s -X POST localhost:8080/api/v1/translations/sync \
   -H 'Content-Type: application/json' -d '{"text":"以金瑬爲承旨","year":1623}'
 ```
 
-API 문서(Swagger UI)는 <http://localhost:8080/> 에서 열린다.
+API 문서(Swagger UI)는 <http://localhost:8080/> 에서 열립니다.
 
 ## 공개 엔드포인트
 
-SKALA EKS `skala-gj4`에 배포한다 (ADR-022 개정). 주소: `https://skala-gj4-sjw.skala-gj.com`
-— 루트를 열면 Swagger UI다. 가용성은 교육 과정 기간에 한정된다.
+SKALA EKS `skala-gj4`에 배포했습니다 (ADR-022 개정). 주소는 `https://skala-gj4-sjw.skala-gj.com`이며
+루트를 열면 Swagger UI가 뜹니다. 가용성은 교육 과정 기간에 한정됩니다.
 
-공개 모드에서는 키가 두 개다. 축이 다르다:
+공개 모드에서는 키가 두 개이고, 축이 다릅니다:
 
 | 헤더 | 무엇 | 없으면 |
 |---|---|---|
-| `X-Api-Key` | 발급받은 테넌트 키. 일일 호출 상한이 여기 걸린다 | 401 `API_KEY_REQUIRED` |
-| `X-Llm-Key` | 본인 Gemini API 키. **저장·로깅하지 않는다** | 403 `BYOK_REQUIRED` (캐시 미스일 때만) |
+| `X-Api-Key` | 발급받은 테넌트 키. 일일 호출 상한이 여기 걸립니다 | 401 `API_KEY_REQUIRED` |
+| `X-Llm-Key` | 본인 Gemini API 키. **저장·로깅하지 않습니다** | 403 `BYOK_REQUIRED` (캐시 미스일 때만) |
 
 **본인 키를 받는 이유:** 운영자 무료 quota가 하루 20회(RPD 20 실측)라 공개하면 한 사람이 오전에
-소진한다. 번역 비용은 요청자 키로 나간다 (ADR-020).
+소진됩니다. 번역 비용은 요청자 키로 나갑니다 (ADR-020).
 
 ```bash
 # 캐시에 있는 문장 — X-Api-Key만으로 응답한다 (LLM을 부르지 않으므로)
@@ -116,13 +140,13 @@ curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
   -H 'Content-Type: application/json' -d '{"text":"上曰予不敏","year":1623}'
 ```
 
-비동기 잡·배치 생성은 운영자 키로 LLM을 호출하므로 `operator_access` 테넌트만 쓸 수 있다
-(없으면 403 `OPERATOR_ACCESS_REQUIRED`). 테넌트 키 발급은 `deploy/k8s/issue-key.sh`.
+비동기 잡·배치 생성은 운영자 키로 LLM을 호출하므로 `operator_access` 테넌트만 쓸 수 있습니다
+(없으면 403 `OPERATOR_ACCESS_REQUIRED`). 테넌트 키 발급은 `deploy/k8s/issue-key.sh`입니다.
 
 ### 바로 해보기 (Gemini 키 불필요)
 
-골든셋 앞 5문장은 미리 번역해 캐시에 넣어 두었다(`deploy/preheat-cache.py`). 캐시 히트는
-BYOK 없이 응답하므로 아래를 그대로 붙여넣으면 실제 출력이 나온다.
+골든셋 앞 5문장은 미리 번역해 캐시에 넣어 두었습니다(`deploy/preheat-cache.py`). 캐시 히트는
+BYOK 없이 응답하므로 아래를 그대로 붙여넣으면 실제 출력이 나옵니다.
 
 ```bash
 curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
@@ -146,12 +170,12 @@ curl -s -X POST https://skala-gj4-sjw.skala-gj.com/api/v1/translations/sync \
 }
 ```
 
-`entities`가 KB 주입의 실물이다 — `鄭太和`를 인물 `M_0005933`(정태화)로 확정했기 때문에 LLM이
-이름을 지어내지 않는다. 캐시 미스일 때의 지연 분해는 `{"ner":197,"link":0,"prompt":19,"llm":1802}`로,
-외부 LLM 호출은 전체의 일부다.
+`entities`가 KB 주입의 실물입니다 — `鄭太和`를 인물 `M_0005933`(정태화)로 확정했기 때문에 LLM이
+이름을 지어내지 않습니다. 캐시 미스일 때의 지연 분해는 `{"ner":197,"link":0,"prompt":19,"llm":1802}`로,
+외부 LLM 호출은 전체의 일부입니다.
 
-데모 키는 일일 50회 상한이며 캐시 히트만 가능하다 — 캐시에 없는 문장은 요청자의 `X-Llm-Key`가
-필요하므로 이 키만으로는 운영자 quota를 소모시킬 수 없다.
+데모 키는 일일 50회 상한이며 캐시 히트만 가능합니다 — 캐시에 없는 문장은 요청자의 `X-Llm-Key`가
+필요하므로 이 키만으로는 운영자 quota를 소모시킬 수 없습니다.
 
 ## 문서
 

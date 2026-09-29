@@ -1,6 +1,6 @@
-# 진행 상황 & 재개 가이드
+# 개발 기록
 
-> 마지막 갱신: 2026-09-24. 다른 컴퓨터에서 이어서 작업하기 위한 인수인계 문서.
+> 마일스톤별 진행과 실측을 시간순으로 남긴 기록이다. 무엇을 재고 무엇을 버렸는지가 여기 있다.
 > 전체 설계·수용 기준은 [PROJECT_PLAN.md](PROJECT_PLAN.md), 결정 기록은 [docs/adr/](docs/adr/).
 
 ## 1. 로드맵 현황
@@ -43,50 +43,20 @@
 
 **M2 수용 기준 증거 상태:** ① 강제 종료→재개 중복 0건 = `demo-resume.sh` 라이브 증명 ✅ ② 429→하향→상향 = ~~라이브 유발 실패~~ (60 RPM·2워커에서도 429 0건 — provider 유효 한도 미달) **→ 2026-09-21 가짜 provider로 유발 성공: 429 2건, rate 39→19·23→11 RPM, 완주 (§5.5)**, AIMD 자체는 실측 429 원문 기반 단위 테스트로 검증, 강제 429 라이브 검증은 M6 mock provider로 이관 ③ DLQ 분류 적재 = 404 유발 라이브 증명 ✅. 상세는 benchmarks.md.
 
-## 4. 새 컴퓨터 셋업 (순서대로)
+## 4. 실행
 
-```bash
-git clone https://github.com/dainkil/sjw_traslator.git && cd sjw_traslator
+로컬 실행과 공개 엔드포인트 사용법은 [README](README.md#실행-방법)에 있다.
+전 스택은 `docker compose -f deploy/docker-compose.yml up -d --build` 한 줄이고,
+NER 모델만 최초 1회 변환이 필요하다 (`ner-server/scripts/export_onnx.py`, 재현성은 ADR-024).
 
-# 1) 비밀키 — 저장소엔 없다. 직접 만들 것:
-cp .env.example .env   # GEMINI_API_KEY=<결제 미연동 프로젝트의 키> 로 편집
-echo "GEMINI_MODEL=gemini-3.1-flash-lite" >> .env
-# 주의: 키는 반드시 '결제 미연동' 프로젝트에서 발급 (ADR-016).
-#       키를 바꾸면 모델 탐침을 다시 돌릴 것 (docs/troubleshooting.md §3).
+대용량 원천 데이터(`malmoi/` 180MB — 병렬 코퍼스 등)는 저장소에 없다. 서빙에는 불필요하며,
+필요한 KB·골든셋은 `kb/`·`eval/`에 있다. 소재는 [docs/asset-inventory.md](docs/asset-inventory.md).
 
-# 지름길 (M2.5-S8): NER 모델을 한 번 export해 두면 전 스택이 컨테이너로 뜬다 —
-#   cd ner-server && uv sync && uv run python scripts/export_onnx.py && cd ..
-#   docker compose -f deploy/docker-compose.yml up -d --build
-# 아래 2)~4)는 로컬 gradle 개발 경로다.
-
-# 2) 인프라만
-docker compose -f deploy/docker-compose.yml up -d redis postgres
-
-# 3) NER 서버 (최초 1회 모델 변환 ~700MB 다운로드)
-cd ner-server && uv sync && uv run python scripts/export_onnx.py
-uv run uvicorn app.main:app --port 8100 &   # :8100
-cd ..
-
-# 4) api + worker (Java 21 필요, gradle wrapper 포함)
-set -a; source .env; set +a
-./gradlew :api:bootRun &      # :8080 (스키마 자동 적용)
-./gradlew :worker:bootRun &   # :8081
-
-# 5) 동작 확인
-curl -s -X POST localhost:8080/api/v1/translations -H 'Content-Type: application/json' \
-  -d '{"text":"傳曰知道","year":1623}'          # → 202 {jobId}
-curl -s localhost:8080/api/v1/translations/<jobId> # → SUCCEEDED + 번역
-./deploy/demo-resume.sh                            # 강제종료→재개 데모 (12 LLM 호출 소모)
-```
-
-**이 컴퓨터에만 있는 것 (커밋 안 됨):** `malmoi/` 원천 데이터 180MB (병렬 코퍼스 70MB 등).
-서빙 개발에는 불필요 — 필요한 KB·골든셋은 `kb/`, `eval/`에 커밋되어 있다. M0 코퍼스 통계 재실측이나 M2 인조 1년치 대량 배치를 다른 컴퓨터에서 하려면 이 디렉토리를 별도로 옮겨야 한다.
-
-## 5. 다음 작업 (재개 지점)
+## 5. 마일스톤별 기록
 
 > **2026-09-01 계획 개정.** 계획 검토 결과 M3·M4가 둘 다 아직 없는 추상화(모델 레지스트리, 검증된 `kb_version`, 품질 게이트)에 의존한다는 점이 확인되어, **M2.5를 M3 앞에 삽입**했다. 개정 전문은 [PROJECT_PLAN.md](PROJECT_PLAN.md) §5.4 / §10 / §15.
 
-### 5.0 공개 서빙 1차 — 최소 하드닝 + skala-gj 배포 (**현재 재개 지점**, 계획 확정 2026-09-23 · 진행 중)
+### 5.0 공개 서빙 1차 — 최소 하드닝 + skala-gj 배포 (계획 확정 2026-09-23 · 배포 완료 2026-09-29)
 
 > **상태 (2026-09-28).** Step 1(하드닝) · Step 3(매니페스트) · Step 4(문서·ADR) 완료.
 > Step 2(이미지)는 스크립트만 작성됨 — **Harbor 푸시와 클러스터 적용이 남은 전부다** (자격증명 필요).
@@ -144,7 +114,7 @@ curl -s localhost:8080/api/v1/translations/<jobId> # → SUCCEEDED + 번역
   nginx Ingress + `*.skala-gj.com` 와일드카드 DNS, cert-manager `letsencrypt-prod`, StorageClass `ebs-sc`(기본, RWO),
   **노드 x86_64**, 권한은 네임스페이스 범위만. **자격증명(AWS 키·Harbor·ArgoCD 비밀번호)은 PDF에만 있다 — 저장소·문서·
   명령 기록에 절대 남기지 않는다.**
-- **노출:** `https://skala-gj4-sjw.skala-gj.com` (Ingress 하나). 사용자는 "HTTP 우선"을 골랐으나 이 환경에선 TLS가
+- **노출:** `https://skala-gj4-sjw.skala-gj.com` (Ingress 하나). HTTP 우선도 검토했으나 이 환경에선 TLS가
   어노테이션 한 줄이고 BYOK 키가 헤더로 오가므로 처음부터 HTTPS (발급 실패 시 HTTP로 먼저 열고 이어서 처리).
 - **범위 밖(이후):** M5의 3단계 예산 저하·Grafana 전 지표·ADR-011, 동기 경로 원장 기록, CI 이미지 푸시.
 - **주의:** 실습 클러스터라 노드가 내려가 있을 수 있고 과정 종료 후 유지 보장이 없다 → 상시 서비스가 아니라
@@ -155,11 +125,11 @@ curl -s localhost:8080/api/v1/translations/<jobId> # → SUCCEEDED + 번역
 동기 경로 429가 500으로 나감 / LLM 하드 타임아웃 없음(26분 RUNNING 선례) / `/actuator/prometheus` 404(레지스트리 없음) /
 redis 무비밀번호·postgres `sjw/sjw` 하드코딩·전 포트 호스트 노출 / K8s 매니페스트 없음.
 
-**0. 접속 준비 (자격증명 입력은 사용자가 직접 셸에서)**
+**0. 접속 준비 (자격증명은 저장소·기록에 남기지 않는다)**
 - `aws configure --profile skala-gj4` → `aws eks update-kubeconfig --name skala-gj --region ap-northeast-2 --profile skala-gj4`
   → `kubectl config set-context --current --namespace=skala-gj4`.
 - Harbor: `docker login harbor.skala-gj.com -u skala-gj4 --password-stdin` (**`https://` 없이** — 붙이면 push 401).
-  `harbor-cred` docker-registry Secret도 사용자가 생성.
+  `harbor-cred` docker-registry Secret도 직접 생성한다.
 - 확인: `kubectl get nodes`(여유 메모리 — 전 스택 요청 ~2.5GB), `kubectl auth can-i create ingress`, `kubectl get sc`.
 - ArgoCD가 GitHub 저장소를 읽을 수 있는지 (비공개면 저장소 자격증명 등록 필요).
 
@@ -216,7 +186,7 @@ README에 공개 엔드포인트 사용법(`X-Api-Key` + `X-Llm-Key` curl 예시
 3. EKS: `kubectl kustomize deploy/k8s` 렌더 → ArgoCD sync(첫 회는 `kubectl apply -k`) → `kubectl rollout status` →
    `https://skala-gj4-sjw.skala-gj.com`에서 키 없음 401 / 발급 키 + BYOK 없음 + 미캐시 문장 403 / 발급 키 + 실제 BYOK 키 200
    (사용자 키로 1~2회만). 관리 포트는 외부에서 접근 불가 확인.
-4. 커밋 단위: ① 하드닝 / ② 이미지·매니페스트·배포 / ③ 문서·ADR — 단계별 보고 → 승인 → 커밋.
+4. 커밋 단위: ① 하드닝 / ② 이미지·매니페스트·배포 / ③ 문서·ADR.
 
 ### 5.1 M3 진행
 
@@ -298,7 +268,7 @@ README에 공개 엔드포인트 사용법(`X-Api-Key` + `X-Llm-Key` curl 예시
   재현: `python3 eval/simulate_cache.py --years all --self-check` (NER 서버 필요, 첫 실행 846초 —
   NER 결과는 `eval/.ner_cache_*.json`에 캐시되어 재실행은 즉시. 캐시는 gitignore).
 
-### 5.1.1 L2 활성화 결정 — **off 유지** (사용자 결정, 2026-09-11)
+### 5.1.1 L2 활성화 결정 — **off 유지** (2026-09-11)
 
 S4 실측을 보고 **L2를 기본 off로 유지**하기로 했다. 근거는 교환 조건의 크기다:
 
@@ -369,7 +339,7 @@ S4 실측을 보고 **L2를 기본 off로 유지**하기로 했다. 근거는 �
    **단, 통과에도 L2는 off로 유지**한다(수혜 1.74%p). 계획서 §13의 "시도했고 이 조건에서는
    수혜가 작다"는 결과 형태로 기록했다.
 
-### 5.3 M4 진행 (현재 재개 지점)
+### 5.3 M4 진행
 
 계획서 §10의 M4가 정본. **단, S1 실측이 §5.1의 전제를 뒤집었다 — ADR-010이 그 기록이다.**
 
@@ -412,7 +382,7 @@ S4 실측을 보고 **L2를 기본 off로 유지**하기로 했다. 근거는 �
 
   테스트 100/100 (신규 21건: TierRouter 7 / ModelAllocator 8 / ModelSpec·리미터 6).
 
-- **다음: M4-S2 — 라우팅 on/off 비용·품질 곡선** (M4 수용 기준). LLM 호출이 필요하다.
+- 남은 범위: M4-S2 — 라우팅 on/off 비용·품질 곡선 (M4 수용 기준). LLM 호출이 필요하다.
   ① ~~gemma-4 등 나머지 모델 RPD/RPM을 429 `quotaValue`로 탐침~~ → **2026-09-21 탐침 결과: 측정 불가, 그 전 단계에서 막힘.**
      `eval/probe_model.py`로 골든셋 60 배치 → 25분에 응답 12건, **전부 PARSE_ERROR**(응답이 JSON이 아니라 `*` 마크다운),
      출력 평균 64 tok, 응답 간격 30초~11분, 429 0건, 1건은 26분 RUNNING(하드 타임아웃 부재). gemma-4는 Structured Output
@@ -465,20 +435,8 @@ M2.5처럼 계획 중간에 삽입한 마일스톤. 계기는 AI 엔지니어링
     구두점만 바꾼 v5 추가. 6변형 × 3 × 60 = 1,080회 (RPD 500 → 하루 2변형).
   - **v5(구두점만) 라운드 1: chrF 39.62** — v0 세 라운드보다 위, 인명 동일. 라운드 2는 16/60에서 **QUOTA_PAUSED**
     (batch `e95b8d16-9fdb-4453-be8d-528f755bc754`). 워커는 지금 v5 프롬프트·캐시 off·승격 off 상태로 떠 있다.
-  - **재개 절차 (다음 날, quota 리셋 = PT 자정 = 07:00Z). 남은 것: v5 라운드 2~3, v2, v3, v4 = 660회 → 이틀.**
-    ```bash
-    # 1) 멈춘 v5 라운드 2 재개 (워커는 이미 v5 상태) — resume은 FAILED를 PENDING으로 되돌려 재발행한다
-    curl -X POST localhost:8080/api/v1/batches/e95b8d16-9fdb-4453-be8d-528f755bc754/resume
-    uv run --with sacrebleu --with "psycopg[binary]" python eval/prompt_ablation.py --variant v5   # 라운드 2 이어서 대기 → 3
-    # 2) 다음 변형: 워커를 그 프롬프트 + 캐시 off + 승격 off로 재기동 후 실행 (api는 이미 SJW_EVAL_CORPUS=/eval/eval60_stratified.json)
-    PROMPT_TEMPLATE=file:/eval/prompts/v4-minimal.st CACHE_L1_ENABLED=false CACHE_L2_ENABLED=false \
-      TIER_UP_ENABLED=false SJW_EVAL_CORPUS=/eval/eval60_stratified.json \
-      docker compose -f deploy/docker-compose.yml up -d --no-deps worker
-    uv run --with sacrebleu --with "psycopg[binary]" python eval/prompt_ablation.py --variant v4   # 이어서 v2, v3
-    # QUOTA_PAUSED로 멈추면: curl -X POST localhost:8080/api/v1/batches/<id>/resume 후 같은 --variant 명령 재실행
-    # 전부 끝나면: ... --verdict  /  ... --table (benchmarks 표 교체)
-    # 실험 종료 후 되돌리기: docker compose -f deploy/docker-compose.yml up -d api worker   (기본 env — 캐시 on, 승격 on, 생산 프롬프트, 골든셋 300)
-    ```
+  - v5 라운드 2가 QUOTA_PAUSED로 멈췄다 — 무료 일일 한도를 실험이 실제로 밀어냈다는 기록이다.
+    이후 v5 r2~3 · v2 · v3 · v4를 하루 한도에 맞춰 나눠 측정했다 (총 1,080회, 사흘).
   - **막간 작업 (2026-09-21, quota 대기 중, LLM 0회):**
     ① `simulate_routing.py`에 채택 규칙(`tier_adopted` = `TierRouter.classify` 이식) 추가 → T0 8,080 / T1 52,843 /
     T2 1,133 **정확 재현**(M4-S1의 "알려진 갭" 닫힘, benchmarks M4-S1 절에 재현 커맨드).
@@ -497,7 +455,7 @@ M2.5처럼 계획 중간에 삽입한 마일스톤. 계기는 AI 엔지니어링
 
 ### 5.5 M6 선행 — 가짜 LLM provider (2026-09-21)
 
-다른 세션이 시작한 `FakeTranslator`/`FakeProvider`/`FakeLlmProperties`(common/llm)를 이어받아 배선·검증·데모까지.
+`FakeTranslator`/`FakeProvider`/`FakeLlmProperties`(common/llm) 배선·검증·데모.
 `Translator` 포트의 **두 번째 provider** — ADR-018 재검토 조건("두 번째 provider가 필요해지면") 이행. 네트워크 0, quota 0.
 
 - **배선:** `TranslatorFactory`가 레지스트리 `provider`로 분기(`google-genai` | `fake`, 모르는 값은 `ModelSpec`이 기동
@@ -513,8 +471,8 @@ M2.5처럼 계획 중간에 삽입한 마일스톤. 계기는 AI 엔지니어링
   **B `FAKE_RPM=20` → 429 2건, 리미터 39→19·23→11 RPM(힌트 쿨다운) → 완주** / C `FAKE_DROP_NAME_RATE=0.3` → REJECTED 7 →
   `fake-flash` 승격 7회. **M2 수용 기준 ②가 닫혔다.**
 - ADR-018 개정(provider 축 2구현 + 재검토 조건 이행 기록). 부수: `up -d worker`가 api를 기본 env로 재생성하는 함정 →
-  재기동은 항상 `--no-deps`(§5.4 재개 절차도 수정). 실수로 생긴 배치 `83ca0bb5`는 PAUSED, 무해.
-- 남은 것: 부하 테스트(M6)에서 `FAKE_LATENCY_MS`·`FAKE_ERROR_RATE`로 처리량 상한·서킷 동작 실측, CI E2E에 fake 스택.
+  재기동은 항상 `--no-deps`.
+- 이후 범위: 부하 테스트(M6)에서 `FAKE_LATENCY_MS`·`FAKE_ERROR_RATE`로 처리량 상한·서킷 동작 실측, CI E2E에 fake 스택.
 
 ### 5.2 M2.5 완료 기록
 
@@ -552,12 +510,3 @@ M2.5처럼 계획 중간에 삽입한 마일스톤. 계기는 AI 엔지니어링
 
 **작성 완료 (2026-09-01, M2.5-S1):** 004(KB in-memory) / 007(Tool Calling 배제) / 008(ChatMemory 배제) / 012(Kafka·MSA·K8s 배제) / 021(단일 워커 — 처리량 실측 근거) / 023(Flyway).
 **남은 M2.5 산출물:** 022(배포 타겟) — 018(S4)·019(S5)·020(S6) 작성 완료. 009(M3)·010(M4)·013(M3.5, 2026-09-21) 작성 완료 — 011은 M5에서.
-
-## 6. 세션 운영 규칙 (작업 재개 시)
-
-- **단계별 보고 → 사용자 승인 → 커밋.** 승인 없이 커밋하지 않는다.
-- **커밋 메시지에 도구·에이전트 표기 금지** (Co-Authored-By, 세션 링크 등).
-- 모든 성능·비용 주장은 실측 기반, 추정은 `(추정)` 표기 (계획서 원칙 4).
-- 새 의존성 = ADR 작성. §7 배제 목록(RAG·Kafka·K8s 등) 도입 전 반드시 사용자 확인.
-- LLM 호출은 무료 quota를 아껴서: 개발·데모는 `gemini-3.1-flash-lite`, 3.5-flash는 하루 20회뿐.
-- 트러블슈팅 선례: `docs/troubleshooting.md` (429 3종, Vertex 모드 함정, 모델 가용성).
