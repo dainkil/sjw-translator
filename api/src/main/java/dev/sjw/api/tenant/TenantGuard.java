@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * BYOK LLM 키(X-Llm-Key)는 여기를 지나지 않는다 — 식별·과금과 키는 별개 축이다
  * ({@link #requireByok}는 키의 <b>유무</b>만 본다).
  *
- * <p>공개 모드({@code sjw.public-mode}, PROGRESS §5.0 1-1)는 "나 혼자 로컬" 전제를 걷어낸다:
+ * <p>공개 모드({@code sjw.public-mode}, ADR-020 개정)는 "나 혼자 로컬" 전제를 걷어낸다:
  * 키 없는 요청이 default 테넌트(운영자)로 통과하지 않고, 운영자 키로 도는 경로는 허가된 테넌트만,
  * 동기·스트림의 캐시 미스는 BYOK만. 로컬 기본값(false)의 동작은 그대로다.
  */

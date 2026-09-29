@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 동기·스트림 경로의 실패 → HTTP 상태 (PROGRESS §5.0 1-2). 워커와 <b>같은 분류기</b>를 쓴다 —
+ * 동기·스트림 경로의 실패 → HTTP 상태. 워커와 <b>같은 분류기</b>를 쓴다 —
  * 429가 지출 상한·일일 quota·순간 rate 셋으로 갈리는 것은 경로와 무관한 사실이다.
  * 이전에는 전부 500이었다: 클라이언트가 "기다리면 되는지(429)"와 "고쳐야 하는지(4xx)"를 구분할 수 없었다.
  *

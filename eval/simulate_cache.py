@@ -16,7 +16,7 @@
 키 일치로 결정되는 '구조적 히트율'은 프록시와 무관하게 정확하고, 적재 정책을 반영한 '실효
 히트율'만 프록시에 의존한다. 둘 다 보고한다.
 
-전제: NER 서버(:8100) 기동. 인물 KB는 kb/. 코퍼스는 malmoi/ (커밋 안 됨 — PROGRESS §4).
+전제: NER 서버(:8100) 기동. 인물 KB는 kb/. 코퍼스는 malmoi/ (커밋 안 됨 — docs/asset-inventory.md).
 
 사용법:
   python3 eval/simulate_cache.py                    # A01 (인조 1년치, 수용 기준)

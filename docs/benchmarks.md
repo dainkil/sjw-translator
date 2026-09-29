@@ -366,7 +366,7 @@ L2 히트는 **LLM이 생성하지 않은 문장**이다 — 다른 문장의 �
 **품질 축은 통과했고, 결정을 가른 것은 수혜 크기다.** L2가 사는 것은 전수 기준 LLM 호출 1,075회
 (+1.74%p)이고, 완역 환산으로는 캐시 17.4% 기준 **5.72년 → 5.63년**(약 5주)이다. 그 대가는
 DEGRADED 등급 1,392건(LLM이 쓰지 않은 문장의 서빙), L1 히트 317건 잠식, 재주입 실패 표면의
-유지 비용이다. 근거와 결정 기록은 ADR-009 "운영 상태" · PROGRESS §5.1.1.
+유지 비용이다. 근거와 결정 기록은 ADR-009 "운영 상태".
 
 ### 부수 실측: `gemini-3.1-flash-lite`의 무료 티어 quota
 
@@ -379,7 +379,7 @@ DEGRADED 등급 1,392건(LLM이 쓰지 않은 문장의 서빙), L1 히트 317�
 | `GenerateRequestsPerDayPerProjectPerModel-FreeTier` | **500** | 28건 (2차 R2, 당일 누적 ~700 호출 후) |
 
 `quotaDimensions.model` = `gemini-3.1-flash-lite` (42건 전부). **이것이 M2에서 유발에 실패했던
-라이브 429다** — PROGRESS는 "60 RPM·2워커에서도 429 0건"으로 M6 mock provider에 이관해 뒀다.
+라이브 429다** — 종전에는 "60 RPM·2워커에서도 429 0건"이라 M6 mock provider에 이관해 뒀다.
 
 **미해소 모순:** M2가 측정한 배치 처리량 **23 jobs/min**은 지금 확정된 **RPM 15**를 넘는데 그때는
 429가 0건이었다. 가능한 설명은 ① 그 사이 quota 변경 ② 분당 창의 버스트 허용 ③ M2 측정 창이
@@ -706,3 +706,47 @@ uv run --with sacrebleu --with "psycopg[binary]" python eval/kb_ablation.py --ru
 uv run --with sacrebleu --with "psycopg[binary]" python eval/kb_ablation.py --report
 ```
 결과 정본 `eval/kb_ablation.json`.
+
+## 공개 서빙 배포 (2026-09-29, SKALA EKS `skala-gj4`)
+
+`https://skala-gj4-sjw.skala-gj.com` — 파드 5개(api·worker·ner·postgres·redis), 이미지 태그 `981bae1`.
+재현에 필요한 다이제스트·리비전·버전 고정은 [ADR-024](adr/024-artifact-reproducibility.md).
+
+### 이미지 크기
+
+| 이미지 | M2.5 (2026-09-01) | 배포본 (2026-09-29) |
+|---|---|---|
+| `sjw-api` | 604MB | **182MB** |
+| `sjw-worker` | 600MB | **175MB** |
+| `sjw-ner` | 973MB | **956MB** |
+
+api·worker가 3분의 1로 줄어든 것은 런타임 단계를 `eclipse-temurin:21-jre`로 분리한 멀티스테이지
+빌드 결과다(빌드 단계의 JDK·gradle 캐시가 최종 이미지에 남지 않는다). ner은 INT8 가중치 174MB와
+onnxruntime을 품고 있어 크기의 대부분이 그 둘이다 — 여기서 더 줄이려면 모델을 이미지 밖으로
+빼야 하는데, 기동 시 다운로드 구조는 ADR-003·§15.2에서 이미 버린 선택지다.
+
+### 배포 검증 (공개 URL 기준)
+
+| 항목 | 결과 |
+|---|---|
+| 스키마 마이그레이션 | Flyway V1~V5 전부 성공 |
+| TLS | cert-manager `letsencrypt-prod` 발급, HSTS `max-age=31536000` |
+| 키 없음 / 미등록 키 | 401 `API_KEY_REQUIRED` / 401 `UNKNOWN_API_KEY` |
+| 발급 키 + 캐시 미스 | 403 `BYOK_REQUIRED` |
+| 발급 키 + 예열 문장 | 200, `cacheHit: L1_EXACT`, **1ms** (캐시 미스 2,018ms 대비) |
+| 비운영자 비동기·배치 | 403 `OPERATOR_ACCESS_REQUIRED` |
+| 관리 포트(9080·9081) | 외부에서 404 — Service·Ingress에 열지 않음 |
+| readiness 의존성 | redis 중단 시 readiness 503 / liveness 200 (재시작 루프 없음) |
+
+### 배포 전 검증에서 잡은 결함
+
+`FailureClassifier`가 상태 코드를 `contains("500")`으로 찾아, **타임아웃 값 자체의 숫자**에 걸렸다.
+
+| 하드 타임아웃 | 분류 결과 |
+|---|---|
+| 7000ms | 504 `LLM_TIMEOUT` (정상) |
+| 5000ms | 502 `SERVER_ERROR` — `"5000ms"` 안의 `500` |
+| 15000ms | 502 `SERVER_ERROR` — `"15000ms"` 안의 `500` |
+
+`404`·`429`·`503`도 같은 취약점이었다. 숫자 상태 코드를 단어 경계(`\b500\b`)로 찾도록 고치고
+회귀 테스트 2건을 추가했다. 수정 후 5000ms에서 504, 5.24초에 절단 확인.

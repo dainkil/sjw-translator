@@ -50,7 +50,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
- * 공개 모드 하드닝 (PROGRESS §5.0 1-1·1-2) — 컨트롤러 + 두 advice의 실제 조합을 DB·Redis·LLM 없이 검증한다.
+ * 공개 모드 하드닝 (ADR-020 개정) — 컨트롤러 + 두 advice의 실제 조합을 DB·Redis·LLM 없이 검증한다.
  * advice 순서(테넌트 거절이 LLM 포괄 처리에 먹히지 않는가)와 SSE 요청의 JSON 거절까지 이 조합에서만 드러난다.
  */
 class PublicModeWebTest {

@@ -2,7 +2,7 @@
 
 > 발표용 설명문. 비전공자도 따라올 수 있도록 모든 기술 용어에 일상 비유를 붙였고, 모든 숫자에는 **실측** / **(계획)** / **(추정)** 꼬리표를 달았다. 꼬리표가 없는 숫자는 전부 실측이다. 숫자의 출처는 부록 B에, 용어는 부록 A에 모아 두었다.
 >
-> 정본 문서: 설계·수용 기준은 `PROJECT_PLAN.md`, 진행 기록은 `PROGRESS.md`, 실측은 `docs/benchmarks.md`, 비용 계산은 `docs/cost-model.md`, 결정 기록은 `docs/adr/`.
+> 정본 문서: 설계·수용 기준은 `PROJECT_PLAN.md`, 실측은 `docs/benchmarks.md`, 비용 계산은 `docs/cost-model.md`, 결정 기록은 `docs/adr/`.
 
 ---
 
@@ -740,16 +740,16 @@ PostgreSQL에 표가 다섯 개다.
 | 820 입력 토큰, 700 오버헤드(85%) | `docs/benchmarks.md`, `docs/cost-model.md` |
 | 23.4 / 23.1 jobs/min, 중복 0건, 12/12 | `docs/benchmarks.md` (M2 절), `deploy/demo-resume.sh` |
 | L1 0~12ms vs 1,665ms; L2 42ms vs 2,450ms | `docs/benchmarks.md` (캐시 절), `deploy/demo-*-cache.sh` |
-| 히트율 17.36% / 18.21%, 비용 79,146 → 65,409원 | `docs/benchmarks.md`, `eval/simulate_cache.py`, `PROGRESS.md` §5.1 |
-| L2 교환 조건표 (−1,075회, DEGRADED 1,392, 잠식 317) | `PROGRESS.md` §5.1.1 |
+| 히트율 17.36% / 18.21%, 비용 79,146 → 65,409원 | `docs/benchmarks.md`, `eval/simulate_cache.py` |
+| L2 교환 조건표 (−1,075회, DEGRADED 1,392, 잠식 317) | `docs/benchmarks.md`, ADR-009 "운영 상태" |
 | 게이트 오탐률 3.9% (7/181), 기준선 chrF 41.52 / 반영률 99.09% / ETS 98.21%, 전문가 번역 ETS 97.13% | `docs/benchmarks.md`, `eval/baseline_scores.json`, ADR-019, `eval/score_db.py --self-check-reference` |
 | L2 비열등 +0.04 / ±0, 6라운드 −2.20~+0.70 | `eval/l2_noninferiority.json`, `docs/benchmarks.md` |
 | 라우팅 35.87% 미정의, 124 → 926일, 135배, T0 13.02 / T1 85.15 / T2 1.83 | `docs/benchmarks.md`, `eval/simulate_routing.py`, ADR-010 |
 | flash-lite RPD 500 / RPM 15, 3.5-flash RPD 20 | `docs/benchmarks.md`, ADR-016, `application.yml` 모델 레지스트리 |
 | $663 / 93만 원 / 0.7일 / 5.7년 / 173년 | `docs/cost-model.md`, `docs/cost-model/cost_model.py` |
-| 코퍼스 밀림 11.24% / 20.67%, REJECTED 26.6% → 4.36% | `docs/troubleshooting.md` §5, `PROGRESS.md` |
-| 이미지 604 / 600 / 973MB, 컨테이너 5개 | `PROGRESS.md` §5.2 M2.5 판정 |
-| MISS 44,082건 / 13,586 표면형 / 42.21% | `PROGRESS.md` §5.3 M4-S1 ④ |
+| 코퍼스 밀림 11.24% / 20.67%, REJECTED 26.6% → 4.36% | `docs/troubleshooting.md` §5 |
+| 이미지 크기·컨테이너 5개 | `docs/benchmarks.md` "공개 서빙 배포" |
+| MISS 44,082건 / 13,586 표면형 / 42.21% | `docs/benchmarks.md`, ADR-010 |
 | 지명 확장 2.77% → 13.86% → 15.63% | `docs/benchmarks.md`, ADR-009 재검토 조건 |
 | 예산 3단계 70 / 85 / 100% | `PROJECT_PLAN.md` §5.3 (계획) |
 

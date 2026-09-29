@@ -1,4 +1,4 @@
-# SKALA skala-gj EKS · 네임스페이스 skala-gj4 (PROGRESS §5.0 3). kustomize만 — Helm·오퍼레이터 없음 (ADR-012).
+# SKALA skala-gj EKS · 네임스페이스 skala-gj4 (ADR-022). kustomize만 — Helm·오퍼레이터 없음 (ADR-012).
 # 렌더 확인:  kubectl kustomize deploy/k8s
 # 배포 = 커밋: build-push.sh가 이미지를 올린 뒤 아래 images의 newTag를 git short SHA로 바꿔 커밋 → ArgoCD 동기화.
 # Secret(sjw-secrets)은 여기 없다 — create-secrets.sh가 로컬 .env로 만든다 (ArgoCD 관리 밖, git에 비밀 없음).

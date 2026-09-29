@@ -26,7 +26,7 @@ M3은 캐시 무효화를 `kb_version`에, M4는 모델 스위칭에 의존하�
 | `KnowledgeSource` | version은 데이터 파생값 (체크섬) | `FileKnowledgeSource`(injo/jeongjo) / `NoOp` | `KB_NAME` / `KB_MODE` |
 
 원칙: **구현이 1개뿐인 인터페이스는 만들지 않는다.** 포트의 목적은 추상화가 아니라 교체다.
-전부 라이브 검증됨 (docs/benchmarks.md, PROGRESS.md): 3모델 설정 교체, rule NER E2E(골든셋 recall 26.9% vs ONNX 100%), 정조 KB 기동(`jeongjo-2abe1183`) — 코드 수정 0줄.
+전부 라이브 검증됨 (docs/benchmarks.md): 3모델 설정 교체, rule NER E2E(골든셋 recall 26.9% vs ONNX 100%), 정조 KB 기동(`jeongjo-2abe1183`) — 코드 수정 0줄.
 
 **모델 레지스트리**(`sjw.llm.models[]`)가 Translator 포트의 짝이다: rate 버킷 키 · 원장 counterfactual 단가 · M4 티어 매핑의 단일 출처. 모델 지식이 코드에 없어야 "교체 = 설정"이 성립한다.
 
