@@ -86,6 +86,15 @@
   아니라 ArgoCD 자체 계정(CLI·UI)으로 등록한다 (`deploy/k8s/argocd-app.yaml` 주석).
 - 재현성은 C가 여전히 낫다 — `docker compose up` 한 줄은 그대로 유지된다 (ADR 본문의 근거 그대로).
 
+**운영 상태 (2026-09-29):** 배포·검증을 마치고 **워크로드를 내렸다.** 공용 네임스페이스라
+상시 점유가 적절하지 않다 — 노드 파드 상한(58/노드)에 걸려 한때 전 파드가 Pending이었던 것이
+그 제약의 실물이다. 품질이나 안정성 문제로 내린 것이 아니다.
+
+배포 자산은 `deploy/k8s/`에 그대로 있고 이미지는 Harbor에 남아 있어 `kubectl apply -k deploy/k8s`로
+복구된다. 단 PVC를 함께 지웠다면 테넌트 키와 L1 캐시는 재생성이 필요하다
+(`issue-key.sh` → `preheat-cache.py`, 예열은 LLM 호출을 소모한다).
+검증 결과와 증거는 `docs/benchmarks.md` "공개 서빙 배포"와 `docs/deploy/`에 남겼다.
+
 **재검토 조건 (개정판):**
 - 과정 종료로 네임스페이스가 회수되면 C(self-host compose)로 되돌리거나, 그때 유료 최소
   인스턴스를 재평가한다 (ADR-016 동반 갱신).

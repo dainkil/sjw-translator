@@ -709,7 +709,8 @@ uv run --with sacrebleu --with "psycopg[binary]" python eval/kb_ablation.py --re
 
 ## 공개 서빙 배포 (2026-09-29, SKALA EKS `skala-gj4`)
 
-`https://skala-gj4-sjw.skala-gj.com` — 파드 5개(api·worker·ner·postgres·redis), 이미지 태그 `981bae1`.
+`https://skala-gj4-sjw.skala-gj.com`에 파드 5개(api·worker·ner·postgres·redis), 이미지 태그 `981bae1`로
+배포해 아래를 측정했다. 공용 클러스터라 검증 후 워크로드를 내렸다 (ADR-022 "운영 상태").
 재현에 필요한 다이제스트·리비전·버전 고정은 [ADR-024](adr/024-artifact-reproducibility.md).
 
 ### 이미지 크기
