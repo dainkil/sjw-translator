@@ -1,0 +1,26 @@
+{
+ "rule": "unresolved 인명의 후보 표기가 이웃 행(±2) 국역에 전부 있음",
+ "excluded": [
+  "SJW-A07070180-00900",
+  "SJW-A09020070-00300"
+ ],
+ "detail": {
+  "SJW-A07070180-00900": {
+   "reason": "partial_misalignment",
+   "neighbor_offset": 1,
+   "names": {
+    "沈諿": "심집"
+   },
+   "also": [
+    "kb_key_misalignment"
+   ]
+  },
+  "SJW-A09020070-00300": {
+   "reason": "partial_misalignment",
+   "neighbor_offset": -1,
+   "names": {
+    "權大進": "권대진"
+   }
+  }
+ }
+}

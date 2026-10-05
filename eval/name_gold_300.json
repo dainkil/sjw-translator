@@ -1,0 +1,8149 @@
+{
+ "spans": "idx_person_300.json",
+ "kb": "injo",
+ "summary": {
+  "names": 527,
+  "sentences": 225,
+  "all": {
+   "names": 527,
+   "status": {
+    "agree": 343,
+    "lib": 107,
+    "ref_reading": 8,
+    "unresolved": 24,
+    "master": 21,
+    "kb_alt": 5,
+    "given": 9,
+    "rare": 5,
+    "surname_fix": 5
+   }
+  },
+  "in_kb": {
+   "names": 356,
+   "status": {
+    "agree": 343,
+    "lib": 1,
+    "kb_alt": 5,
+    "surname_fix": 5,
+    "unresolved": 1,
+    "master": 1
+   }
+  },
+  "out_kb": {
+   "names": 171,
+   "status": {
+    "lib": 106,
+    "ref_reading": 8,
+    "unresolved": 23,
+    "master": 20,
+    "given": 9,
+    "rare": 5
+   }
+  },
+  "out_kb_share": 0.3245,
+  "old_gold": {
+   "names": 371,
+   "out_kb": 20,
+   "dropped": 156,
+   "dropped_out_kb": 151
+  },
+  "injected_disagree": {
+   "rate": 0.02,
+   "names": 350
+  },
+  "scored": 495,
+  "scored_rate": 0.9393
+ },
+ "names": [
+  {
+   "id": "SJW-A16120220-01600",
+   "surface": "鄭太和",
+   "hanja": "鄭太和",
+   "gold": "정태화",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정태화",
+   "kb_names": [
+    "정태화"
+   ],
+   "lib": "정태화",
+   "old": "정태화",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04050150-00200",
+   "surface": "姜碩期",
+   "hanja": "姜碩期",
+   "gold": "강석기",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강석기",
+   "kb_names": [
+    "강석기"
+   ],
+   "lib": "강석기",
+   "old": "강석기",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A11100030-00400",
+   "surface": "金慶徵",
+   "hanja": "金慶徵",
+   "gold": "김경징",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김경징",
+   "kb_names": [
+    "김경징"
+   ],
+   "lib": "금경징",
+   "old": "김경징",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09060100-00200",
+   "surface": "滿月介",
+   "hanja": "滿月介",
+   "gold": "만월개",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "만월개",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26010140-00800",
+   "surface": "兪榥",
+   "hanja": "兪榥",
+   "gold": "유황",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유황",
+   "kb_names": [
+    "유황"
+   ],
+   "lib": "유황",
+   "old": "유황",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05020140-00400",
+   "surface": "鄭承澤",
+   "hanja": "鄭承澤",
+   "gold": "정승택",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정승택",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17020260-00600",
+   "surface": "梁禮男",
+   "hanja": "梁禮男",
+   "gold": "양예남",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "양례남",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26040190-01100",
+   "surface": "黃緝",
+   "hanja": "黃緝",
+   "gold": "황집",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "황집",
+   "kb_names": [
+    "황집"
+   ],
+   "lib": "황집",
+   "old": "황집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06030080-01100",
+   "surface": "蔡命俊",
+   "hanja": "蔡命俊",
+   "gold": "채명준",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "채명준",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09060090-00200",
+   "surface": "趙絅",
+   "hanja": "趙絅",
+   "gold": "조경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조경",
+   "kb_names": [
+    "조경"
+   ],
+   "lib": "조경",
+   "old": "조경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21100060-01000",
+   "surface": "徐景雨",
+   "hanja": "徐景雨",
+   "gold": "서경우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "서경우",
+   "kb_names": [
+    "서경우"
+   ],
+   "lib": "서경우",
+   "old": "서경우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17040120-00400",
+   "surface": "沈悅",
+   "hanja": "沈悅",
+   "gold": "심열",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "침열",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10060260-00500",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10060260-00500",
+   "surface": "李元翼",
+   "hanja": "李元翼",
+   "gold": "이원익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이원익",
+   "kb_names": [
+    "이원익"
+   ],
+   "lib": "이원익",
+   "old": "이원익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10120010-00500",
+   "surface": "金自點",
+   "hanja": "金自點",
+   "gold": "김자점",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김자점",
+   "kb_names": [
+    "김자점"
+   ],
+   "lib": "금자점",
+   "old": "김자점",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09020070-00300",
+   "surface": "權大進",
+   "hanja": "權大進",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권대진",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09020070-00300",
+   "surface": "繼",
+   "hanja": "繼",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "계",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09020070-00300",
+   "surface": "絡",
+   "hanja": "絡",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "낙",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A20120080-00200",
+   "surface": "趙璞",
+   "hanja": "趙璞",
+   "gold": "조박",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "조박",
+   "old": "조박",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21070250-00200",
+   "surface": "任絖",
+   "hanja": "任絖",
+   "gold": "임광",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임광",
+   "kb_names": [
+    "임광"
+   ],
+   "lib": "임광",
+   "old": "임광",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21070250-00200",
+   "surface": "鄭祥",
+   "hanja": "鄭祥",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정상",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21070250-00200",
+   "surface": "朴希福",
+   "hanja": "朴希福",
+   "gold": "박희복",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박희복",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07010170-00700",
+   "surface": "李溟運",
+   "hanja": "李溟運",
+   "gold": "이명운",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이명운",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07010170-00700",
+   "surface": "成戒愼",
+   "hanja": "成戒愼",
+   "gold": "성계신",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "성계신",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09060080-01100",
+   "surface": "姜碩期",
+   "hanja": "姜碩期",
+   "gold": "강석기",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강석기",
+   "kb_names": [
+    "강석기"
+   ],
+   "lib": "강석기",
+   "old": "강석기",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A20111130-00300",
+   "surface": "元宗大王",
+   "hanja": "元宗大王",
+   "gold": "원종대왕",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "원종대왕",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17110030-00800",
+   "surface": "昇平府院君金瑬",
+   "hanja": "金瑬",
+   "gold": "김류",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김류",
+   "kb_names": [
+    "김류"
+   ],
+   "lib": "금류",
+   "old": "김류",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18070170-00900",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110270-02800",
+   "surface": "朴守弘",
+   "hanja": "朴守弘",
+   "gold": "박수홍",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박수홍",
+   "kb_names": [
+    "박수홍"
+   ],
+   "lib": "박수홍",
+   "old": "박수홍",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05060010-01000",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22120040-01400",
+   "surface": "洪瑞鳳",
+   "hanja": "洪瑞鳳",
+   "gold": "홍서봉",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍서봉",
+   "kb_names": [
+    "홍서봉"
+   ],
+   "lib": "홍서봉",
+   "old": "홍서봉",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26040170-01600",
+   "surface": "申翊全",
+   "hanja": "申翊全",
+   "gold": "신익전",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신익전",
+   "kb_names": [
+    "신익전"
+   ],
+   "lib": "신익전",
+   "old": "신익전",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18110200-01100",
+   "surface": "申敏一",
+   "hanja": "申敏一",
+   "gold": "신민일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신민일",
+   "kb_names": [
+    "신민일"
+   ],
+   "lib": "신민일",
+   "old": "신민일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19110220-00800",
+   "surface": "趙錫胤",
+   "hanja": "趙錫胤",
+   "gold": "조석윤",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조석윤",
+   "kb_names": [
+    "조석윤"
+   ],
+   "lib": "조석윤",
+   "old": "조석윤",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020260-00700",
+   "surface": "李彦英",
+   "hanja": "李彦英",
+   "gold": "이언영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이언영",
+   "kb_names": [
+    "이언영"
+   ],
+   "lib": "이언영",
+   "old": "이언영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020260-00700",
+   "surface": "沈長世",
+   "hanja": "沈長世",
+   "gold": "심장세",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심장세",
+   "kb_names": [
+    "심장세"
+   ],
+   "lib": "침장세",
+   "old": "심장세",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12070120-00300",
+   "surface": "洪瑞鳳",
+   "hanja": "洪瑞鳳",
+   "gold": "홍서봉",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍서봉",
+   "kb_names": [
+    "홍서봉"
+   ],
+   "lib": "홍서봉",
+   "old": "홍서봉",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12070120-00300",
+   "surface": "尹毅立",
+   "hanja": "尹毅立",
+   "gold": "윤의립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤의립",
+   "kb_names": [
+    "윤의립"
+   ],
+   "lib": "윤의립",
+   "old": "윤의립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12070120-00300",
+   "surface": "韓必遠",
+   "hanja": "韓必遠",
+   "gold": "한필원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한필원",
+   "kb_names": [
+    "한필원"
+   ],
+   "lib": "한필원",
+   "old": "한필원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12070120-00300",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A23070250-00300",
+   "surface": "金壽奎",
+   "hanja": "金壽奎",
+   "gold": "김수규",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금수규",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09030190-01100",
+   "surface": "柳之煥",
+   "hanja": "柳之煥",
+   "gold": "유지환",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유지환",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09030190-01100",
+   "surface": "鄭振",
+   "hanja": "鄭振",
+   "gold": "정진",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정진",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06060270-00200",
+   "surface": "金槃",
+   "hanja": "金槃",
+   "gold": "김반",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김반",
+   "kb_names": [
+    "김반"
+   ],
+   "lib": "금반",
+   "old": "김반",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18070230-01800",
+   "surface": "洪瑞鳳",
+   "hanja": "洪瑞鳳",
+   "gold": "홍서봉",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍서봉",
+   "kb_names": [
+    "홍서봉"
+   ],
+   "lib": "홍서봉",
+   "old": "홍서봉",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19090120-00500",
+   "surface": "閔希遠",
+   "hanja": "閔希遠",
+   "gold": "민희원",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "민희원",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17100180-01300",
+   "surface": "睦性善",
+   "hanja": "睦性善",
+   "gold": "목성선",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "목성선",
+   "kb_names": [
+    "목성선"
+   ],
+   "lib": "목성선",
+   "old": "목성선",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16090020-00600",
+   "surface": "柳淰",
+   "hanja": "柳淰",
+   "gold": "유심",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유심",
+   "kb_names": [
+    "유심"
+   ],
+   "lib": "유심",
+   "old": "유심",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25080100-00500",
+   "surface": "孝善",
+   "hanja": "孝善",
+   "gold": "효선",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "효선",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A25080100-00500",
+   "surface": "柳景緝",
+   "hanja": "柳景緝",
+   "gold": "유경집",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유경집",
+   "kb_names": [
+    "유경집"
+   ],
+   "lib": "유경집",
+   "old": "유경집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16060020-00300",
+   "surface": "李時白",
+   "hanja": "李時白",
+   "gold": "이시백",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이시백",
+   "kb_names": [
+    "이시백"
+   ],
+   "lib": "이시백",
+   "old": "이시백",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07020090-00800",
+   "surface": "金起宗,",
+   "hanja": "金起宗",
+   "gold": "김기종",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김기종",
+   "kb_names": [
+    "김기종"
+   ],
+   "lib": "금기종",
+   "old": "김기종",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06090160-01000",
+   "surface": "曇華",
+   "hanja": "曇華",
+   "gold": "담화",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "담화",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A19060100-00700",
+   "surface": "沈大孚",
+   "hanja": "沈大孚",
+   "gold": "심대부",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심대부",
+   "kb_names": [
+    "심대부"
+   ],
+   "lib": "침대부",
+   "old": "심대부",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A01050140-00200",
+   "surface": "李顯英",
+   "hanja": "李顯英",
+   "gold": "이현영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이현영",
+   "kb_names": [
+    "이현영"
+   ],
+   "lib": "이현영",
+   "old": "이현영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A01050140-00200",
+   "surface": "權泰一",
+   "hanja": "權泰一",
+   "gold": "권태일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권태일",
+   "kb_names": [
+    "권태일"
+   ],
+   "lib": "권태일",
+   "old": "권태일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04110020-00900",
+   "surface": "趙濈",
+   "hanja": "趙濈",
+   "gold": "조즙",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조즙",
+   "kb_names": [
+    "조즙"
+   ],
+   "lib": "조즙",
+   "old": "조즙",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26040100-00300",
+   "surface": "漢豐君崔應一",
+   "hanja": "崔應一",
+   "gold": "최응일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최응일",
+   "kb_names": [
+    "최응일"
+   ],
+   "lib": "최응일",
+   "old": "최응일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26040100-00300",
+   "surface": "金霱",
+   "hanja": "金霱",
+   "gold": "김휼",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금휼",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09060260-01000",
+   "surface": "朴尙俊",
+   "hanja": "朴尙俊",
+   "gold": "박상준",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박상준",
+   "old": "박상준",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18110220-00800",
+   "surface": "兪㯙",
+   "hanja": "兪㯙",
+   "gold": "유철",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유철",
+   "kb_names": [
+    "유철"
+   ],
+   "lib": "유철",
+   "old": "유철",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12070200-00400",
+   "surface": "吳允謙",
+   "hanja": "吳允謙",
+   "gold": "오윤겸",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오윤겸",
+   "kb_names": [
+    "오윤겸"
+   ],
+   "lib": "오윤겸",
+   "old": "오윤겸",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08090230-00300",
+   "surface": "金光燧",
+   "hanja": "金光燧",
+   "gold": "김광수",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금광수",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22050150-00300",
+   "surface": "申進益",
+   "hanja": "申進益",
+   "gold": "신진익",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신진익",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A04090260-00800",
+   "surface": "李植",
+   "hanja": "李植",
+   "gold": "이식",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이식",
+   "kb_names": [
+    "이식"
+   ],
+   "lib": "이식",
+   "old": "이식",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04090260-00800",
+   "surface": "金尙",
+   "hanja": "金尙",
+   "gold": "김상",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상",
+   "kb_names": [
+    "김상"
+   ],
+   "lib": "금상",
+   "old": "김상",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110100-00200",
+   "surface": "李蕆",
+   "hanja": "李蕆",
+   "gold": "이천",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이천",
+   "old": "이천",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110100-00200",
+   "surface": "南銑",
+   "hanja": "南銑",
+   "gold": "남선",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남선",
+   "kb_names": [
+    "남선"
+   ],
+   "lib": "남선",
+   "old": "남선",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12110090-00500",
+   "surface": "吳允謙",
+   "hanja": "吳允謙",
+   "gold": "오윤겸",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오윤겸",
+   "kb_names": [
+    "오윤겸"
+   ],
+   "lib": "오윤겸",
+   "old": "오윤겸",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19110110-02800",
+   "surface": "柳具福",
+   "hanja": "柳具福",
+   "gold": "유구복",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유구복",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A27030270-00500",
+   "surface": "李天基",
+   "hanja": "李天基",
+   "gold": "이천기",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이천기",
+   "kb_names": [
+    "이천기"
+   ],
+   "lib": "이천기",
+   "old": "이천기",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27030270-00500",
+   "surface": "洪命夏",
+   "hanja": "洪命夏",
+   "gold": "홍명하",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍명하",
+   "kb_names": [
+    "홍명하"
+   ],
+   "lib": "홍명하",
+   "old": "홍명하",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22030120-00700",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08120020-00700",
+   "surface": "金瑬",
+   "hanja": "金瑬",
+   "gold": "김류",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김류",
+   "kb_names": [
+    "김류"
+   ],
+   "lib": "금류",
+   "old": "김류",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020050-00400",
+   "surface": "鄭昌胄",
+   "hanja": "鄭昌胄",
+   "gold": "정창주",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정창주",
+   "kb_names": [
+    "정창주"
+   ],
+   "lib": "정창주",
+   "old": "정창주",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18060090-00500",
+   "surface": "申濩",
+   "hanja": "申濩",
+   "gold": "신호",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신호",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10040010-00300",
+   "surface": "明德",
+   "hanja": "明德",
+   "gold": "명덕",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "명덕",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10040010-00300",
+   "surface": "敬德",
+   "hanja": "敬德",
+   "gold": "경덕",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "경덕",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10040010-00300",
+   "surface": "明獻",
+   "hanja": "明獻",
+   "gold": "명헌",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "명헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10040010-00300",
+   "surface": "欽獻",
+   "hanja": "欽獻",
+   "gold": "흠헌",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "흠헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10040010-00300",
+   "surface": "仁獻",
+   "hanja": "仁獻",
+   "gold": "인헌",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "인헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "李一元",
+   "hanja": "李一元",
+   "gold": "이일원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이일원",
+   "kb_names": [
+    "이일원"
+   ],
+   "lib": "이일원",
+   "old": "이일원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "金應鉉",
+   "hanja": "金應鉉",
+   "gold": "김응현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김응현",
+   "kb_names": [
+    "김응현"
+   ],
+   "lib": "금응현",
+   "old": "김응현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "金淵",
+   "hanja": "金淵",
+   "gold": "김연",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금연",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "金棍",
+   "hanja": "金棍",
+   "gold": "김곤",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금곤",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "金楫",
+   "hanja": "金楫",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금즙",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "沈碩槃",
+   "hanja": "沈碩槃",
+   "gold": "심석반",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "침석반",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "權斗亨",
+   "hanja": "權斗亨",
+   "gold": "권두형",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권두형",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "蔡一亨",
+   "hanja": "蔡一亨",
+   "gold": "채문형",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "채일형",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22030240-00800",
+   "surface": "安光立",
+   "hanja": "安光立",
+   "gold": "안광립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안광립",
+   "kb_names": [
+    "안광립"
+   ],
+   "lib": "안광립",
+   "old": "안광립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21070200-00900",
+   "surface": "李楷",
+   "hanja": "李楷",
+   "gold": "이해",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이해",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "趙翼",
+   "hanja": "趙翼",
+   "gold": "조익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조익",
+   "kb_names": [
+    "조익"
+   ],
+   "lib": "조익",
+   "old": "조익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "南以雄",
+   "hanja": "南以雄",
+   "gold": "남이웅",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남이웅",
+   "kb_names": [
+    "남이웅"
+   ],
+   "lib": "남이웅",
+   "old": "남이웅",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "韓必遠",
+   "hanja": "韓必遠",
+   "gold": "한필원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한필원",
+   "kb_names": [
+    "한필원"
+   ],
+   "lib": "한필원",
+   "old": "한필원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "姜大遂",
+   "hanja": "姜大遂",
+   "gold": "강대수",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강대수",
+   "kb_names": [
+    "강대수"
+   ],
+   "lib": "강대수",
+   "old": "강대수",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "金光宇",
+   "hanja": "金光宇",
+   "gold": "김광우",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금광우",
+   "old": "김광우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "鄭雷卿",
+   "hanja": "鄭雷卿",
+   "gold": "정뇌경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정뇌경",
+   "kb_names": [
+    "정뇌경"
+   ],
+   "lib": "정뢰경",
+   "old": "정뇌경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "南老星",
+   "hanja": "南老星",
+   "gold": "남노성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남노성",
+   "kb_names": [
+    "남노성"
+   ],
+   "lib": "남로성",
+   "old": "남노성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12090260-00200",
+   "surface": "兪榥",
+   "hanja": "兪榥",
+   "gold": "유황",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유황",
+   "kb_names": [
+    "유황"
+   ],
+   "lib": "유황",
+   "old": "유황",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "朴挺生",
+   "hanja": "朴挺生",
+   "gold": "박정생",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박정생",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "安鈸",
+   "hanja": "安鈸",
+   "gold": "안발",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "안발",
+   "old": "안발",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "許恪",
+   "hanja": "許恪",
+   "gold": "허각",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "허각",
+   "old": "허각",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "禹敏錫",
+   "hanja": "禹敏錫",
+   "gold": "우경석",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "우민석",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "朴而㫥",
+   "hanja": "朴而㫥",
+   "gold": "박이명",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박이명",
+   "old": "박이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "金克譓",
+   "hanja": "金克譓",
+   "gold": "김극혜",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금극혜",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "洪重普",
+   "hanja": "洪重普",
+   "gold": "홍중보",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍중보",
+   "kb_names": [
+    "홍중보"
+   ],
+   "lib": "홍중보",
+   "old": "홍중보",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26020020-00300",
+   "surface": "朴而立",
+   "hanja": "朴而立",
+   "gold": "박이립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박이립",
+   "kb_names": [
+    "박이립"
+   ],
+   "lib": "박이립",
+   "old": "박이립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06010090-00400",
+   "surface": "裴",
+   "hanja": "裴",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "배",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06010090-00400",
+   "surface": "辛大容",
+   "hanja": "辛大容",
+   "gold": "신대용",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신대용",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06010090-00400",
+   "surface": "崔彦恂",
+   "hanja": "崔彦恂",
+   "gold": "최언순",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "최언순",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "李貴",
+   "hanja": "李貴",
+   "gold": "이귀",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이귀",
+   "kb_names": [
+    "이귀"
+   ],
+   "lib": "이귀",
+   "old": "이귀",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "金自點",
+   "hanja": "金自點",
+   "gold": "김자점",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김자점",
+   "kb_names": [
+    "김자점"
+   ],
+   "lib": "금자점",
+   "old": "김자점",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "尹知敬",
+   "hanja": "尹知敬",
+   "gold": "윤지경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤지경",
+   "kb_names": [
+    "윤지경"
+   ],
+   "lib": "윤지경",
+   "old": "윤지경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "李景曾",
+   "hanja": "李景曾",
+   "gold": "이경증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경증",
+   "kb_names": [
+    "이경증"
+   ],
+   "lib": "이경증",
+   "old": "이경증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "姜大遂",
+   "hanja": "姜大遂",
+   "gold": "강대수",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강대수",
+   "kb_names": [
+    "강대수"
+   ],
+   "lib": "강대수",
+   "old": "강대수",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "安時賢",
+   "hanja": "安時賢",
+   "gold": "안시현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안시현",
+   "kb_names": [
+    "안시현"
+   ],
+   "lib": "안시현",
+   "old": "안시현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "嚴鼎耉",
+   "hanja": "嚴鼎耉",
+   "gold": "엄정구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "엄정구",
+   "kb_names": [
+    "엄정구"
+   ],
+   "lib": "엄정구",
+   "old": "엄정구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09100020-00200",
+   "surface": "沈之漢",
+   "hanja": "沈之漢",
+   "gold": "심지한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심지한",
+   "kb_names": [
+    "심지한"
+   ],
+   "lib": "침지한",
+   "old": "심지한",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040110-00300",
+   "surface": "趙廷虎",
+   "hanja": "趙廷虎",
+   "gold": "조정호",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조정호",
+   "kb_names": [
+    "조정호"
+   ],
+   "lib": "조정호",
+   "old": "조정호",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040110-00300",
+   "surface": "沈之溟",
+   "hanja": "沈之溟",
+   "gold": "심지명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심지명",
+   "kb_names": [
+    "심지명"
+   ],
+   "lib": "침지명",
+   "old": "심지명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06090040-00400",
+   "surface": "鄭崧",
+   "hanja": "鄭崧",
+   "gold": "정숭",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정숭",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A08050200-00600",
+   "surface": "邊潝",
+   "hanja": "邊潝",
+   "gold": "변흡",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "변흡",
+   "kb_names": [
+    "변흡"
+   ],
+   "lib": "변흡",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A20030210-00800",
+   "surface": "金協",
+   "hanja": "金協",
+   "gold": "김협",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금협",
+   "old": "김협",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A23040150-00400",
+   "surface": "藤倭",
+   "hanja": "藤倭",
+   "gold": "등왜",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "등왜",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A22090100-00300",
+   "surface": "李英達",
+   "hanja": "李英達",
+   "gold": "이영달",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이영달",
+   "kb_names": [
+    "이영달"
+   ],
+   "lib": "이영달",
+   "old": "이영달",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-02200",
+   "surface": "金長生",
+   "hanja": "金長生",
+   "gold": "김장생",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김장생",
+   "kb_names": [
+    "김장생"
+   ],
+   "lib": "금장생",
+   "old": "김장생",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-02200",
+   "surface": "李景稷",
+   "hanja": "李景稷",
+   "gold": "이경직",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경직",
+   "kb_names": [
+    "이경직"
+   ],
+   "lib": "이경직",
+   "old": "이경직",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-02200",
+   "surface": "鄭廣敬",
+   "hanja": "鄭廣敬",
+   "gold": "정광경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정광경",
+   "kb_names": [
+    "정광경"
+   ],
+   "lib": "정광경",
+   "old": "정광경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-02200",
+   "surface": "李植",
+   "hanja": "李植",
+   "gold": "이식",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이식",
+   "kb_names": [
+    "이식"
+   ],
+   "lib": "이식",
+   "old": "이식",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-02200",
+   "surface": "李楘",
+   "hanja": "李楘",
+   "gold": "이목",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이목",
+   "kb_names": [
+    "이목"
+   ],
+   "lib": "이목",
+   "old": "이목",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "洪瑞鳳",
+   "hanja": "洪瑞鳳",
+   "gold": "홍서봉",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍서봉",
+   "kb_names": [
+    "홍서봉"
+   ],
+   "lib": "홍서봉",
+   "old": "홍서봉",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "洪霶",
+   "hanja": "洪霶",
+   "gold": "홍방",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍방",
+   "kb_names": [
+    "홍방"
+   ],
+   "lib": "홍방",
+   "old": "홍방",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "趙緯韓",
+   "hanja": "趙緯韓",
+   "gold": "조위한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조위한",
+   "kb_names": [
+    "조위한"
+   ],
+   "lib": "조위한",
+   "old": "조위한",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "洪命一",
+   "hanja": "洪命一",
+   "gold": "홍명일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍명일",
+   "kb_names": [
+    "홍명일"
+   ],
+   "lib": "홍명일",
+   "old": "홍명일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "柳道三",
+   "hanja": "柳道三",
+   "gold": "유도삼",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유도삼",
+   "kb_names": [
+    "유도삼"
+   ],
+   "lib": "유도삼",
+   "old": "유도삼",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "南老星",
+   "hanja": "南老星",
+   "gold": "남노성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남노성",
+   "kb_names": [
+    "남노성"
+   ],
+   "lib": "남로성",
+   "old": "남노성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070150-00200",
+   "surface": "梁曼容",
+   "hanja": "梁曼容",
+   "gold": "양만용",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "양만용",
+   "kb_names": [
+    "양만용"
+   ],
+   "lib": "양만용",
+   "old": "양만용",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17070210-00800",
+   "surface": "朴東元",
+   "hanja": "朴東元",
+   "gold": "박동원",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박동원",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17070210-00800",
+   "surface": "義昌君",
+   "hanja": "義昌君",
+   "gold": "의창군",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "의창군",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09080090-00600",
+   "surface": "元海一",
+   "hanja": "元海一",
+   "gold": "원해일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "원해일",
+   "kb_names": [
+    "원해일"
+   ],
+   "lib": "원해일",
+   "old": "원해일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09080090-00600",
+   "surface": "梁時獻",
+   "hanja": "梁時獻",
+   "gold": "양시헌",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "양시헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A12070030-02000",
+   "surface": "尹爓",
+   "hanja": "尹爓",
+   "gold": "윤섬",
+   "status": "lib",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤염",
+   "kb_names": [
+    "윤염"
+   ],
+   "lib": "윤섬",
+   "old": "윤염",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21110230-00300",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25100040-01800",
+   "surface": "金守玄",
+   "hanja": "金守玄",
+   "gold": "김수현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김수현",
+   "kb_names": [
+    "김수현"
+   ],
+   "lib": "금수현",
+   "old": "김수현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16080050-01500",
+   "surface": "朴守文",
+   "hanja": "朴守文",
+   "gold": "박수문",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박수문",
+   "kb_names": [
+    "박수문"
+   ],
+   "lib": "박수문",
+   "old": "박수문",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "鄭百昌",
+   "hanja": "鄭百昌",
+   "gold": "정백창",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정백창",
+   "kb_names": [
+    "정백창"
+   ],
+   "lib": "정백창",
+   "old": "정백창",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "張維",
+   "hanja": "張維",
+   "gold": "장유",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장유",
+   "kb_names": [
+    "장유"
+   ],
+   "lib": "장유",
+   "old": "장유",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "鄭光績",
+   "hanja": "鄭光績",
+   "gold": "정광적",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정광적",
+   "kb_names": [
+    "정광적"
+   ],
+   "lib": "정광적",
+   "old": "정광적",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "韓必遠",
+   "hanja": "韓必遠",
+   "gold": "한필원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한필원",
+   "kb_names": [
+    "한필원"
+   ],
+   "lib": "한필원",
+   "old": "한필원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "金世濂",
+   "hanja": "金世濂",
+   "gold": "김세렴",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김세렴",
+   "kb_names": [
+    "김세렴"
+   ],
+   "lib": "금세렴",
+   "old": "김세렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李坰",
+   "hanja": "李坰",
+   "gold": "이경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경",
+   "kb_names": [
+    "이경"
+   ],
+   "lib": "이경",
+   "old": "이경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李景曾",
+   "hanja": "李景曾",
+   "gold": "이경증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경증",
+   "kb_names": [
+    "이경증"
+   ],
+   "lib": "이경증",
+   "old": "이경증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "趙公淑",
+   "hanja": "趙公淑",
+   "gold": "조공숙",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조공숙",
+   "kb_names": [
+    "조공숙"
+   ],
+   "lib": "조공숙",
+   "old": "조공숙",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "趙贇",
+   "hanja": "趙贇",
+   "gold": "조빈",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조빈",
+   "kb_names": [
+    "조빈"
+   ],
+   "lib": "조윤",
+   "old": "조빈",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李元鎭",
+   "hanja": "李元鎭",
+   "gold": "이원진",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이원진",
+   "kb_names": [
+    "이원진"
+   ],
+   "lib": "이원진",
+   "old": "이원진",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李時楳",
+   "hanja": "李時楳",
+   "gold": "이시매",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이시매",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李敬輿",
+   "hanja": "李敬輿",
+   "gold": "이경여",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경여",
+   "kb_names": [
+    "이경여"
+   ],
+   "lib": "이경여",
+   "old": "이경여",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "宋象仁",
+   "hanja": "宋象仁",
+   "gold": "송상인",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "송상인",
+   "kb_names": [
+    "송상인"
+   ],
+   "lib": "송상인",
+   "old": "송상인",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "權淰",
+   "hanja": "權淰",
+   "gold": "권심",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권심",
+   "kb_names": [
+    "권심"
+   ],
+   "lib": "권심",
+   "old": "권심",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "尹鳴殷",
+   "hanja": "尹鳴殷",
+   "gold": "윤명은",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤명은",
+   "kb_names": [
+    "윤명은"
+   ],
+   "lib": "윤명은",
+   "old": "윤명은",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "趙絅",
+   "hanja": "趙絅",
+   "gold": "조경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조경",
+   "kb_names": [
+    "조경"
+   ],
+   "lib": "조경",
+   "old": "조경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "趙珩",
+   "hanja": "趙珩",
+   "gold": "조형",
+   "status": "kb_alt",
+   "stage": "AMBIGUOUS",
+   "in_kb": true,
+   "injected": null,
+   "kb_names": [
+    "조형"
+   ],
+   "lib": "조형",
+   "old": "조형",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "姜大遂",
+   "hanja": "姜大遂",
+   "gold": "강대수",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강대수",
+   "kb_names": [
+    "강대수"
+   ],
+   "lib": "강대수",
+   "old": "강대수",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "金槃",
+   "hanja": "金槃",
+   "gold": "김반",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김반",
+   "kb_names": [
+    "김반"
+   ],
+   "lib": "금반",
+   "old": "김반",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "崔惠吉",
+   "hanja": "崔惠吉",
+   "gold": "최혜길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최혜길",
+   "kb_names": [
+    "최혜길"
+   ],
+   "lib": "최혜길",
+   "old": "최혜길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "李彦英",
+   "hanja": "李彦英",
+   "gold": "이언영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이언영",
+   "kb_names": [
+    "이언영"
+   ],
+   "lib": "이언영",
+   "old": "이언영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09070290-00200",
+   "surface": "洪霶",
+   "hanja": "洪霶",
+   "gold": "홍방",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍방",
+   "kb_names": [
+    "홍방"
+   ],
+   "lib": "홍방",
+   "old": "홍방",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080250-01000",
+   "surface": "李景曾",
+   "hanja": "李景曾",
+   "gold": "이경증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경증",
+   "kb_names": [
+    "이경증"
+   ],
+   "lib": "이경증",
+   "old": "이경증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080250-01000",
+   "surface": "韓亨吉",
+   "hanja": "韓亨吉",
+   "gold": "한형길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한형길",
+   "kb_names": [
+    "한형길"
+   ],
+   "lib": "한형길",
+   "old": "한형길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22060120-00400",
+   "surface": "金廷翼",
+   "hanja": "金廷翼",
+   "gold": "김정익",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금정익",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18040010-01500",
+   "surface": "金始蕃",
+   "hanja": "金始蕃",
+   "gold": "김시번",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김시번",
+   "kb_names": [
+    "김시번"
+   ],
+   "lib": "금시번",
+   "old": "김시번",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07020050-00500",
+   "surface": "克明",
+   "hanja": "克明",
+   "gold": "극명",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "극명",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07020050-00500",
+   "surface": "克誠",
+   "hanja": "克誠",
+   "gold": "극성",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "극성",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09050010-00500",
+   "surface": "崔有海",
+   "hanja": "崔有海",
+   "gold": "최유해",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최유해",
+   "kb_names": [
+    "최유해"
+   ],
+   "lib": "최유해",
+   "old": "최유해",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09050010-00500",
+   "surface": "李行遠",
+   "hanja": "李行遠",
+   "gold": "이행원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이행원",
+   "kb_names": [
+    "이행원"
+   ],
+   "lib": "이행원",
+   "old": "이행원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09010180-00700",
+   "surface": "崔有海",
+   "hanja": "崔有海",
+   "gold": "최유해",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최유해",
+   "kb_names": [
+    "최유해"
+   ],
+   "lib": "최유해",
+   "old": "최유해",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09010180-00700",
+   "surface": "許&#55381;&#57050;",
+   "hanja": "許𥛚",
+   "gold": "허적",
+   "status": "rare",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "허𥛚",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09010180-00700",
+   "surface": "朴&#55383;&#56711;",
+   "hanja": "朴𥶇",
+   "gold": "박로",
+   "status": "rare",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박𥶇",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09010180-00700",
+   "surface": "成俊耉",
+   "hanja": "成俊耉",
+   "gold": "성준구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "성준구",
+   "kb_names": [
+    "성준구"
+   ],
+   "lib": "성준구",
+   "old": "성준구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09120030-01100",
+   "surface": "金世濂",
+   "hanja": "金世濂",
+   "gold": "김세렴",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김세렴",
+   "kb_names": [
+    "김세렴"
+   ],
+   "lib": "금세렴",
+   "old": "김세렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09120030-01100",
+   "surface": "李貴",
+   "hanja": "李貴",
+   "gold": "이귀",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이귀",
+   "kb_names": [
+    "이귀"
+   ],
+   "lib": "이귀",
+   "old": "이귀",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09080170-00300",
+   "surface": "柳汝恪",
+   "hanja": "柳汝恪",
+   "gold": "유여각",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유여각",
+   "kb_names": [
+    "유여각"
+   ],
+   "lib": "유여각",
+   "old": "유여각",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05100180-00300",
+   "surface": "崔晛",
+   "hanja": "崔晛",
+   "gold": "최현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최현",
+   "kb_names": [
+    "최현"
+   ],
+   "lib": "최현",
+   "old": "최현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05070030-00600",
+   "surface": "張晩",
+   "hanja": "張晩",
+   "gold": "장만",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장만",
+   "kb_names": [
+    "장만"
+   ],
+   "lib": "장만",
+   "old": "장만",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07080270-00400",
+   "surface": "李景奭",
+   "hanja": "李景奭",
+   "gold": "이경석",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경석",
+   "kb_names": [
+    "이경석"
+   ],
+   "lib": "이경석",
+   "old": "이경석",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21030040-00400",
+   "surface": "邊得中",
+   "hanja": "邊得中",
+   "gold": "변득중",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "변득중",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A12100070-00200",
+   "surface": "朴明榑",
+   "hanja": "朴明榑",
+   "gold": "박명부",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박명부",
+   "kb_names": [
+    "박명부"
+   ],
+   "lib": "박명부",
+   "old": "박명부",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12100070-00200",
+   "surface": "趙翼",
+   "hanja": "趙翼",
+   "gold": "조익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조익",
+   "kb_names": [
+    "조익"
+   ],
+   "lib": "조익",
+   "old": "조익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040200-01000",
+   "surface": "李弘胄",
+   "hanja": "李弘胄",
+   "gold": "이홍주",
+   "status": "kb_alt",
+   "stage": "AMBIGUOUS",
+   "in_kb": true,
+   "injected": null,
+   "kb_names": [
+    "이홍주"
+   ],
+   "lib": "이홍주",
+   "old": "이홍주",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040200-01000",
+   "surface": "蔡夢翼",
+   "hanja": "蔡夢翼",
+   "gold": "채몽익",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "채몽익",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A04040200-01000",
+   "surface": "李顯英",
+   "hanja": "李顯英",
+   "gold": "이현영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이현영",
+   "kb_names": [
+    "이현영"
+   ],
+   "lib": "이현영",
+   "old": "이현영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040200-01000",
+   "surface": "李楘",
+   "hanja": "李楘",
+   "gold": "이목",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이목",
+   "kb_names": [
+    "이목"
+   ],
+   "lib": "이목",
+   "old": "이목",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05030060-00500",
+   "surface": "金始生",
+   "hanja": "金始生",
+   "gold": "김시생",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금시생",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05030060-00500",
+   "surface": "姜絪",
+   "hanja": "姜絪",
+   "gold": "강인",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강인",
+   "kb_names": [
+    "강인"
+   ],
+   "lib": "강인",
+   "old": "강인",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21090200-00400",
+   "surface": "今伊",
+   "hanja": "今伊",
+   "gold": "금이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21090200-00400",
+   "surface": "弟明",
+   "hanja": "弟明",
+   "gold": "제명",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "제명",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21090200-00400",
+   "surface": "貞伊",
+   "hanja": "貞伊",
+   "gold": "정이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21060030-00400",
+   "surface": "沈悅",
+   "hanja": "沈悅",
+   "gold": "심열",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "침열",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21060030-00400",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21060030-00400",
+   "surface": "李楘",
+   "hanja": "李楘",
+   "gold": "이목",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이목",
+   "kb_names": [
+    "이목"
+   ],
+   "lib": "이목",
+   "old": "이목",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120140-00400",
+   "surface": "趙翼",
+   "hanja": "趙翼",
+   "gold": "조익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조익",
+   "kb_names": [
+    "조익"
+   ],
+   "lib": "조익",
+   "old": "조익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120140-00400",
+   "surface": "金尙安",
+   "hanja": "金尙安",
+   "gold": "김상안",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금상안",
+   "old": "김상안",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120140-00400",
+   "surface": "尙安",
+   "hanja": "尙安",
+   "gold": "김상안",
+   "status": "surname_fix",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이상안",
+   "kb_names": [
+    "이상안"
+   ],
+   "lib": "상안",
+   "old": "이상안",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080260-02000",
+   "surface": "金世濂",
+   "hanja": "金世濂",
+   "gold": "김세렴",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김세렴",
+   "kb_names": [
+    "김세렴"
+   ],
+   "lib": "금세렴",
+   "old": "김세렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080260-02000",
+   "surface": "李景義",
+   "hanja": "李景義",
+   "gold": "이경의",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경의",
+   "kb_names": [
+    "이경의"
+   ],
+   "lib": "이경의",
+   "old": "이경의",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06010250-00600",
+   "surface": "李民宬",
+   "hanja": "李民宬",
+   "gold": "이민성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이민성",
+   "kb_names": [
+    "이민성"
+   ],
+   "lib": "이민성",
+   "old": "이민성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06010250-00600",
+   "surface": "具山斗",
+   "hanja": "具山斗",
+   "gold": "구산두",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "구산두",
+   "kb_names": [
+    "구산두"
+   ],
+   "lib": "구산두",
+   "old": "구산두",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08080230-00700",
+   "surface": "權鑊",
+   "hanja": "權鑊",
+   "gold": "권확",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권확",
+   "kb_names": [
+    "권확"
+   ],
+   "lib": "권확",
+   "old": "권확",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08080230-00700",
+   "surface": "劉興治",
+   "hanja": "劉興治",
+   "gold": "유흥치",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유흥치",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A08080230-00700",
+   "surface": "興治",
+   "hanja": "興治",
+   "gold": "흥치",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "흥치",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A08080110-01600",
+   "surface": "尹墀",
+   "hanja": "尹墀",
+   "gold": "윤지",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤지",
+   "kb_names": [
+    "윤지"
+   ],
+   "lib": "윤지",
+   "old": "윤지",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08080110-01600",
+   "surface": "權得仁",
+   "hanja": "權得仁",
+   "gold": "권득인",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권득인",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A19010230-00600",
+   "surface": "張禮忠",
+   "hanja": "張禮忠",
+   "gold": "장예충",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장예충",
+   "kb_names": [
+    "장예충"
+   ],
+   "lib": "장례충",
+   "old": "장예충",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19010230-00600",
+   "surface": "林慶業",
+   "hanja": "林慶業",
+   "gold": "임경업",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임경업",
+   "kb_names": [
+    "임경업"
+   ],
+   "lib": "임경업",
+   "old": "임경업",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "姜栢年",
+   "hanja": "姜栢年",
+   "gold": "강백년",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강백년",
+   "kb_names": [
+    "강백년"
+   ],
+   "lib": "강백년",
+   "old": "강백년",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "吳挺緯",
+   "hanja": "吳挺緯",
+   "gold": "오정위",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오정위",
+   "kb_names": [
+    "오정위"
+   ],
+   "lib": "오정위",
+   "old": "오정위",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "李慶徽",
+   "hanja": "李慶徽",
+   "gold": "이경휘",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경휘",
+   "kb_names": [
+    "이경휘"
+   ],
+   "lib": "이경휘",
+   "old": "이경휘",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "南老星",
+   "hanja": "南老星",
+   "gold": "남노성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남노성",
+   "kb_names": [
+    "남노성"
+   ],
+   "lib": "남로성",
+   "old": "남노성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "申恦",
+   "hanja": "申恦",
+   "gold": "신상",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신상",
+   "kb_names": [
+    "신상"
+   ],
+   "lib": "신상",
+   "old": "신상",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25020240-01700",
+   "surface": "權坽",
+   "hanja": "權坽",
+   "gold": "권령",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권령",
+   "kb_names": [
+    "권령"
+   ],
+   "lib": "권령",
+   "old": "권령",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12120250-01500",
+   "surface": "李景仁",
+   "hanja": "李景仁",
+   "gold": "이경인",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경인",
+   "kb_names": [
+    "이경인"
+   ],
+   "lib": "이경인",
+   "old": "이경인",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06020210-01900",
+   "surface": "趙希孟",
+   "hanja": "趙希孟",
+   "gold": "조희맹",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조희맹",
+   "kb_names": [
+    "조희맹"
+   ],
+   "lib": "조희맹",
+   "old": "조희맹",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06020210-01900",
+   "surface": "希孟",
+   "hanja": "希孟",
+   "gold": "조희맹",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조희맹",
+   "kb_names": [
+    "조희맹"
+   ],
+   "lib": "희맹",
+   "old": "조희맹",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12120280-00700",
+   "surface": "徐景雨",
+   "hanja": "徐景雨",
+   "gold": "서경우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "서경우",
+   "kb_names": [
+    "서경우"
+   ],
+   "lib": "서경우",
+   "old": "서경우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25030070-00400",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25030070-00400",
+   "surface": "申恦",
+   "hanja": "申恦",
+   "gold": "신상",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신상",
+   "kb_names": [
+    "신상"
+   ],
+   "lib": "신상",
+   "old": "신상",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25030070-00400",
+   "surface": "李慶徽",
+   "hanja": "李慶徽",
+   "gold": "이경휘",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경휘",
+   "kb_names": [
+    "이경휘"
+   ],
+   "lib": "이경휘",
+   "old": "이경휘",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25030070-00400",
+   "surface": "梁曼容",
+   "hanja": "梁曼容",
+   "gold": "양만용",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "양만용",
+   "kb_names": [
+    "양만용"
+   ],
+   "lib": "양만용",
+   "old": "양만용",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26050200-00300",
+   "surface": "鄭維城",
+   "hanja": "鄭維城",
+   "gold": "정유성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정유성",
+   "kb_names": [
+    "정유성"
+   ],
+   "lib": "정유성",
+   "old": "정유성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26050200-00300",
+   "surface": "韓興一",
+   "hanja": "韓興一",
+   "gold": "한흥일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한흥일",
+   "kb_names": [
+    "한흥일"
+   ],
+   "lib": "한흥일",
+   "old": "한흥일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27020120-01100",
+   "surface": "沈詻",
+   "hanja": "沈詻",
+   "gold": "심액",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심액",
+   "kb_names": [
+    "심액"
+   ],
+   "lib": "침액",
+   "old": "심액",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27020120-01100",
+   "surface": "韓興一",
+   "hanja": "韓興一",
+   "gold": "한흥일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한흥일",
+   "kb_names": [
+    "한흥일"
+   ],
+   "lib": "한흥일",
+   "old": "한흥일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A23080240-00600",
+   "surface": "奇震興",
+   "hanja": "奇震興",
+   "gold": "기진흥",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "기진흥",
+   "kb_names": [
+    "기진흥"
+   ],
+   "lib": "기진흥",
+   "old": "기진흥",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05030060-00700",
+   "surface": "李穳",
+   "hanja": "李穳",
+   "gold": "이찬",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이찬",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05030060-00700",
+   "surface": "安衛",
+   "hanja": "安衛",
+   "gold": "안위",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안위",
+   "kb_names": [
+    "안위"
+   ],
+   "lib": "안위",
+   "old": "안위",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05030060-00700",
+   "surface": "金起宗",
+   "hanja": "金起宗",
+   "gold": "김기종",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김기종",
+   "kb_names": [
+    "김기종"
+   ],
+   "lib": "금기종",
+   "old": "김기종",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050250-01500",
+   "surface": "朴啓榮",
+   "hanja": "朴啓榮",
+   "gold": "박계영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박계영",
+   "kb_names": [
+    "박계영"
+   ],
+   "lib": "박계영",
+   "old": "박계영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050250-01500",
+   "surface": "申翊全",
+   "hanja": "申翊全",
+   "gold": "신익전",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신익전",
+   "kb_names": [
+    "신익전"
+   ],
+   "lib": "신익전",
+   "old": "신익전",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050250-01500",
+   "surface": "權濤",
+   "hanja": "權濤",
+   "gold": "권도",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권도",
+   "kb_names": [
+    "권도"
+   ],
+   "lib": "권도",
+   "old": "권도",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050250-01500",
+   "surface": "趙壽益",
+   "hanja": "趙壽益",
+   "gold": "조수익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조수익",
+   "kb_names": [
+    "조수익"
+   ],
+   "lib": "조수익",
+   "old": "조수익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050250-01500",
+   "surface": "李景奭",
+   "hanja": "李景奭",
+   "gold": "이경석",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경석",
+   "kb_names": [
+    "이경석"
+   ],
+   "lib": "이경석",
+   "old": "이경석",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04090220-01300",
+   "surface": "金尙",
+   "hanja": "金尙",
+   "gold": "김상",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상",
+   "kb_names": [
+    "김상"
+   ],
+   "lib": "금상",
+   "old": "김상",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18011180-00500",
+   "surface": "李省身",
+   "hanja": "李省身",
+   "gold": "이성신",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이성신",
+   "kb_names": [
+    "이성신"
+   ],
+   "lib": "이성신",
+   "old": "이성신",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18011180-00500",
+   "surface": "連化伊",
+   "hanja": "連化伊",
+   "gold": "연화이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "연화이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18011180-00500",
+   "surface": "朴英男",
+   "hanja": "朴英男",
+   "gold": "박영남",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박영남",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A03050100-01100",
+   "surface": "毛都督",
+   "hanja": "毛都督",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모도독",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A03050100-01100",
+   "surface": "韓汝溭",
+   "hanja": "韓汝溭",
+   "gold": "한여직",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한여직",
+   "kb_names": [
+    "한여직"
+   ],
+   "lib": "한여직",
+   "old": "한여직",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16040270-00500",
+   "surface": "金光煜",
+   "hanja": "金光煜",
+   "gold": "김광욱",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김광욱",
+   "kb_names": [
+    "김광욱"
+   ],
+   "lib": "금광욱",
+   "old": "김광욱",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16040270-00500",
+   "surface": "洪世平",
+   "hanja": "洪世平",
+   "gold": "홍세평",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍세평",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16040270-00500",
+   "surface": "元夢祥",
+   "hanja": "元夢祥",
+   "gold": "원몽상",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "원몽상",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A01040190-00700",
+   "surface": "權盡己",
+   "hanja": "權盡己",
+   "gold": "권진기",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권진기",
+   "kb_names": [
+    "권진기"
+   ],
+   "lib": "권진기",
+   "old": "권진기",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A01040190-00700",
+   "surface": "尹民獻",
+   "hanja": "尹民獻",
+   "gold": "윤민헌",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "윤민헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A01040190-00700",
+   "surface": "柳永漢",
+   "hanja": "柳永漢",
+   "gold": "유영한",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유영한",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18011160-00700",
+   "surface": "李省身",
+   "hanja": "李省身",
+   "gold": "이성신",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이성신",
+   "kb_names": [
+    "이성신"
+   ],
+   "lib": "이성신",
+   "old": "이성신",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18011160-00700",
+   "surface": "南老星",
+   "hanja": "南老星",
+   "gold": "남노성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남노성",
+   "kb_names": [
+    "남노성"
+   ],
+   "lib": "남로성",
+   "old": "남노성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18011160-00700",
+   "surface": "李天基",
+   "hanja": "李天基",
+   "gold": "이천기",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이천기",
+   "kb_names": [
+    "이천기"
+   ],
+   "lib": "이천기",
+   "old": "이천기",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19040080-00300",
+   "surface": "尹弘任",
+   "hanja": "尹弘任",
+   "gold": "윤홍임",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "윤홍임",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A19040080-00300",
+   "surface": "南應琛",
+   "hanja": "南應琛",
+   "gold": "남응침",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "남응침",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05110030-00400",
+   "surface": "安景深",
+   "hanja": "安景深",
+   "gold": "안경심",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안경심",
+   "kb_names": [
+    "안경심"
+   ],
+   "lib": "안경심",
+   "old": "안경심",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05110030-00400",
+   "surface": "成俊耉",
+   "hanja": "成俊耉",
+   "gold": "성준구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "성준구",
+   "kb_names": [
+    "성준구"
+   ],
+   "lib": "성준구",
+   "old": "성준구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05110030-00400",
+   "surface": "張",
+   "hanja": "張",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "장",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05110030-00400",
+   "surface": "毛督",
+   "hanja": "毛督",
+   "gold": "모두",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모독",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05050260-01000",
+   "surface": "朴慶龍",
+   "hanja": "朴慶龍",
+   "gold": "박경룡",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박경룡",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16090030-01700",
+   "surface": "李俔",
+   "hanja": "李俔",
+   "gold": "이현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이현",
+   "kb_names": [
+    "이현"
+   ],
+   "lib": "이현",
+   "old": "이현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16090030-01700",
+   "surface": "白汝奉",
+   "hanja": "白汝奉",
+   "gold": "백여봉",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "백여봉",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16090030-01700",
+   "surface": "李鳳",
+   "hanja": "李鳳",
+   "gold": "이현",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이봉",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26040180-01400",
+   "surface": "權坽",
+   "hanja": "權坽",
+   "gold": "권령",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "권령",
+   "kb_names": [
+    "권령"
+   ],
+   "lib": "권령",
+   "old": "권령",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26040180-01400",
+   "surface": "郭之欽",
+   "hanja": "郭之欽",
+   "gold": "곽지흠",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "곽지흠",
+   "kb_names": [
+    "곽지흠"
+   ],
+   "lib": "곽지흠",
+   "old": "곽지흠",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26040180-01400",
+   "surface": "金應祖",
+   "hanja": "金應祖",
+   "gold": "김응조",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김응조",
+   "kb_names": [
+    "김응조"
+   ],
+   "lib": "금응조",
+   "old": "김응조",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080110-01300",
+   "surface": "金世濂",
+   "hanja": "金世濂",
+   "gold": "김세렴",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김세렴",
+   "kb_names": [
+    "김세렴"
+   ],
+   "lib": "금세렴",
+   "old": "김세렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080110-01300",
+   "surface": "申埈",
+   "hanja": "申埈",
+   "gold": "신준",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신준",
+   "kb_names": [
+    "신준"
+   ],
+   "lib": "신준",
+   "old": "신준",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03030200-00300",
+   "surface": "黃致正",
+   "hanja": "黃致正",
+   "gold": "황치정",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "황치정",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07050010-01400",
+   "surface": "洪命耉",
+   "hanja": "洪命耉",
+   "gold": "홍명구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍명구",
+   "kb_names": [
+    "홍명구"
+   ],
+   "lib": "홍명구",
+   "old": "홍명구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21030250-00400",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21030250-00400",
+   "surface": "李景憲",
+   "hanja": "李景憲",
+   "gold": "이경헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경헌",
+   "kb_names": [
+    "이경헌"
+   ],
+   "lib": "이경헌",
+   "old": "이경헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12120170-00800",
+   "surface": "崔葕",
+   "hanja": "崔葕",
+   "gold": "최연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최연",
+   "kb_names": [
+    "최연"
+   ],
+   "lib": "최연",
+   "old": "최연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12120170-00800",
+   "surface": "昇平府院君臣金瑬",
+   "hanja": "金瑬",
+   "gold": "김류",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김류",
+   "kb_names": [
+    "김류"
+   ],
+   "lib": "금류",
+   "old": "김류",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05050180-00600",
+   "surface": "吳䎘",
+   "hanja": "吳䎘",
+   "gold": "오숙",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오숙",
+   "kb_names": [
+    "오숙"
+   ],
+   "lib": "오숙",
+   "old": "오숙",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19100240-02100",
+   "surface": "鄭譯",
+   "hanja": "鄭譯",
+   "gold": "정역",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정역",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A19100240-02100",
+   "surface": "麟坪大君",
+   "hanja": "麟坪大君",
+   "gold": "인평대군",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "인평대군",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李澥",
+   "hanja": "李澥",
+   "gold": "이해",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이해",
+   "kb_names": [
+    "이해"
+   ],
+   "lib": "이해",
+   "old": "이해",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李浚",
+   "hanja": "李浚",
+   "gold": "이준",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이준",
+   "kb_names": [
+    "이준"
+   ],
+   "lib": "이준",
+   "old": "이준",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李潗",
+   "hanja": "李潗",
+   "gold": "이집",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이집",
+   "old": "이집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李義吉",
+   "hanja": "李義吉",
+   "gold": "이의길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이의길",
+   "kb_names": [
+    "이의길"
+   ],
+   "lib": "이의길",
+   "old": "이의길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李淹",
+   "hanja": "李淹",
+   "gold": "이엄",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이엄",
+   "kb_names": [
+    "이엄"
+   ],
+   "lib": "이엄",
+   "old": "이엄",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李濂",
+   "hanja": "李濂",
+   "gold": "이렴",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이렴",
+   "old": "이렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李漸",
+   "hanja": "李漸",
+   "gold": "이점",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이점",
+   "old": "이점",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李涵",
+   "hanja": "李涵",
+   "gold": "이함",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이함",
+   "old": "이함",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李貴",
+   "hanja": "李貴",
+   "gold": "이귀",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이귀",
+   "kb_names": [
+    "이귀"
+   ],
+   "lib": "이귀",
+   "old": "이귀",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "金在",
+   "hanja": "金在",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금재",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "李□",
+   "hanja": "李",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09111240-00400",
+   "surface": "金□",
+   "hanja": "金",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A19080130-00200",
+   "surface": "許積",
+   "hanja": "許積",
+   "gold": "허적",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "허적",
+   "kb_names": [
+    "허적"
+   ],
+   "lib": "허적",
+   "old": "허적",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21090210-00300",
+   "surface": "柳之蔓",
+   "hanja": "柳之蔓",
+   "gold": "유지만",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유지만",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A27040200-00700",
+   "surface": "申翊全",
+   "hanja": "申翊全",
+   "gold": "신익전",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신익전",
+   "kb_names": [
+    "신익전"
+   ],
+   "lib": "신익전",
+   "old": "신익전",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27040200-00700",
+   "surface": "鄭知和",
+   "hanja": "鄭知和",
+   "gold": "정지화",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정지화",
+   "kb_names": [
+    "정지화"
+   ],
+   "lib": "정지화",
+   "old": "정지화",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22040040-00600",
+   "surface": "權斗昌",
+   "hanja": "權斗昌",
+   "gold": "권두창",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권두창",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A25030110-00900",
+   "surface": "韓必遠",
+   "hanja": "韓必遠",
+   "gold": "한필원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한필원",
+   "kb_names": [
+    "한필원"
+   ],
+   "lib": "한필원",
+   "old": "한필원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25030110-00900",
+   "surface": "南應琛",
+   "hanja": "南應琛",
+   "gold": "남응침",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "남응침",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A25030110-00900",
+   "surface": "申可貴",
+   "hanja": "申可貴",
+   "gold": "신가귀",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신가귀",
+   "old": "신가귀",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19120100-00300",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19120100-00300",
+   "surface": "李明漢",
+   "hanja": "李明漢",
+   "gold": "이명한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명한",
+   "kb_names": [
+    "이명한"
+   ],
+   "lib": "이명한",
+   "old": "이명한",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "金壽賢",
+   "hanja": "金壽賢",
+   "gold": "김수현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김수현",
+   "kb_names": [
+    "김수현"
+   ],
+   "lib": "금수현",
+   "old": "김수현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "成以性",
+   "hanja": "成以性",
+   "gold": "성이성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "성이성",
+   "kb_names": [
+    "성이성"
+   ],
+   "lib": "성이성",
+   "old": "성이성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "安時賢",
+   "hanja": "安時賢",
+   "gold": "안시현",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안시현",
+   "kb_names": [
+    "안시현"
+   ],
+   "lib": "안시현",
+   "old": "안시현",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "柳&#55383;&#56525;",
+   "hanja": "柳𥳍",
+   "gold": "유심",
+   "status": "rare",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유𥳍",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "李克仁",
+   "hanja": "李克仁",
+   "gold": "이극인",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이극인",
+   "kb_names": [
+    "이극인"
+   ],
+   "lib": "이극인",
+   "old": "이극인",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "李䅘",
+   "hanja": "李䅘",
+   "gold": "이래",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이래",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "李晩榮",
+   "hanja": "李晩榮",
+   "gold": "이만영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이만영",
+   "kb_names": [
+    "이만영"
+   ],
+   "lib": "이만영",
+   "old": "이만영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "具仁垕",
+   "hanja": "具仁垕",
+   "gold": "구인후",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "구인후",
+   "kb_names": [
+    "구인후"
+   ],
+   "lib": "구인후",
+   "old": "구인후",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "柳道三",
+   "hanja": "柳道三",
+   "gold": "유도삼",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유도삼",
+   "kb_names": [
+    "유도삼"
+   ],
+   "lib": "유도삼",
+   "old": "유도삼",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17110220-00800",
+   "surface": "綾川君具仁垕",
+   "hanja": "具仁垕",
+   "gold": "구인후",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "구인후",
+   "kb_names": [
+    "구인후"
+   ],
+   "lib": "구인후",
+   "old": "구인후",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06020160-01000",
+   "surface": "金尙憲",
+   "hanja": "金尙憲",
+   "gold": "김상헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상헌",
+   "kb_names": [
+    "김상헌"
+   ],
+   "lib": "금상헌",
+   "old": "김상헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25100160-02300",
+   "surface": "景奭",
+   "hanja": "景奭",
+   "gold": "경석",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "경석",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09090070-00700",
+   "surface": "李淑鎭",
+   "hanja": "李淑鎭",
+   "gold": "이숙진",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이숙진",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21100110-01000",
+   "surface": "韓巨元",
+   "hanja": "韓巨元",
+   "gold": "한거원",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "한거원",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21100110-01000",
+   "surface": "柳達",
+   "hanja": "柳達",
+   "gold": "유달",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유달",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18040160-00500",
+   "surface": "金鋿",
+   "hanja": "金鋿",
+   "gold": "김상",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상",
+   "kb_names": [
+    "김상"
+   ],
+   "lib": "금상",
+   "old": "김상",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040160-00500",
+   "surface": "趙絅",
+   "hanja": "趙絅",
+   "gold": "조경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조경",
+   "kb_names": [
+    "조경"
+   ],
+   "lib": "조경",
+   "old": "조경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040160-00500",
+   "surface": "柳景緝",
+   "hanja": "柳景緝",
+   "gold": "유경집",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유경집",
+   "kb_names": [
+    "유경집"
+   ],
+   "lib": "유경집",
+   "old": "유경집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040160-00500",
+   "surface": "鄭攸",
+   "hanja": "鄭攸",
+   "gold": "정유",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정유",
+   "kb_names": [
+    "정유"
+   ],
+   "lib": "정유",
+   "old": "정유",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18040160-00500",
+   "surface": "李彬",
+   "hanja": "李彬",
+   "gold": "이빈",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이빈",
+   "kb_names": [
+    "이빈"
+   ],
+   "lib": "이빈",
+   "old": "이빈",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10030200-01000",
+   "surface": "姜弘重",
+   "hanja": "姜弘重",
+   "gold": "강홍중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강홍중",
+   "kb_names": [
+    "강홍중"
+   ],
+   "lib": "강홍중",
+   "old": "강홍중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10030200-01000",
+   "surface": "鄭弘溟",
+   "hanja": "鄭弘溟",
+   "gold": "정홍명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정홍명",
+   "kb_names": [
+    "정홍명"
+   ],
+   "lib": "정홍명",
+   "old": "정홍명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10030200-01000",
+   "surface": "柳穎",
+   "hanja": "柳穎",
+   "gold": "유영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유영",
+   "kb_names": [
+    "유영"
+   ],
+   "lib": "유영",
+   "old": "유영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19080240-00300",
+   "surface": "李溟",
+   "hanja": "李溟",
+   "gold": "이명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이명",
+   "kb_names": [
+    "이명"
+   ],
+   "lib": "이명",
+   "old": "이명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19080240-00300",
+   "surface": "沈演",
+   "hanja": "沈演",
+   "gold": "심연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심연",
+   "kb_names": [
+    "심연"
+   ],
+   "lib": "침연",
+   "old": "심연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25120010-00300",
+   "surface": "金自點",
+   "hanja": "金自點",
+   "gold": "김자점",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김자점",
+   "kb_names": [
+    "김자점"
+   ],
+   "lib": "금자점",
+   "old": "김자점",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25120010-00300",
+   "surface": "趙絅",
+   "hanja": "趙絅",
+   "gold": "조경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조경",
+   "kb_names": [
+    "조경"
+   ],
+   "lib": "조경",
+   "old": "조경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A25120010-00300",
+   "surface": "金光煜",
+   "hanja": "金光煜",
+   "gold": "김광욱",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김광욱",
+   "kb_names": [
+    "김광욱"
+   ],
+   "lib": "금광욱",
+   "old": "김광욱",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13010290-00400",
+   "surface": "崔惠吉",
+   "hanja": "崔惠吉",
+   "gold": "최혜길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최혜길",
+   "kb_names": [
+    "최혜길"
+   ],
+   "lib": "최혜길",
+   "old": "최혜길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13010290-00400",
+   "surface": "鄭百昌",
+   "hanja": "鄭百昌",
+   "gold": "정백창",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정백창",
+   "kb_names": [
+    "정백창"
+   ],
+   "lib": "정백창",
+   "old": "정백창",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13010290-00400",
+   "surface": "徐景雨",
+   "hanja": "徐景雨",
+   "gold": "서경우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "서경우",
+   "kb_names": [
+    "서경우"
+   ],
+   "lib": "서경우",
+   "old": "서경우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13010290-00400",
+   "surface": "鄭世矩",
+   "hanja": "鄭世矩",
+   "gold": "정세구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정세구",
+   "kb_names": [
+    "정세구"
+   ],
+   "lib": "정세구",
+   "old": "정세구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13010290-00400",
+   "surface": "朴明榑",
+   "hanja": "朴明榑",
+   "gold": "박명부",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박명부",
+   "kb_names": [
+    "박명부"
+   ],
+   "lib": "박명부",
+   "old": "박명부",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16010110-01900",
+   "surface": "金光煜",
+   "hanja": "金光煜",
+   "gold": "김광욱",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김광욱",
+   "kb_names": [
+    "김광욱"
+   ],
+   "lib": "금광욱",
+   "old": "김광욱",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "趙絅",
+   "hanja": "趙絅",
+   "gold": "조경",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조경",
+   "kb_names": [
+    "조경"
+   ],
+   "lib": "조경",
+   "old": "조경",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "柳慶昌",
+   "hanja": "柳慶昌",
+   "gold": "유경창",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유경창",
+   "kb_names": [
+    "유경창"
+   ],
+   "lib": "유경창",
+   "old": "유경창",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "梁曼容",
+   "hanja": "梁曼容",
+   "gold": "양만용",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "양만용",
+   "kb_names": [
+    "양만용"
+   ],
+   "lib": "양만용",
+   "old": "양만용",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "丁彦璧",
+   "hanja": "丁彦璧",
+   "gold": "정언벽",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정언벽",
+   "kb_names": [
+    "정언벽"
+   ],
+   "lib": "정언벽",
+   "old": "정언벽",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "鄭攸",
+   "hanja": "鄭攸",
+   "gold": "정유",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정유",
+   "kb_names": [
+    "정유"
+   ],
+   "lib": "정유",
+   "old": "정유",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "任重",
+   "hanja": "任重",
+   "gold": "임중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임중",
+   "kb_names": [
+    "임중"
+   ],
+   "lib": "임중",
+   "old": "임중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "李惟碩",
+   "hanja": "李惟碩",
+   "gold": "이유석",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이유석",
+   "kb_names": [
+    "이유석"
+   ],
+   "lib": "이유석",
+   "old": "이유석",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26070230-00500",
+   "surface": "辛生",
+   "hanja": "辛生",
+   "gold": "신생",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신생",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A17120260-00500",
+   "surface": "金堉",
+   "hanja": "金堉",
+   "gold": "김육",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김육",
+   "kb_names": [
+    "김육"
+   ],
+   "lib": "금육",
+   "old": "김육",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A22050200-00900",
+   "surface": "羅永祿",
+   "hanja": "羅永祿",
+   "gold": "나영록",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "나영록",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13020230-00900",
+   "surface": "沈之漢",
+   "hanja": "沈之漢",
+   "gold": "심지한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심지한",
+   "kb_names": [
+    "심지한"
+   ],
+   "lib": "침지한",
+   "old": "심지한",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13020230-00900",
+   "surface": "金炯",
+   "hanja": "金炯",
+   "gold": "김형",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금형",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13090070-00600",
+   "surface": "申得淵",
+   "hanja": "申得淵",
+   "gold": "신득연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신득연",
+   "kb_names": [
+    "신득연"
+   ],
+   "lib": "신득연",
+   "old": "신득연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13090070-00600",
+   "surface": "任絖",
+   "hanja": "任絖",
+   "gold": "임광",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임광",
+   "kb_names": [
+    "임광"
+   ],
+   "lib": "임광",
+   "old": "임광",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13090070-00600",
+   "surface": "金元立",
+   "hanja": "金元立",
+   "gold": "김원립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김원립",
+   "kb_names": [
+    "김원립"
+   ],
+   "lib": "금원립",
+   "old": "김원립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110240-00300",
+   "surface": "睦大欽",
+   "hanja": "睦大欽",
+   "gold": "목대흠",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "목대흠",
+   "kb_names": [
+    "목대흠"
+   ],
+   "lib": "목대흠",
+   "old": "목대흠",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13060150-02000",
+   "surface": "崔葕",
+   "hanja": "崔葕",
+   "gold": "최연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최연",
+   "kb_names": [
+    "최연"
+   ],
+   "lib": "최연",
+   "old": "최연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13060150-02000",
+   "surface": "任絖",
+   "hanja": "任絖",
+   "gold": "임광",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임광",
+   "kb_names": [
+    "임광"
+   ],
+   "lib": "임광",
+   "old": "임광",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12120280-00500",
+   "surface": "徐景雨",
+   "hanja": "徐景雨",
+   "gold": "서경우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "서경우",
+   "kb_names": [
+    "서경우"
+   ],
+   "lib": "서경우",
+   "old": "서경우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13090230-00200",
+   "surface": "具鳳瑞",
+   "hanja": "具鳳瑞",
+   "gold": "구봉서",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "구봉서",
+   "kb_names": [
+    "구봉서"
+   ],
+   "lib": "구봉서",
+   "old": "구봉서",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07020280-04500",
+   "surface": "兪伯曾",
+   "hanja": "兪伯曾",
+   "gold": "유백증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유백증",
+   "kb_names": [
+    "유백증"
+   ],
+   "lib": "유백증",
+   "old": "유백증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A11100140-03000",
+   "surface": "李行遠",
+   "hanja": "李行遠",
+   "gold": "이행원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이행원",
+   "kb_names": [
+    "이행원"
+   ],
+   "lib": "이행원",
+   "old": "이행원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03090230-00200",
+   "surface": "李敏求",
+   "hanja": "李敏求",
+   "gold": "이민구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이민구",
+   "kb_names": [
+    "이민구"
+   ],
+   "lib": "이민구",
+   "old": "이민구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120180-02200",
+   "surface": "韓好古",
+   "hanja": "韓好古",
+   "gold": "한호고",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "한호고",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A11060040-01800",
+   "surface": "金堉",
+   "hanja": "金堉",
+   "gold": "김육",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김육",
+   "kb_names": [
+    "김육"
+   ],
+   "lib": "금육",
+   "old": "김육",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A11060040-01800",
+   "surface": "任都司",
+   "hanja": "任都司",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "임도사",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A04040240-00900",
+   "surface": "趙翼",
+   "hanja": "趙翼",
+   "gold": "조익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조익",
+   "kb_names": [
+    "조익"
+   ],
+   "lib": "조익",
+   "old": "조익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020090-00200",
+   "surface": "鄭廣成",
+   "hanja": "鄭廣成",
+   "gold": "정광성",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정광성",
+   "kb_names": [
+    "정광성"
+   ],
+   "lib": "정광성",
+   "old": "정광성",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13090120-00700",
+   "surface": "申得淵",
+   "hanja": "申得淵",
+   "gold": "신득연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신득연",
+   "kb_names": [
+    "신득연"
+   ],
+   "lib": "신득연",
+   "old": "신득연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A11100200-01300",
+   "surface": "沈&#55401;&#56774;",
+   "hanja": "沈𪗆",
+   "gold": "심제",
+   "status": "rare",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "침𪗆",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A11100200-01300",
+   "surface": "珙",
+   "hanja": "珙",
+   "gold": "이공",
+   "status": "surname_fix",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤공",
+   "kb_names": [
+    "윤공"
+   ],
+   "lib": "공",
+   "old": "윤공",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04100140-00500",
+   "surface": "金蓍國",
+   "hanja": "金蓍國",
+   "gold": "김시국",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김시국",
+   "kb_names": [
+    "김시국"
+   ],
+   "lib": "금시국",
+   "old": "김시국",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-01500",
+   "surface": "羅萬甲",
+   "hanja": "羅萬甲",
+   "gold": "나만갑",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "나만갑",
+   "kb_names": [
+    "나만갑"
+   ],
+   "lib": "나만갑",
+   "old": "나만갑",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-01500",
+   "surface": "李景奭",
+   "hanja": "李景奭",
+   "gold": "이경석",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경석",
+   "kb_names": [
+    "이경석"
+   ],
+   "lib": "이경석",
+   "old": "이경석",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03020060-01500",
+   "surface": "珙",
+   "hanja": "珙",
+   "gold": "이공",
+   "status": "surname_fix",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤공",
+   "kb_names": [
+    "윤공"
+   ],
+   "lib": "공",
+   "old": "윤공",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040190-00200",
+   "surface": "閔應恢",
+   "hanja": "閔應恢",
+   "gold": "민응회",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "민응회",
+   "kb_names": [
+    "민응회"
+   ],
+   "lib": "민응회",
+   "old": "민응회",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040190-00200",
+   "surface": "李景曾",
+   "hanja": "李景曾",
+   "gold": "이경증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경증",
+   "kb_names": [
+    "이경증"
+   ],
+   "lib": "이경증",
+   "old": "이경증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03050180-02300",
+   "surface": "辛啓榮",
+   "hanja": "辛啓榮",
+   "gold": "신계영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신계영",
+   "kb_names": [
+    "신계영"
+   ],
+   "lib": "신계영",
+   "old": "신계영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03050180-02300",
+   "surface": "表廷老",
+   "hanja": "表廷老",
+   "gold": "표정로",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "표정로",
+   "kb_names": [
+    "표정로"
+   ],
+   "lib": "표정로",
+   "old": "표정로",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03050180-02300",
+   "surface": "朴炡",
+   "hanja": "朴炡",
+   "gold": "박정",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박정",
+   "kb_names": [
+    "박정"
+   ],
+   "lib": "박정",
+   "old": "박정",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050070-01000",
+   "surface": "尹昕",
+   "hanja": "尹昕",
+   "gold": "윤흔",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤흔",
+   "kb_names": [
+    "윤흔"
+   ],
+   "lib": "윤흔",
+   "old": "윤흔",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050070-01000",
+   "surface": "崔鳴吉",
+   "hanja": "崔鳴吉",
+   "gold": "최명길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최명길",
+   "kb_names": [
+    "최명길"
+   ],
+   "lib": "최명길",
+   "old": "최명길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050070-01000",
+   "surface": "李弘胄",
+   "hanja": "李弘胄",
+   "gold": "이홍주",
+   "status": "kb_alt",
+   "stage": "AMBIGUOUS",
+   "in_kb": true,
+   "injected": null,
+   "kb_names": [
+    "이홍주"
+   ],
+   "lib": "이홍주",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16050070-01000",
+   "surface": "李聖求",
+   "hanja": "李聖求",
+   "gold": "이성구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이성구",
+   "kb_names": [
+    "이성구"
+   ],
+   "lib": "이성구",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A04080200-01000",
+   "surface": "趙邦直",
+   "hanja": "趙邦直",
+   "gold": "조방직",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조방직",
+   "kb_names": [
+    "조방직"
+   ],
+   "lib": "조방직",
+   "old": "조방직",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A23070290-00400",
+   "surface": "金世濂",
+   "hanja": "金世濂",
+   "gold": "김세렴",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김세렴",
+   "kb_names": [
+    "김세렴"
+   ],
+   "lib": "금세렴",
+   "old": "김세렴",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19060240-00900",
+   "surface": "柳廷益",
+   "hanja": "柳廷益",
+   "gold": "유정익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유정익",
+   "kb_names": [
+    "유정익"
+   ],
+   "lib": "유정익",
+   "old": "유정익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16010070-01600",
+   "surface": "任絖",
+   "hanja": "任絖",
+   "gold": "임광",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "임광",
+   "kb_names": [
+    "임광"
+   ],
+   "lib": "임광",
+   "old": "임광",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07070180-00900",
+   "surface": "金瑬",
+   "hanja": "金瑬",
+   "gold": "김류",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김류",
+   "kb_names": [
+    "김류"
+   ],
+   "lib": "금류",
+   "old": "김류",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07070180-00900",
+   "surface": "萬甲",
+   "hanja": "萬甲",
+   "gold": "만갑",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "만갑",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07070180-00900",
+   "surface": "沈諿",
+   "hanja": "沈諿",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심집",
+   "kb_names": [
+    "심집"
+   ],
+   "lib": "침집",
+   "old": "심집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "尹衡彦",
+   "hanja": "尹衡彦",
+   "gold": "윤형언",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤형언",
+   "kb_names": [
+    "윤형언"
+   ],
+   "lib": "윤형언",
+   "old": "윤형언",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "鄭世矩",
+   "hanja": "鄭世矩",
+   "gold": "정세구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정세구",
+   "kb_names": [
+    "정세구"
+   ],
+   "lib": "정세구",
+   "old": "정세구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "閔應恢",
+   "hanja": "閔應恢",
+   "gold": "민응회",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "민응회",
+   "kb_names": [
+    "민응회"
+   ],
+   "lib": "민응회",
+   "old": "민응회",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "鄭",
+   "hanja": "鄭",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "閔應亨",
+   "hanja": "閔應亨",
+   "gold": "민응형",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "민응형",
+   "kb_names": [
+    "민응형"
+   ],
+   "lib": "민응형",
+   "old": "민응형",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A04040260-01700",
+   "surface": "李景義",
+   "hanja": "李景義",
+   "gold": "이경의",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경의",
+   "kb_names": [
+    "이경의"
+   ],
+   "lib": "이경의",
+   "old": "이경의",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "南斗瞻",
+   "hanja": "南斗瞻",
+   "gold": "남두첨",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남두첨",
+   "kb_names": [
+    "남두첨"
+   ],
+   "lib": "남두첨",
+   "old": "남두첨",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "李永式",
+   "hanja": "李永式",
+   "gold": "이영식",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이영식",
+   "kb_names": [
+    "이영식"
+   ],
+   "lib": "이영식",
+   "old": "이영식",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "柳秩",
+   "hanja": "柳秩",
+   "gold": "유질",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유질",
+   "old": "유질",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "黃用正",
+   "hanja": "黃用正",
+   "gold": "황용정",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "황용정",
+   "kb_names": [
+    "황용정"
+   ],
+   "lib": "황용정",
+   "old": "황용정",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "魏廷喆",
+   "hanja": "魏廷喆",
+   "gold": "위정철",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "위정철",
+   "kb_names": [
+    "위정철"
+   ],
+   "lib": "위정철",
+   "old": "위정철",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "柳希培",
+   "hanja": "柳希培",
+   "gold": "유희배",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유희배",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "朴簉",
+   "hanja": "朴簉",
+   "gold": "박추",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박추",
+   "kb_names": [
+    "박추"
+   ],
+   "lib": "박추",
+   "old": "박추",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "申得淵",
+   "hanja": "申得淵",
+   "gold": "신득연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신득연",
+   "kb_names": [
+    "신득연"
+   ],
+   "lib": "신득연",
+   "old": "신득연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "權濬",
+   "hanja": "權濬",
+   "gold": "권준",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권준",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "羅德憲",
+   "hanja": "羅德憲",
+   "gold": "나덕헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "나덕헌",
+   "kb_names": [
+    "나덕헌"
+   ],
+   "lib": "나덕헌",
+   "old": "나덕헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "慶申復",
+   "hanja": "慶申復",
+   "gold": "경신복",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "경신복",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07041090-00700",
+   "surface": "盧希聖",
+   "hanja": "盧希聖",
+   "gold": "노희성",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "노희성",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A23080150-00700",
+   "surface": "乺伊",
+   "hanja": "乺伊",
+   "gold": "솔이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "솔이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A23080150-00700",
+   "surface": "立伊",
+   "hanja": "立伊",
+   "gold": "입이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "입이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A23080150-00700",
+   "surface": "李尙稷",
+   "hanja": "李尙稷",
+   "gold": "이상직",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이상직",
+   "old": "이상직",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A23080150-00700",
+   "surface": "李善",
+   "hanja": "李善",
+   "gold": "이번",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이선",
+   "old": "이선",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120220-00500",
+   "surface": "兪省曾",
+   "hanja": "兪省曾",
+   "gold": "유성증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유성증",
+   "kb_names": [
+    "유성증"
+   ],
+   "lib": "유성증",
+   "old": "유성증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07120220-00500",
+   "surface": "曺明勖",
+   "hanja": "曺明勖",
+   "gold": "조명욱",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "조명욱",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07120220-00500",
+   "surface": "鄭承澤",
+   "hanja": "鄭承澤",
+   "gold": "정승택",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정승택",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07120220-00500",
+   "surface": "文郁",
+   "hanja": "文郁",
+   "gold": "문욱",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "문욱",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21100100-01000",
+   "surface": "玄頊",
+   "hanja": "玄頊",
+   "gold": "현욱",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "현욱",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A03040080-00500",
+   "surface": "全湜",
+   "hanja": "全湜",
+   "gold": "전식",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "전식",
+   "kb_names": [
+    "전식"
+   ],
+   "lib": "전식",
+   "old": "전식",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27010260-00900",
+   "surface": "斗杓",
+   "hanja": "斗杓",
+   "gold": "원두표",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "원두표",
+   "kb_names": [
+    "원두표"
+   ],
+   "lib": "두표",
+   "old": "원두표",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27010260-00900",
+   "surface": "時昉",
+   "hanja": "時昉",
+   "gold": "이시방",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이시방",
+   "kb_names": [
+    "이시방"
+   ],
+   "lib": "시방",
+   "old": "이시방",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27010260-00900",
+   "surface": "興一",
+   "hanja": "興一",
+   "gold": "한흥일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한흥일",
+   "kb_names": [
+    "한흥일"
+   ],
+   "lib": "흥일",
+   "old": "한흥일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03080180-00900",
+   "surface": "姜大進",
+   "hanja": "姜大進",
+   "gold": "강대진",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "강대진",
+   "kb_names": [
+    "강대진"
+   ],
+   "lib": "강대진",
+   "old": "강대진",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03080180-00900",
+   "surface": "李愖",
+   "hanja": "李愖",
+   "gold": "이심",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이심",
+   "kb_names": [
+    "이심"
+   ],
+   "lib": "이심",
+   "old": "이심",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03080180-00900",
+   "surface": "奇協",
+   "hanja": "奇協",
+   "gold": "기협",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "기협",
+   "kb_names": [
+    "기협"
+   ],
+   "lib": "기협",
+   "old": "기협",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03080180-00900",
+   "surface": "沈侻",
+   "hanja": "沈侻",
+   "gold": "심탈",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "침탈",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13110080-01200",
+   "surface": "柳景緝",
+   "hanja": "柳景緝",
+   "gold": "유경집",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유경집",
+   "kb_names": [
+    "유경집"
+   ],
+   "lib": "유경집",
+   "old": "유경집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13110080-01200",
+   "surface": "申起漢",
+   "hanja": "申起漢",
+   "gold": "신기한",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신기한",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13110080-01200",
+   "surface": "金應祖",
+   "hanja": "金應祖",
+   "gold": "김응조",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김응조",
+   "kb_names": [
+    "김응조"
+   ],
+   "lib": "금응조",
+   "old": "김응조",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050140-01200",
+   "surface": "崔有淵",
+   "hanja": "崔有淵",
+   "gold": "최유연",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최유연",
+   "kb_names": [
+    "최유연"
+   ],
+   "lib": "최유연",
+   "old": "최유연",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16050140-01200",
+   "surface": "朴安仁",
+   "hanja": "朴安仁",
+   "gold": "박안인",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박안인",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16050140-01200",
+   "surface": "命長",
+   "hanja": "命長",
+   "gold": "명장",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "명장",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A16050140-01200",
+   "surface": "崔有海",
+   "hanja": "崔有海",
+   "gold": "최유해",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최유해",
+   "kb_names": [
+    "최유해"
+   ],
+   "lib": "최유해",
+   "old": "최유해",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21060050-00800",
+   "surface": "洪茂績",
+   "hanja": "洪茂績",
+   "gold": "홍무적",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍무적",
+   "kb_names": [
+    "홍무적"
+   ],
+   "lib": "홍무적",
+   "old": "홍무적",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21060050-00800",
+   "surface": "具元悌",
+   "hanja": "具元悌",
+   "gold": "구원제",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "구원제",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21060050-00800",
+   "surface": "閔馨男",
+   "hanja": "閔馨男",
+   "gold": "민형남",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "민형남",
+   "kb_names": [
+    "민형남"
+   ],
+   "lib": "민형남",
+   "old": "민형남",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21060050-00800",
+   "surface": "李必崇",
+   "hanja": "李必崇",
+   "gold": "이필영",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "이필숭",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A21060050-00800",
+   "surface": "金蓍國",
+   "hanja": "金蓍國",
+   "gold": "김시국",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김시국",
+   "kb_names": [
+    "김시국"
+   ],
+   "lib": "금시국",
+   "old": "김시국",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16070100-00400",
+   "surface": "洪&#55396;&#56777;",
+   "hanja": "洪𩇉",
+   "gold": "홍보",
+   "status": "rare",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍𩇉",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13090110-00900",
+   "surface": "尹集",
+   "hanja": "尹集",
+   "gold": "윤집",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤집",
+   "kb_names": [
+    "윤집"
+   ],
+   "lib": "윤집",
+   "old": "윤집",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13090110-00900",
+   "surface": "金尙憲",
+   "hanja": "金尙憲",
+   "gold": "김상헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상헌",
+   "kb_names": [
+    "김상헌"
+   ],
+   "lib": "금상헌",
+   "old": "김상헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27040220-00600",
+   "surface": "金南重",
+   "hanja": "金南重",
+   "gold": "김남중",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김남중",
+   "kb_names": [
+    "김남중"
+   ],
+   "lib": "금남중",
+   "old": "김남중",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A27040220-00600",
+   "surface": "完川君崔來吉",
+   "hanja": "崔來吉",
+   "gold": "최내길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최내길",
+   "kb_names": [
+    "최내길"
+   ],
+   "lib": "최래길",
+   "old": "최내길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03040250-00600",
+   "surface": "趙翼",
+   "hanja": "趙翼",
+   "gold": "조익",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조익",
+   "kb_names": [
+    "조익"
+   ],
+   "lib": "조익",
+   "old": "조익",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A12100020-00300",
+   "surface": "安信一",
+   "hanja": "安信一",
+   "gold": "안신일",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "안신일",
+   "kb_names": [
+    "안신일"
+   ],
+   "lib": "안신일",
+   "old": "안신일",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080260-02300",
+   "surface": "申翊亮",
+   "hanja": "申翊亮",
+   "gold": "신익량",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신익량",
+   "kb_names": [
+    "신익량"
+   ],
+   "lib": "신익량",
+   "old": "신익량",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080260-02300",
+   "surface": "鄭致和",
+   "hanja": "鄭致和",
+   "gold": "정치화",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정치화",
+   "kb_names": [
+    "정치화"
+   ],
+   "lib": "정치화",
+   "old": "정치화",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A17080260-02300",
+   "surface": "張自好",
+   "hanja": "張自好",
+   "gold": "장자호",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장자호",
+   "kb_names": [
+    "장자호"
+   ],
+   "lib": "장자호",
+   "old": "장자호",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06010250-01000",
+   "surface": "洪靌",
+   "hanja": "洪靌",
+   "gold": "홍보",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍보",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06010250-01000",
+   "surface": "辛慶英",
+   "hanja": "辛慶英",
+   "gold": "신경영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신경영",
+   "kb_names": [
+    "신경영"
+   ],
+   "lib": "신경영",
+   "old": "신경영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06010250-01000",
+   "surface": "李胤男",
+   "hanja": "李胤男",
+   "gold": "이윤남",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이윤남",
+   "kb_names": [
+    "이윤남"
+   ],
+   "lib": "이윤남",
+   "old": "이윤남",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07030200-01000",
+   "surface": "李景奭",
+   "hanja": "李景奭",
+   "gold": "이경석",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경석",
+   "kb_names": [
+    "이경석"
+   ],
+   "lib": "이경석",
+   "old": "이경석",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07030200-01000",
+   "surface": "毛",
+   "hanja": "毛",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A09040190-00500",
+   "surface": "爾瞻",
+   "hanja": "爾瞻",
+   "gold": "이이첨",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이이첨",
+   "kb_names": [
+    "이이첨"
+   ],
+   "lib": "이첨",
+   "old": "이이첨",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A26010020-00600",
+   "surface": "南重晦",
+   "hanja": "南重晦",
+   "gold": "남중회",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "남중회",
+   "kb_names": [
+    "남중회"
+   ],
+   "lib": "남중회",
+   "old": "남중회",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08090130-00500",
+   "surface": "吳允謙",
+   "hanja": "吳允謙",
+   "gold": "오윤겸",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오윤겸",
+   "kb_names": [
+    "오윤겸"
+   ],
+   "lib": "오윤겸",
+   "old": "오윤겸",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A21010220-00500",
+   "surface": "李行遠",
+   "hanja": "李行遠",
+   "gold": "이행원",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이행원",
+   "kb_names": [
+    "이행원"
+   ],
+   "lib": "이행원",
+   "old": "이행원",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05050180-00400",
+   "surface": "金尙憲",
+   "hanja": "金尙憲",
+   "gold": "김상헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상헌",
+   "kb_names": [
+    "김상헌"
+   ],
+   "lib": "금상헌",
+   "old": "김상헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10050290-01100",
+   "surface": "崔惠吉",
+   "hanja": "崔惠吉",
+   "gold": "최혜길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "최혜길",
+   "kb_names": [
+    "최혜길"
+   ],
+   "lib": "최혜길",
+   "old": "최혜길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10050290-01100",
+   "surface": "尹孝永",
+   "hanja": "尹孝永",
+   "gold": "윤효영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤효영",
+   "kb_names": [
+    "윤효영"
+   ],
+   "lib": "윤효영",
+   "old": "윤효영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110080-01100",
+   "surface": "鄭世矩",
+   "hanja": "鄭世矩",
+   "gold": "정세구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정세구",
+   "kb_names": [
+    "정세구"
+   ],
+   "lib": "정세구",
+   "old": "정세구",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110080-01100",
+   "surface": "文晦",
+   "hanja": "文晦",
+   "gold": "문회",
+   "status": "master",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정문회",
+   "kb_names": [
+    "정문회"
+   ],
+   "lib": "문회",
+   "old": "문회",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A03110080-01100",
+   "surface": "晦",
+   "hanja": "晦",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "회",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A03110080-01100",
+   "surface": "李景憲",
+   "hanja": "李景憲",
+   "gold": "이경헌",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이경헌",
+   "kb_names": [
+    "이경헌"
+   ],
+   "lib": "이경헌",
+   "old": "이경헌",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A08120030-00300",
+   "surface": "李行健",
+   "hanja": "李行健",
+   "gold": "이행건",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이행건",
+   "kb_names": [
+    "이행건"
+   ],
+   "lib": "이행건",
+   "old": "이행건",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16020160-00200",
+   "surface": "金藎國",
+   "hanja": "金藎國",
+   "gold": "김신국",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김신국",
+   "kb_names": [
+    "김신국"
+   ],
+   "lib": "금신국",
+   "old": "김신국",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A16090070-00800",
+   "surface": "許啓",
+   "hanja": "許啓",
+   "gold": "허계",
+   "status": "kb_alt",
+   "stage": "AMBIGUOUS",
+   "in_kb": true,
+   "injected": null,
+   "kb_names": [
+    "허계"
+   ],
+   "lib": "허계",
+   "old": "허계",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05050270-00300",
+   "surface": "吳䎘",
+   "hanja": "吳䎘",
+   "gold": "오숙",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오숙",
+   "kb_names": [
+    "오숙"
+   ],
+   "lib": "오숙",
+   "old": "오숙",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05050270-00300",
+   "surface": "原昌君",
+   "hanja": "原昌君",
+   "gold": "원창군",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "원창군",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "李胤男",
+   "hanja": "李胤男",
+   "gold": "이윤남",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이윤남",
+   "kb_names": [
+    "이윤남"
+   ],
+   "lib": "이윤남",
+   "old": "이윤남",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "辛慶英",
+   "hanja": "辛慶英",
+   "gold": "신경영",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "신경영",
+   "kb_names": [
+    "신경영"
+   ],
+   "lib": "신경영",
+   "old": "신경영",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "豐寧君洪靌",
+   "hanja": "洪靌",
+   "gold": "홍보",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍보",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "鰲山君李擢男",
+   "hanja": "李擢男",
+   "gold": "이탁남",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이탁남",
+   "kb_names": [
+    "이탁남"
+   ],
+   "lib": "이탁남",
+   "old": "이탁남",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "李順命",
+   "hanja": "李順命",
+   "gold": "이순명",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이순명",
+   "kb_names": [
+    "이순명"
+   ],
+   "lib": "이순명",
+   "old": "이순명",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05120250-00600",
+   "surface": "洪靌",
+   "hanja": "洪靌",
+   "gold": "홍보",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍보",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A05060230-00400",
+   "surface": "張晩",
+   "hanja": "張晩",
+   "gold": "장만",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장만",
+   "kb_names": [
+    "장만"
+   ],
+   "lib": "장만",
+   "old": "장만",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05060230-00400",
+   "surface": "金搢",
+   "hanja": "金搢",
+   "gold": "김진",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김진",
+   "kb_names": [
+    "김진"
+   ],
+   "lib": "금진",
+   "old": "김진",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05060230-00400",
+   "surface": "朴惟健",
+   "hanja": "朴惟健",
+   "gold": "박유건",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박유건",
+   "kb_names": [
+    "박유건"
+   ],
+   "lib": "박유건",
+   "old": "박유건",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07060280-00300",
+   "surface": "毛都督",
+   "hanja": "毛都督",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모도독",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07060280-00300",
+   "surface": "張大秋",
+   "hanja": "張大秋",
+   "gold": "장대추",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "장대추",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07060280-00300",
+   "surface": "毛文龍",
+   "hanja": "毛文龍",
+   "gold": "모문룡",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모문룡",
+   "old": "모문룡",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A07060280-00300",
+   "surface": "袁軍門崇煥",
+   "hanja": "袁軍門崇煥",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "원군문숭환",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A26100290-00300",
+   "surface": "金弘澤",
+   "hanja": "金弘澤",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "금홍택",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A07030070-00500",
+   "surface": "毛文龍",
+   "hanja": "毛文龍",
+   "gold": "모문룡",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "모문룡",
+   "old": "모문룡",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "洪處濬",
+   "hanja": "洪處濬",
+   "gold": "홍처준",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍처준",
+   "kb_names": [
+    "홍처준"
+   ],
+   "lib": "홍처준",
+   "old": "홍처준",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "命亨",
+   "hanja": "命亨",
+   "gold": "홍명형",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "홍명형",
+   "kb_names": [
+    "홍명형"
+   ],
+   "lib": "명형",
+   "old": "홍명형",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "金尙容",
+   "hanja": "金尙容",
+   "gold": "김상용",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "김상용",
+   "kb_names": [
+    "김상용"
+   ],
+   "lib": "금상용",
+   "old": "김상용",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "李時稷",
+   "hanja": "李時稷",
+   "gold": "이시직",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이시직",
+   "kb_names": [
+    "이시직"
+   ],
+   "lib": "이시직",
+   "old": "이시직",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "朴知警",
+   "hanja": "朴知警",
+   "gold": "박지경",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박지경",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "知警",
+   "hanja": "知警",
+   "gold": "지경",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "지경",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "尙容",
+   "hanja": "尙容",
+   "gold": "상용",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "상용",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "洪",
+   "hanja": "洪",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "韓汝宗",
+   "hanja": "韓汝宗",
+   "gold": "한여종",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "한여종",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "張遇漢",
+   "hanja": "張遇漢",
+   "gold": "장우한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "장우한",
+   "kb_names": [
+    "장우한"
+   ],
+   "lib": "장우한",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "尹世獻",
+   "hanja": "尹世獻",
+   "gold": "윤세헌",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "윤세헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "南斗徵",
+   "hanja": "南斗徵",
+   "gold": "남두징",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "남두징",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "興吉",
+   "hanja": "興吉",
+   "gold": "흥길",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "흥길",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A18050210-02000",
+   "surface": "世獻",
+   "hanja": "世獻",
+   "gold": "세헌",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "세헌",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A08040170-01000",
+   "surface": "唐憲宗",
+   "hanja": "唐憲宗",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "당헌종",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13070220-00900",
+   "surface": "兪伯曾",
+   "hanja": "兪伯曾",
+   "gold": "유백증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유백증",
+   "kb_names": [
+    "유백증"
+   ],
+   "lib": "유백증",
+   "old": "유백증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070220-00900",
+   "surface": "朴弘美",
+   "hanja": "朴弘美",
+   "gold": "박홍미",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박홍미",
+   "kb_names": [
+    "박홍미"
+   ],
+   "lib": "박홍미",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "曇華",
+   "hanja": "曇華",
+   "gold": "담화",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "담화",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "鄭佐郞",
+   "hanja": "鄭佐郞",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "정좌랑",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "權大宗",
+   "hanja": "權大宗",
+   "gold": "권대종",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "권대종",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "申廷立",
+   "hanja": "申廷立",
+   "gold": "신정립",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "신정립",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "鄭沁",
+   "hanja": "鄭沁",
+   "gold": "정심",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정심",
+   "kb_names": [
+    "정심"
+   ],
+   "lib": "정심",
+   "old": "정심",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "柳孝立",
+   "hanja": "柳孝立",
+   "gold": "유효립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유효립",
+   "kb_names": [
+    "유효립"
+   ],
+   "lib": "유효립",
+   "old": "유효립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "宗善",
+   "hanja": "宗善",
+   "gold": "유종선",
+   "status": "surname_fix",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "조종선",
+   "kb_names": [
+    "조종선"
+   ],
+   "lib": "종선",
+   "old": "조종선",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "閔姓",
+   "hanja": "閔姓",
+   "gold": "민씨",
+   "status": "ref_reading",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "민성",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "仁城君",
+   "hanja": "仁城君",
+   "gold": "인성군",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "인성군",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "秀香",
+   "hanja": "秀香",
+   "gold": "수향",
+   "status": "given",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "수향",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "柳監役",
+   "hanja": "柳監役",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유감역",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A06090170-01000",
+   "surface": "柳",
+   "hanja": "柳",
+   "gold": null,
+   "status": "unresolved",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "유",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A13040300-01800",
+   "surface": "吳允謙",
+   "hanja": "吳允謙",
+   "gold": "오윤겸",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "오윤겸",
+   "kb_names": [
+    "오윤겸"
+   ],
+   "lib": "오윤겸",
+   "old": "오윤겸",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13040300-01800",
+   "surface": "沈之漢",
+   "hanja": "沈之漢",
+   "gold": "심지한",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "심지한",
+   "kb_names": [
+    "심지한"
+   ],
+   "lib": "침지한",
+   "old": "심지한",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A05120070-00800",
+   "surface": "豐寧君洪靌",
+   "hanja": "洪靌",
+   "gold": "홍보",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "홍보",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A08050160-00400",
+   "surface": "宋岦",
+   "hanja": "宋岦",
+   "gold": "송립",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "송립",
+   "kb_names": [
+    "송립"
+   ],
+   "lib": "송립",
+   "old": "송립",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18110090-01000",
+   "surface": "李德洙",
+   "hanja": "李德洙",
+   "gold": "이덕수",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "이덕수",
+   "kb_names": [
+    "이덕수"
+   ],
+   "lib": "이덕수",
+   "old": "이덕수",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A18110090-01000",
+   "surface": "韓亨吉",
+   "hanja": "韓亨吉",
+   "gold": "한형길",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "한형길",
+   "kb_names": [
+    "한형길"
+   ],
+   "lib": "한형길",
+   "old": "한형길",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070190-01900",
+   "surface": "朴頵",
+   "hanja": "朴頵",
+   "gold": "박군",
+   "status": "master",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "박군",
+   "old": "박군",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A13070190-01900",
+   "surface": "錦南君鄭忠信",
+   "hanja": "鄭忠信",
+   "gold": "정충신",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정충신",
+   "kb_names": [
+    "정충신"
+   ],
+   "lib": "정충신",
+   "old": "정충신",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A19030250-00500",
+   "surface": "文天經",
+   "hanja": "文天經",
+   "gold": "문천경",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "문천경",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A03020150-01100",
+   "surface": "珙",
+   "hanja": "珙",
+   "gold": "이공",
+   "status": "surname_fix",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "윤공",
+   "kb_names": [
+    "윤공"
+   ],
+   "lib": "공",
+   "old": "윤공",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "鄭之羽",
+   "hanja": "鄭之羽",
+   "gold": "정지우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정지우",
+   "kb_names": [
+    "정지우"
+   ],
+   "lib": "정지우",
+   "old": "정지우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "歸希",
+   "hanja": "歸希",
+   "gold": "귀희",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "귀희",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "玉伊",
+   "hanja": "玉伊",
+   "gold": "옥이",
+   "status": "lib",
+   "stage": "MISS",
+   "in_kb": false,
+   "injected": null,
+   "kb_names": [],
+   "lib": "옥이",
+   "old": null,
+   "in_old_gold": false
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "之羽",
+   "hanja": "之羽",
+   "gold": "정지우",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "정지우",
+   "kb_names": [
+    "정지우"
+   ],
+   "lib": "지우",
+   "old": "정지우",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "兪伯曾",
+   "hanja": "兪伯曾",
+   "gold": "유백증",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "유백증",
+   "kb_names": [
+    "유백증"
+   ],
+   "lib": "유백증",
+   "old": "유백증",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "李弘胄",
+   "hanja": "李弘胄",
+   "gold": "이홍주",
+   "status": "kb_alt",
+   "stage": "AMBIGUOUS",
+   "in_kb": true,
+   "injected": null,
+   "kb_names": [
+    "이홍주"
+   ],
+   "lib": "이홍주",
+   "old": "이홍주",
+   "in_old_gold": true
+  },
+  {
+   "id": "SJW-A10110110-00500",
+   "surface": "朴弘耉",
+   "hanja": "朴弘耉",
+   "gold": "박홍구",
+   "status": "agree",
+   "stage": "SINGLE",
+   "in_kb": true,
+   "injected": "박홍구",
+   "kb_names": [
+    "박홍구"
+   ],
+   "lib": "박홍구",
+   "old": "박홍구",
+   "in_old_gold": true
+  }
+ ]
+}
