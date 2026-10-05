@@ -118,6 +118,9 @@ services:
       NER_MODE: ${NER_MODE:-http}
       KB_MODE: ${KB_MODE:-file}     # noop = 무주입 대조군 (전 멘션 MISS — KB 주입 효과 A/B)
       KB_NAME: ${KB_NAME:-injo}
+      # 기본은 이미지에 구운 /app/kb. 레포의 kb/를 재빌드 없이 쓰려면 KB_DIR=/kb-local
+      # (예: 오프라인 KB 확장 평가 — KB_DIR=/kb-local KB_NAME=injo_aug, eval/kb_mining.py --write-kb)
+      KB_DIR: ${KB_DIR:-/app/kb}
       CACHE_EPOCH: ${CACHE_EPOCH:-1}
       CACHE_L1_ENABLED: ${CACHE_L1_ENABLED:-true}
       CACHE_L2_ENABLED: ${CACHE_L2_ENABLED:-false}   # M3-S3 템플릿 슬롯 캐시 — opt-in
@@ -134,6 +137,7 @@ services:
       FAKE_SEED: ${FAKE_SEED:-}
     volumes:
       - ../eval:/eval:ro
+      - ../kb:/kb-local:ro
     ports:
       - "8081:8081"
       - "9081:9081"   # 관리 포트 (actuator)
