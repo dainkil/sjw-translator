@@ -1,464 +1,457 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=1100">
 <title>승정원일기 번역 작업대</title>
 <!--
-  번역가용 작업 화면. 빌드 도구 없이 Spring static으로 서빙한다 (§7 "프론트엔드 완성도" 배제 —
+  번역가용 작업 화면 (데스크톱 전용). 빌드 도구 없이 Spring static으로 서빙한다 (§7 "프론트엔드 완성도" 배제 —
   프레임워크를 들이지 않고 파일 하나로 끝낸다). API는 같은 오리진의 /api/v1/translations/sync만 쓴다.
 
+  배치는 CAT 도구 관례를 따른다: 왼쪽 문단 표(원문 | 번역 | 상태), 오른쪽 검사 패널(선택 문단의 인명·메모·정보),
+  아래 상태 표시줄. 문단 단위 조작(연도·다시 번역·되돌리기)은 검사 패널에 둔다. 화면 언어(한/영)·테마는 토글.
+
   키 취급 (ADR-020): 요청자 LLM 키(X-Llm-Key)는 기본적으로 메모리에만 둔다. "이 탭에서 기억"을 켤 때만
-  sessionStorage에 두고, localStorage에는 어떤 키도 쓰지 않는다. 작업 내용(원문·번역·검토 표시)만
-  localStorage에 저장한다.
+  sessionStorage에 두고, localStorage에는 어떤 키도 쓰지 않는다. 작업 내용(원문·번역·검토 표시)과
+  화면 설정(언어·테마·독음)만 localStorage에 저장한다.
+
+  글꼴은 CDN에서 받되 없어도 시스템 글꼴로 동작한다 (Pretendard / Noto Serif KR / JetBrains Mono).
 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;600&display=swap">
 <style>
-:root {
-  --bg: #f6f4ef;
-  --panel: #ffffff;
-  --panel-2: #faf8f3;
-  --ink: #1f1d1a;
-  --muted: #6b665d;
-  --line: #e2ddd2;
-  --line-strong: #cfc8b9;
-  --accent: #9e3324;
-  --accent-ink: #ffffff;
-  --accent-soft: #f6e3df;
-  --ok: #2f7a4a;
-  --ok-soft: #e1f0e6;
-  --warn: #9a6a00;
-  --warn-soft: #f8edcf;
-  --bad: #b3261e;
-  --bad-soft: #f9dedc;
-  --info: #2c5d8f;
-  --info-soft: #dfeaf5;
-  --focus: #9e3324;
-  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04);
+:root, :root[data-theme="dark"] {
+  --bg: #09090b;
+  --s1: #0f1013;
+  --s2: #15161a;
+  --s3: #1c1d22;
+  --hover: rgba(255,255,255,.035);
+  --line: rgba(255,255,255,.07);
+  --line-2: rgba(255,255,255,.12);
+  --t1: #ececef;
+  --t2: #a0a1a9;
+  --t3: #6b6c75;
+  --accent: #ff5f3a;
+  --accent-soft: rgba(255,95,58,.12);
+  --accent-ink: #fff;
+  --ok: #3fcf8e;
+  --warn: #f2b13d;
+  --bad: #ff5c62;
+  --info: #6aa2ff;
+  --bad-soft: rgba(255,92,98,.12);
+  --sel: rgba(242,177,61,.18);
+  --shadow: 0 16px 48px rgba(0,0,0,.5), 0 0 0 1px var(--line-2);
+  color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #161513;
-    --panel: #1f1e1b;
-    --panel-2: #24221f;
-    --ink: #ece8df;
-    --muted: #a39d92;
-    --line: #34312c;
-    --line-strong: #47433c;
-    --accent: #e0806f;
-    --accent-ink: #1a1210;
-    --accent-soft: #3b231e;
-    --ok: #7cc795;
-    --ok-soft: #1d3326;
-    --warn: #e2b54f;
-    --warn-soft: #382d13;
-    --bad: #f08a80;
-    --bad-soft: #3d1f1c;
-    --info: #8fb8e3;
-    --info-soft: #1c2a3a;
-    --focus: #e0806f;
-    --shadow: none;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #161513; --panel: #1f1e1b; --panel-2: #24221f; --ink: #ece8df; --muted: #a39d92;
-  --line: #34312c; --line-strong: #47433c; --accent: #e0806f; --accent-ink: #1a1210; --accent-soft: #3b231e;
-  --ok: #7cc795; --ok-soft: #1d3326; --warn: #e2b54f; --warn-soft: #382d13; --bad: #f08a80; --bad-soft: #3d1f1c;
-  --info: #8fb8e3; --info-soft: #1c2a3a; --focus: #e0806f; --shadow: none;
+:root[data-theme="light"] {
+  --bg: #f4f4f5;
+  --s1: #ffffff;
+  --s2: #fafafa;
+  --s3: #f1f1f3;
+  --hover: rgba(0,0,0,.03);
+  --line: rgba(0,0,0,.08);
+  --line-2: rgba(0,0,0,.14);
+  --t1: #18181b;
+  --t2: #5b5c66;
+  --t3: #8c8d96;
+  --accent: #e8461f;
+  --accent-soft: rgba(232,70,31,.09);
+  --accent-ink: #fff;
+  --ok: #128a52;
+  --warn: #b97700;
+  --bad: #d92d33;
+  --info: #2f6fe0;
+  --bad-soft: rgba(217,45,51,.08);
+  --sel: rgba(185,119,0,.16);
+  --shadow: 0 16px 48px rgba(0,0,0,.14), 0 0 0 1px var(--line-2);
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html, body { margin: 0; }
+html, body { margin: 0; height: 100%; }
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font: 14px/1.55 "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  min-width: 1100px;
+  display: grid; grid-template-rows: 52px 40px 1fr 30px;
+  background: var(--bg); color: var(--t1);
+  font: 13px/1.5 "Pretendard Variable", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; letter-spacing: -0.005em;
 }
-.hanmun { font-family: "Noto Serif CJK KR", "Noto Serif KR", "Source Han Serif K", "Batang", "바탕", "Songti SC", serif; }
-button, input, textarea, select { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.hanmun { font-family: "Noto Serif KR", "Noto Serif CJK KR", "Source Han Serif K", "Batang", serif; }
+.mono, kbd { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; font-feature-settings: "zero" 0; }
+button, input, textarea, select { font: inherit; color: inherit; letter-spacing: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 4px; }
+svg.i { width: 15px; height: 15px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── 상단 바 ── */
-.topbar {
-  position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 16px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--line);
+.top {
+  display: flex; align-items: center; gap: 4px; padding: 0 12px 0 16px;
+  background: var(--s1); border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.brand h1 { font-size: 16px; margin: 0; white-space: nowrap; }
-.brand .seal {
-  display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 4px;
-  background: var(--accent); color: var(--accent-ink); font-size: 13px; font-weight: 700;
-  align-self: center;
-}
-.brand small { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand { display: flex; align-items: baseline; gap: 10px; margin-right: 18px; white-space: nowrap; }
+.brand .mark { font-size: 17px; font-weight: 600; letter-spacing: .02em; }
+.brand .sub { font-size: 11px; color: var(--t3); letter-spacing: .14em; text-transform: uppercase; }
 .spacer { flex: 1; }
-.keystate { display: flex; gap: 6px; flex-wrap: wrap; }
-
+.vsep { width: 1px; height: 20px; background: var(--line-2); margin: 0 6px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  height: 32px; padding: 0 12px;
-  border: 1px solid var(--line-strong); border-radius: 6px;
-  background: var(--panel); cursor: pointer; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 10px;
+  border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--t2);
+  cursor: pointer; white-space: nowrap; transition: background .12s, color .12s, border-color .12s;
 }
-.btn:hover { background: var(--panel-2); }
-.btn:disabled { opacity: .45; cursor: not-allowed; }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
-.btn.primary:hover { filter: brightness(1.05); }
-.btn.ghost { border-color: transparent; background: transparent; }
-.btn.ghost:hover { background: var(--panel-2); }
-.btn.sm { height: 26px; padding: 0 8px; font-size: 12px; }
-a.btn { text-decoration: none; color: var(--ink); }
+.btn:hover:not(:disabled) { background: var(--hover); color: var(--t1); }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.outline { border-color: var(--line-2); color: var(--t1); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); font-weight: 600; padding: 0 12px; }
+.btn.primary:hover:not(:disabled) { background: var(--accent); color: var(--accent-ink); filter: brightness(1.08); }
+.btn.primary kbd { background: rgba(255,255,255,.18); border-color: transparent; color: inherit; }
+.btn.sm { height: 26px; padding: 0 8px; font-size: 12px; border-radius: 6px; }
+a.btn { text-decoration: none; }
+.seg-ctl { display: inline-flex; padding: 2px; border-radius: 8px; background: var(--s3); border: 1px solid var(--line); }
+.seg-ctl button {
+  height: 24px; min-width: 32px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent;
+  color: var(--t3); cursor: pointer; font-size: 12px; font-weight: 500;
+}
+.seg-ctl button[aria-pressed="true"] { background: var(--s1); color: var(--t1); box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 0 0 1px var(--line); }
+kbd {
+  display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px;
+  border-radius: 4px; border: 1px solid var(--line-2); background: var(--s2);
+  font-size: 10.5px; color: var(--t2); line-height: 1;
+}
 
-.chip {
-  display: inline-flex; align-items: center; gap: 4px;
-  height: 22px; padding: 0 8px; border-radius: 11px;
-  font-size: 12px; white-space: nowrap;
-  background: var(--panel-2); color: var(--muted); border: 1px solid var(--line);
+/* ── 걸러 보기 ── */
+.bar {
+  display: flex; align-items: center; gap: 2px; padding: 0 12px;
+  background: var(--s1); border-bottom: 1px solid var(--line);
 }
-.chip.ok { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
-.chip.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
-.chip.bad { background: var(--bad-soft); color: var(--bad); border-color: transparent; }
-.chip.info { background: var(--info-soft); color: var(--info); border-color: transparent; }
-.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.tab {
+  position: relative; display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 10px;
+  border: 0; background: transparent; color: var(--t3); cursor: pointer; font-weight: 500;
+}
+.tab:hover:not(:disabled) { color: var(--t1); }
+.tab .n { font-size: 11px; color: var(--t3); font-variant-numeric: tabular-nums; }
+.tab[aria-pressed="true"] { color: var(--t1); }
+.tab[aria-pressed="true"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--accent); }
+.tab .dot { width: 6px; height: 6px; border-radius: 50%; }
+.tab:disabled { opacity: .35; cursor: default; }
+.switch { display: inline-flex; align-items: center; gap: 8px; color: var(--t2); cursor: pointer; font-size: 12px; }
+.switch input { appearance: none; width: 28px; height: 16px; border-radius: 9px; background: var(--s3); border: 1px solid var(--line-2); position: relative; cursor: pointer; transition: background .15s; margin: 0; }
+.switch input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: var(--t2); transition: transform .15s, background .15s; }
+.switch input:checked { background: var(--accent); border-color: var(--accent); }
+.switch input:checked::after { transform: translateX(12px); background: #fff; }
 
 /* ── 작업 영역 ── */
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 16px;
-  padding: 16px;
-  max-width: 1480px;
-  margin: 0 auto;
-}
-.toolbar {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-.progress {
-  display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px;
-}
-.bar { width: 140px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
-.bar > i { display: block; height: 100%; background: var(--ok); width: 0; transition: width .2s; }
+.work { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 0; }
+.grid { display: flex; flex-direction: column; min-height: 0; background: var(--bg); }
+.cols, .seg { display: grid; grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr) 128px; }
+.cols { height: 30px; align-items: center; border-bottom: 1px solid var(--line); color: var(--t3); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.cols > div { padding: 0 14px; }
+.cols > div:first-child { text-align: right; padding-right: 12px; }
+#segments { overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
 
-.colhead {
-  display: grid; grid-template-columns: 36px minmax(0,1fr) minmax(0,1fr); gap: 0;
-  font-size: 12px; color: var(--muted); padding: 0 0 6px;
-}
-.colhead span { padding: 0 14px; }
-
-.seg {
-  display: grid;
-  grid-template-columns: 36px minmax(0,1fr) minmax(0,1fr);
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  margin-bottom: 8px;
-  box-shadow: var(--shadow);
-}
-.seg.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.seg .num {
-  padding: 12px 0; text-align: center; color: var(--muted); font-size: 12px;
-  border-right: 1px solid var(--line); font-variant-numeric: tabular-nums;
-}
-.seg .src {
-  padding: 12px 14px; border-right: 1px solid var(--line);
-  font-size: 17px; line-height: 1.9; word-break: break-all;
-}
-.seg .tgt { display: flex; flex-direction: column; min-width: 0; }
+.seg { position: relative; border-bottom: 1px solid var(--line); transition: background .12s; }
+.seg:hover { background: var(--hover); }
+.seg.active { background: var(--s1); }
+.seg.active::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent); }
+.seg .num { padding: 14px 12px 0 0; text-align: right; color: var(--t3); font-size: 11px; }
+.seg.active .num { color: var(--accent); }
+.seg .src { padding: 10px 14px 12px; font-size: 17px; line-height: 2.25; word-break: break-all; color: var(--t1); }
+.seg .tgt { display: flex; position: relative; border-left: 1px solid var(--line); }
 .seg textarea {
-  flex: 1; width: 100%; min-height: 72px; resize: none;
-  border: 0; background: transparent; padding: 12px 14px;
-  font-size: 15px; line-height: 1.75;
+  flex: 1; width: 100%; min-height: 60px; resize: none; border: 0; background: transparent;
+  padding: 13px 14px; font-size: 14.5px; line-height: 1.75; color: var(--t1);
 }
-.seg textarea:focus { outline: none; background: var(--panel-2); }
-.seg textarea::placeholder { color: var(--muted); }
-.seg .foot {
-  grid-column: 2 / 4;
-  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-  padding: 6px 10px; border-top: 1px solid var(--line);
-  background: var(--panel-2); border-radius: 0 0 8px 0;
-  font-size: 12px; color: var(--muted);
+.seg textarea:focus { outline: none; }
+.seg.active textarea:focus { background: var(--s2); }
+.seg textarea::placeholder { color: var(--t3); }
+.seg .st { padding: 12px 12px; display: flex; flex-direction: column; gap: 5px; font-size: 12px; border-left: 1px solid var(--line); }
+.st .l { display: flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--t2); }
+.st .d { width: 6px; height: 6px; border-radius: 50%; background: var(--t3); flex: none; }
+.chk { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; color: var(--t3); }
+.chk input {
+  appearance: none; width: 15px; height: 15px; margin: 0; border-radius: 4px; border: 1.5px solid var(--line-2);
+  display: grid; place-items: center; cursor: pointer; transition: background .12s, border-color .12s;
 }
-.seg .foot .year { display: inline-flex; align-items: center; gap: 4px; }
-.seg .foot input[type=number] {
-  width: 64px; height: 24px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel);
-}
-.seg .foot label.chk { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
-.seg .err { color: var(--bad); }
-.seg.loading .tgt textarea { opacity: .5; }
+.chk input::after { content: ""; width: 7px; height: 4px; border-left: 1.6px solid #fff; border-bottom: 1.6px solid #fff; transform: rotate(-45deg) translate(1px,-1px); opacity: 0; }
+.chk input:checked { background: var(--ok); border-color: var(--ok); }
+.chk input:checked::after { opacity: 1; }
+.chk.on { color: var(--ok); }
 
-mark.ent {
-  background: transparent; color: inherit; cursor: pointer;
-  border-bottom: 2px solid var(--line-strong); padding: 0 1px;
+.seg.loading .tgt::after {
+  content: ""; position: absolute; left: 14px; top: 20px; width: 40%; height: 8px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--s3), var(--line-2), var(--s3)); background-size: 200% 100%;
+  animation: sh 1.2s linear infinite;
 }
-mark.ent.ok { border-color: var(--ok); }
-mark.ent.miss { border-color: var(--warn); border-bottom-style: dashed; }
-mark.ent.amb { border-color: var(--info); border-bottom-style: dotted; }
-mark.ent.loc { border-color: var(--line-strong); }
-mark.ent.lost { border-color: var(--bad); background: var(--bad-soft); }
-mark.ent.sel { background: var(--accent-soft); }
-/* KB가 확정한 독음 — 원문 위에 작게. 번역가가 사이드 패널을 보지 않고도 이름을 확인한다 */
+.seg.loading textarea { color: transparent; }
+@keyframes sh { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .seg.loading .tgt::after { animation: none; } }
+
+.c-ok { color: var(--ok); } .c-warn { color: var(--warn); } .c-bad { color: var(--bad); } .c-info { color: var(--info); } .c-mute { color: var(--t3); }
+.b-ok { background: var(--ok) !important; } .b-warn { background: var(--warn) !important; } .b-bad { background: var(--bad) !important; } .b-info { background: var(--info) !important; }
+
+/* 원문 속 인명 */
+mark.ent { background: transparent; color: inherit; cursor: pointer; padding: 0 1px; border-radius: 2px; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; text-decoration-color: var(--line-2); }
+mark.ent.ok { text-decoration-color: var(--ok); }
+mark.ent.miss { text-decoration-color: var(--warn); text-decoration-style: dashed; }
+mark.ent.amb { text-decoration-color: var(--info); text-decoration-style: dotted; }
+mark.ent.lost { text-decoration-color: var(--bad); background: var(--bad-soft); }
+mark.ent.sel { background: var(--sel); }
 ruby.reading { ruby-position: over; }
 ruby.reading rt {
-  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  font-size: 12px; line-height: 1; color: var(--ok); font-weight: 600; letter-spacing: 0;
+  font-family: "Pretendard Variable", Pretendard, "Malgun Gothic", system-ui, sans-serif;
+  font-size: 10.5px; line-height: 1; color: var(--ok); font-weight: 600; letter-spacing: .02em; opacity: .9;
 }
 ruby.reading.lost rt { color: var(--bad); }
 .hide-reading ruby.reading rt { display: none; }
 
-/* ── 상태 필터 ── */
-.filters { display: flex; gap: 6px; flex-wrap: wrap; margin: -4px 0 12px; }
-.filter {
-  display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px;
-  border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
-  font-size: 12px; color: var(--muted); cursor: pointer;
+.empty { display: grid; place-items: center; height: 100%; padding: 40px; }
+.empty .box { max-width: 460px; text-align: center; }
+.empty .glyph { font-size: 44px; color: var(--t3); margin-bottom: 14px; }
+.empty h2 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.empty p { margin: 0 0 18px; color: var(--t2); }
+.empty .acts { display: flex; gap: 8px; justify-content: center; }
+.filter-empty { padding: 24px 16px; color: var(--t3); }
+
+/* ── 검사 패널 ── */
+.insp { overflow-y: auto; min-height: 0; background: var(--s1); border-left: 1px solid var(--line); scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
+.sec { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+.sec > h3 { margin: 0 0 10px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); display: flex; gap: 8px; }
+.sec > h3 .n { color: var(--t2); letter-spacing: 0; }
+.big { font-size: 15px; font-weight: 600; margin: -2px 0 10px; }
+.note { color: var(--t3); }
+.kv { display: grid; grid-template-columns: 84px 1fr; gap: 6px 10px; margin: 0; }
+.kv dt { color: var(--t3); }
+.kv dd { margin: 0; word-break: break-all; color: var(--t1); }
+.input { height: 26px; width: 84px; padding: 0 8px; border-radius: 6px; border: 1px solid var(--line-2); background: var(--s2); }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.err { margin-top: 12px; padding: 8px 10px; border-radius: 7px; background: var(--bad-soft); color: var(--bad); }
+
+.ents { display: grid; gap: 2px; margin: 0 -8px; }
+/* 원문 속 mark.ent와 클래스가 겹치므로 반드시 .ents 아래로 한정한다 */
+.ents > .ent { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 10px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
+.ents > .ent:hover { background: var(--hover); }
+.ents > .ent.sel { background: var(--s3); }
+.ents .h { font-size: 16px; }
+.ents .k { margin-left: 8px; font-weight: 600; }
+.ents .s { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--t2); }
+.ents .s .d { width: 6px; height: 6px; border-radius: 50%; }
+.ents .det { grid-column: 1 / -1; font-size: 12px; color: var(--t3); padding-top: 4px; }
+.ents .det .btn { margin-top: 8px; }
+
+.keys { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: center; color: var(--t2); }
+.keys > span:nth-child(odd) { display: inline-flex; gap: 3px; }
+.legend { display: grid; gap: 8px; margin-top: 14px; color: var(--t2); }
+.legend > span { display: flex; align-items: baseline; }
+.legend .hanmun { font-size: 14px; margin-right: 8px; }
+
+/* ── 상태 표시줄 ── */
+.status {
+  display: flex; align-items: center; gap: 16px; padding: 0 16px;
+  background: var(--s1); border-top: 1px solid var(--line);
+  font-size: 11.5px; color: var(--t3); white-space: nowrap; overflow: hidden;
 }
-.filter b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
-.filter[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-.filter[aria-pressed="true"] b { color: var(--accent); }
-.filter.bad b { color: var(--bad); }
-.filter.warn b { color: var(--warn); }
-.filter:disabled { opacity: .45; cursor: default; }
-.filter-empty { color: var(--muted); font-size: 13px; padding: 24px; text-align: center; }
-
-/* 번역 중 — 빈 칸에 진행 표시 */
-.seg.loading .tgt { position: relative; }
-.seg.loading .tgt::after {
-  content: ""; position: absolute; left: 14px; right: 14px; top: 16px; height: 10px; border-radius: 5px;
-  background: linear-gradient(90deg, var(--line) 0%, var(--panel-2) 50%, var(--line) 100%);
-  background-size: 200% 100%; animation: shimmer 1.1s linear infinite;
-}
-@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-@media (prefers-reduced-motion: reduce) { .seg.loading .tgt::after { animation: none; } }
-
-/* 파일 끌어 놓기 */
-.dropzone {
-  position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  border: 3px dashed var(--accent); font-size: 18px; font-weight: 600; color: var(--accent);
-  pointer-events: none;
-}
-
-/* ── 사이드 패널 ── */
-.side { position: sticky; top: 68px; align-self: start; display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 84px); overflow: auto; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
-.card > h2 { font-size: 13px; margin: 0; padding: 10px 12px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; }
-.card > h2 .count { color: var(--muted); font-weight: 400; }
-.card .body { padding: 10px 12px; }
-.empty-note { color: var(--muted); font-size: 13px; }
-
-.ent-card { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; cursor: pointer; }
-.ent-card:last-child { margin-bottom: 0; }
-.ent-card.sel { border-color: var(--accent); }
-.ent-card .row1 { display: flex; align-items: baseline; gap: 8px; }
-.ent-card .surface { font-size: 18px; }
-.ent-card .arrow { color: var(--muted); }
-.ent-card .name { font-size: 15px; font-weight: 600; }
-.ent-card .row2 { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-.ent-card .why { margin-top: 6px; font-size: 12px; color: var(--muted); }
-.ent-card .acts { margin-top: 6px; display: flex; gap: 6px; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12px; }
-.kv dt { color: var(--muted); }
-.kv dd { margin: 0; font-variant-numeric: tabular-nums; word-break: break-all; }
-.legend { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
-.legend span mark { margin-right: 6px; }
-.kbd { font-family: ui-monospace, Consolas, monospace; font-size: 11px; border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--panel-2); }
-
-/* ── 빈 상태 ── */
-.empty {
-  background: var(--panel); border: 1px dashed var(--line-strong); border-radius: 10px;
-  padding: 40px 24px; text-align: center;
-}
-.empty h2 { margin: 0 0 6px; font-size: 18px; }
-.empty p { margin: 0 auto 16px; color: var(--muted); max-width: 520px; }
-.empty .acts { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.status .msg { flex: 1; overflow: hidden; text-overflow: ellipsis; color: var(--t2); transition: color .3s; }
+.status .msg.flash { color: var(--accent); }
+.meter { width: 120px; height: 3px; border-radius: 2px; background: var(--s3); overflow: hidden; }
+.meter > i { display: block; height: 100%; background: var(--ok); width: 0; transition: width .3s; }
+.status .k { display: inline-flex; align-items: center; gap: 5px; }
+.status .k .d { width: 6px; height: 6px; border-radius: 50%; background: var(--t3); }
 
 /* ── 대화상자 ── */
 dialog {
-  border: 1px solid var(--line); border-radius: 10px; padding: 0;
-  background: var(--panel); color: var(--ink);
-  width: min(640px, calc(100vw - 32px));
-  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  border: 0; border-radius: 14px; padding: 0; width: 640px;
+  background: var(--s1); color: var(--t1); box-shadow: var(--shadow);
 }
-dialog::backdrop { background: rgba(0,0,0,.35); }
-dialog header { padding: 14px 16px; border-bottom: 1px solid var(--line); font-weight: 600; }
-dialog .content { padding: 14px 16px; display: grid; gap: 12px; }
-dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
-.field { display: grid; gap: 4px; }
-.field > span { font-size: 13px; font-weight: 600; }
-.field > small { color: var(--muted); font-size: 12px; }
+dialog::backdrop { background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
+dialog header { padding: 18px 20px 6px; font-size: 15px; font-weight: 600; }
+dialog .content { padding: 10px 20px 4px; display: grid; gap: 14px; }
+dialog footer { padding: 16px 20px 18px; display: flex; gap: 8px; align-items: center; }
+.field { display: grid; gap: 6px; }
+.field > span { font-size: 12px; font-weight: 500; color: var(--t2); }
+.hint { color: var(--t3); font-size: 12px; }
 .field input[type=text], .field input[type=password], .field input[type=number], .field textarea {
-  width: 100%; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel); padding: 8px 10px;
+  width: 100%; border: 1px solid var(--line-2); border-radius: 8px; background: var(--s2); padding: 8px 10px;
+  transition: border-color .12s;
 }
-.field textarea { min-height: 220px; resize: vertical; font-size: 16px; line-height: 1.8; }
-.inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field textarea { min-height: 240px; resize: vertical; font-size: 15px; line-height: 1.85; }
+.row { display: flex; gap: 10px; align-items: center; }
+.radio { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--line-2); cursor: pointer; }
+.radio:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.radio input { accent-color: var(--accent); margin: 0; }
 
-/* ── 알림 ── */
-.toast {
-  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
-  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px;
-  font-size: 13px; max-width: calc(100vw - 32px); z-index: 50;
-  opacity: 0; pointer-events: none; transition: opacity .2s;
-}
-.toast.show { opacity: 1; }
-
-@media (max-width: 1080px) {
-  .layout { grid-template-columns: minmax(0,1fr); }
-  .side { position: static; max-height: none; }
-}
-@media (max-width: 720px) {
-  .topbar { flex-wrap: wrap; }
-  .brand small { display: none; }
-  .layout { padding: 12px 16px; }
-  .colhead { display: none; }
-  .seg { grid-template-columns: minmax(0,1fr); }
-  .seg .num { display: none; }
-  .seg .src { border-right: 0; border-bottom: 1px solid var(--line); }
-  .seg .foot { grid-column: 1; border-radius: 0 0 8px 8px; }
-  .bar { width: 80px; }
+.drop {
+  position: fixed; inset: 12px; z-index: 40; display: grid; place-items: center; border-radius: 16px;
+  background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(4px);
+  border: 1.5px dashed var(--accent); font-size: 15px; color: var(--t1); pointer-events: none;
 }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="brand">
-    <span class="seal hanmun" aria-hidden="true">譯</span>
-    <h1>승정원일기 번역 작업대</h1>
-    <small>인물 KB로 인명을 확정해 번역합니다</small>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
+  <symbol id="i-export" viewBox="0 0 24 24"><path d="M12 15V3m0 0-4 4m4-4 4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="brand"><span class="mark hanmun">承政院日記</span><span class="sub" data-i18n="sub"></span></div>
+  <button class="btn" id="btn-import" type="button"><svg class="i"><use href="#i-import"/></svg><span data-i18n="import"></span></button>
+  <button class="btn" id="btn-export" type="button"><svg class="i"><use href="#i-export"/></svg><span data-i18n="export"></span></button>
+  <button class="btn" id="btn-copy" type="button"><svg class="i"><use href="#i-copy"/></svg><span data-i18n="copyAll"></span></button>
+  <span class="spacer"></span>
+  <button class="btn" id="btn-clear" type="button"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="new"></span></button>
+  <button class="btn" id="btn-settings" type="button"><svg class="i"><use href="#i-key"/></svg><span data-i18n="keys"></span></button>
+  <a class="btn" href="/swagger-ui.html" target="_blank" rel="noopener"><svg class="i"><use href="#i-doc"/></svg>API</a>
+  <span class="vsep"></span>
+  <div class="seg-ctl" role="group" aria-label="Language">
+    <button type="button" data-lang="ko">한</button><button type="button" data-lang="en">EN</button>
   </div>
-  <div class="spacer"></div>
-  <div class="keystate" id="keystate"></div>
-  <button class="btn" id="btn-settings" type="button">키 설정</button>
-  <a class="btn ghost" href="/swagger-ui.html" target="_blank" rel="noopener">API 문서</a>
+  <button class="btn" id="btn-theme" type="button" style="padding:0 8px"><svg class="i"><use id="theme-icon" href="#i-sun"/></svg></button>
+  <span class="vsep"></span>
+  <button class="btn primary" id="btn-run" type="button"><svg class="i" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg><span data-i18n="runAll"></span></button>
+  <button class="btn outline" id="btn-stop" type="button" hidden><svg class="i"><use href="#i-stop"/></svg><span data-i18n="stop"></span></button>
 </header>
 
-<main class="layout">
-  <section aria-label="번역 문단">
-    <div class="toolbar" id="toolbar">
-      <button class="btn" id="btn-import" type="button">원문 불러오기</button>
-      <button class="btn primary" id="btn-run" type="button">전체 번역</button>
-      <button class="btn" id="btn-stop" type="button" hidden>멈춤</button>
-      <div class="progress" id="progress"></div>
-      <div class="spacer"></div>
-      <button class="btn" id="btn-copy" type="button">번역문 복사</button>
-      <button class="btn" id="btn-export" type="button">내보내기</button>
-      <button class="btn ghost" id="btn-clear" type="button">새 작업</button>
-    </div>
-    <div class="filters" id="filters" role="toolbar" aria-label="문단 걸러 보기"></div>
-    <div class="colhead" id="colhead"><span></span><span>원문 <label style="font-weight:400;margin-left:8px;cursor:pointer"><input type="checkbox" id="opt-reading" checked> 확정 인명 독음 표시</label></span><span>번역 (직접 고칠 수 있습니다)</span></div>
+<nav class="bar">
+  <div id="filters" style="display:flex" role="toolbar"></div>
+  <span class="spacer"></span>
+  <label class="switch"><input type="checkbox" id="opt-reading" checked><span data-i18n="readings"></span></label>
+</nav>
+
+<main class="work">
+  <section class="grid">
+    <div class="cols" id="cols"><div>#</div><div data-i18n="colSrc"></div><div data-i18n="colTgt"></div><div data-i18n="colSt"></div></div>
     <div id="segments"></div>
   </section>
 
-  <aside class="side" aria-label="검토 패널">
-    <div class="card">
-      <h2>인명 <span class="count" id="ent-count"></span></h2>
-      <div class="body" id="ent-panel"></div>
+  <aside class="insp">
+    <div class="sec">
+      <h3 data-i18n="secSeg"></h3>
+      <div id="seg-panel"></div>
     </div>
-    <div class="card">
-      <h2>검토 메모 <span class="count" id="note-count"></span></h2>
-      <div class="body" id="note-panel"></div>
+    <div class="sec">
+      <h3><span data-i18n="secNames"></span><span class="n" id="ent-count"></span></h3>
+      <div id="ent-panel"></div>
     </div>
-    <div class="card">
-      <h2>번역 정보</h2>
-      <div class="body" id="meta-panel"></div>
+    <div class="sec">
+      <h3><span data-i18n="secNotes"></span><span class="n" id="note-count"></span></h3>
+      <div id="note-panel"></div>
     </div>
-    <div class="card">
-      <h2>표시 안내</h2>
-      <div class="body legend">
-        <span><mark class="ent ok hanmun">鄭太和</mark>KB로 확정된 인물</span>
-        <span><mark class="ent amb hanmun">金某</mark>후보가 여러 명 — 문맥으로 판단</span>
-        <span><mark class="ent miss hanmun">李某</mark>KB에 없는 인물 — 음을 직접 확인</span>
-        <span><mark class="ent lost hanmun">鄭太和</mark>확정했는데 번역문에 이름이 없음</span>
-        <span style="margin-top:4px"><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> 검토 완료하고 다음 문단</span>
-        <span><span class="kbd">Alt</span> + <span class="kbd">Enter</span> 지금 문단 번역 · <span class="kbd">Alt</span> + <span class="kbd">↑↓</span> 문단 이동</span>
+    <div class="sec">
+      <h3 data-i18n="secMeta"></h3>
+      <div id="meta-panel"></div>
+    </div>
+    <div class="sec">
+      <h3 data-i18n="secKeys"></h3>
+      <div class="keys">
+        <span><kbd>Ctrl</kbd><kbd>↵</kbd></span><span data-i18n="kConfirm"></span>
+        <span><kbd>Alt</kbd><kbd>↵</kbd></span><span data-i18n="kTranslate"></span>
+        <span><kbd>Alt</kbd><kbd>↑</kbd><kbd>↓</kbd></span><span data-i18n="kMove"></span>
+      </div>
+      <div class="legend">
+        <span><mark class="ent ok hanmun">鄭太和</mark><span data-i18n="lgOk"></span></span>
+        <span><mark class="ent amb hanmun">金某</mark><span data-i18n="lgAmb"></span></span>
+        <span><mark class="ent miss hanmun">李某</mark><span data-i18n="lgMiss"></span></span>
+        <span><mark class="ent lost hanmun">鄭太和</mark><span data-i18n="lgLost"></span></span>
       </div>
     </div>
   </aside>
 </main>
 
+<footer class="status">
+  <span class="mono" id="sb-progress"></span>
+  <span class="meter" aria-hidden="true"><i id="sb-meter"></i></span>
+  <span class="msg" id="sb-msg" role="status" aria-live="polite"></span>
+  <span class="mono" id="sb-model"></span>
+  <span id="sb-keys" style="display:flex;gap:12px"></span>
+</footer>
+
 <dialog id="dlg-import">
   <form method="dialog">
-    <header>원문 불러오기</header>
+    <header data-i18n="impTitle"></header>
     <div class="content">
       <label class="field">
-        <span>한문 원문</span>
+        <span data-i18n="impSrc"></span>
         <textarea id="import-text" class="hanmun" placeholder="○ 吏曹參議鄭太和上疏。疏辭缺, 批答缺"></textarea>
-        <small>줄바꿈과 ○ 표시를 기준으로 문단을 나눕니다. 2,000자가 넘는 문단은 마침표(。)에서 끊습니다.</small>
+        <span class="hint" data-i18n="impSrcHint"></span>
       </label>
-      <div class="inline" style="font-size:13px">
-        <label class="btn sm" style="cursor:pointer">텍스트 파일 고르기<input type="file" id="import-file" accept=".txt,text/plain" hidden></label>
-        <small style="color:var(--muted)">.txt 파일을 화면에 끌어 놓아도 됩니다 (UTF-8·EUC-KR 자동 인식)</small>
+      <div class="row">
+        <label class="btn outline sm" style="cursor:pointer"><svg class="i"><use href="#i-file"/></svg><span data-i18n="impFile"></span><input type="file" id="import-file" accept=".txt,text/plain" hidden></label>
+        <span class="hint" data-i18n="impFileHint"></span>
       </div>
       <label class="field">
-        <span>문서 연도 (서기)</span>
-        <div class="inline">
-          <input type="number" id="import-year" min="1392" max="1910" style="width:120px">
-          <small id="import-year-hint"></small>
+        <span data-i18n="impYear"></span>
+        <div class="row">
+          <input type="number" id="import-year" min="1392" max="1910" style="width:110px">
+          <span class="hint" id="import-year-hint"></span>
         </div>
-        <small>동명이인을 활동 시기로 가립니다. 모르면 비워 두세요. 문단마다 따로 바꿀 수 있습니다.</small>
+        <span class="hint" data-i18n="impYearHint"></span>
       </label>
-      <label class="inline" style="font-size:13px">
-        <input type="checkbox" id="import-append"> 지금 작업 뒤에 이어 붙이기
-      </label>
+      <label class="chk" id="import-append-row"><input type="checkbox" id="import-append"><span data-i18n="impAppend"></span></label>
     </div>
     <footer>
-      <button class="btn ghost" type="button" id="btn-sample">예시 원문</button>
-      <div class="spacer"></div>
-      <button class="btn" value="cancel" formnovalidate>취소</button>
-      <button class="btn primary" value="ok" id="btn-import-ok">불러오기</button>
+      <button class="btn" type="button" id="btn-sample" data-i18n="sample"></button>
+      <span class="spacer"></span>
+      <button class="btn outline" value="cancel" formnovalidate data-i18n="cancel"></button>
+      <button class="btn primary" value="ok" id="btn-import-ok" data-i18n="impOk"></button>
     </footer>
   </form>
 </dialog>
 
 <dialog id="dlg-settings">
   <form method="dialog">
-    <header>키 설정</header>
+    <header data-i18n="setTitle"></header>
     <div class="content">
       <label class="field">
-        <span>API 키 (X-Api-Key)</span>
+        <span>X-Api-Key</span>
         <input type="password" id="set-api" autocomplete="off" spellcheck="false">
-        <small>발급받은 작업 키입니다. 로컬 서버라면 비워 둬도 됩니다.</small>
+        <span class="hint" data-i18n="setApiHint"></span>
       </label>
       <label class="field">
-        <span>본인 LLM 키 (X-Llm-Key)</span>
+        <span>X-Llm-Key</span>
         <input type="password" id="set-llm" autocomplete="off" spellcheck="false">
-        <small>미리 번역해 둔 문장은 이 키 없이도 나옵니다. 처음 보는 문장은 이 키로 번역하며, 서버는 키를 저장하거나 기록하지 않습니다.</small>
+        <span class="hint" data-i18n="setLlmHint"></span>
       </label>
-      <label class="inline" style="font-size:13px">
-        <input type="checkbox" id="set-remember"> 이 탭을 닫을 때까지 기억 (기본은 새로고침하면 지워짐)
-      </label>
+      <label class="chk"><input type="checkbox" id="set-remember"><span data-i18n="setRemember"></span></label>
     </div>
     <footer>
-      <button class="btn ghost" type="button" id="btn-forget">키 지우기</button>
-      <div class="spacer"></div>
-      <button class="btn" value="cancel" formnovalidate>취소</button>
-      <button class="btn primary" value="ok">저장</button>
+      <button class="btn" type="button" id="btn-forget" data-i18n="setForget"></button>
+      <span class="spacer"></span>
+      <button class="btn outline" value="cancel" formnovalidate data-i18n="cancel"></button>
+      <button class="btn primary" value="ok" data-i18n="save"></button>
     </footer>
   </form>
 </dialog>
 
 <dialog id="dlg-export">
   <form method="dialog">
-    <header>내보내기</header>
+    <header data-i18n="expTitle"></header>
     <div class="content">
-      <label class="inline"><input type="radio" name="fmt" value="txt" checked> 번역문만 (.txt)</label>
-      <label class="inline"><input type="radio" name="fmt" value="pair"> 원문·번역 대조 (.txt)</label>
-      <label class="inline"><input type="radio" name="fmt" value="tsv"> 표 (.tsv — 엑셀에서 열림, 인명·검토 상태 포함)</label>
-      <label class="inline" style="font-size:13px"><input type="checkbox" id="exp-reviewed"> 검토 완료한 문단만</label>
+      <label class="radio"><input type="radio" name="fmt" value="txt" checked><span data-i18n="expTxt"></span></label>
+      <label class="radio"><input type="radio" name="fmt" value="pair"><span data-i18n="expPair"></span></label>
+      <label class="radio"><input type="radio" name="fmt" value="tsv"><span data-i18n="expTsv"></span></label>
+      <label class="chk"><input type="checkbox" id="exp-reviewed"><span data-i18n="expReviewed"></span></label>
     </div>
     <footer>
-      <button class="btn" value="cancel" formnovalidate>취소</button>
-      <button class="btn primary" value="ok">파일로 저장</button>
+      <span class="spacer"></span>
+      <button class="btn outline" value="cancel" formnovalidate data-i18n="cancel"></button>
+      <button class="btn primary" value="ok" data-i18n="save"></button>
     </footer>
   </form>
 </dialog>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (() => {
@@ -467,6 +460,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   const API = '/api/v1/translations/sync';
   const STORE = 'sjw-workbench-v1';
   const KEYSTORE = 'sjw-workbench-keys';
+  const PREFS = 'sjw-workbench-prefs';
   const MAX_CHARS = 2000; // TranslateRequest @Size(max = 2000)
 
   const SAMPLE = {
@@ -474,45 +468,144 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     text: '○ 吏曹參議鄭太和上疏。疏辭缺, 批答缺\n○ 以金瑬爲承旨',
   };
 
-  const STAGE = {
-    SINGLE:    { label: '역색인 단일 후보', cls: 'ok' },
-    TIME:      { label: '활동 시기로 확정', cls: 'ok' },
-    OFFICE:    { label: '관직으로 확정', cls: 'ok' },
-    AMBIGUOUS: { label: '후보 여러 명', cls: 'info' },
-    MISS:      { label: 'KB 미등재', cls: 'warn' },
-  };
-
-  const ERRORS = {
-    API_KEY_REQUIRED: 'API 키가 필요한 서버입니다. 키 설정에서 입력하세요.',
-    UNKNOWN_API_KEY: '등록되지 않은 API 키입니다.',
-    BYOK_REQUIRED: '미리 번역된 적 없는 문장입니다. 키 설정에 본인 LLM 키를 넣으면 번역합니다.',
-    TENANT_DAILY_LIMIT: '오늘 쓸 수 있는 번역 횟수를 다 썼습니다.',
-    LLM_RATE_LIMITED: '번역 모델의 분당 한도에 걸렸습니다.',
-    LLM_QUOTA_DAILY: '번역 모델의 일일 한도를 다 썼습니다.',
-    LLM_SPEND_CAP: '번역 모델의 지출 상한에 걸렸습니다.',
-    LLM_KEY_REJECTED: '번역 모델이 키를 거부했습니다. 키를 확인하세요.',
-    LLM_UPSTREAM_AUTH: '서버의 번역 모델 인증에 문제가 있습니다.',
-    LLM_CONTENT_FILTERED: '번역 모델이 이 문장의 번역을 거절했습니다.',
-    NER_UNAVAILABLE: '인명 인식 서버가 응답하지 않습니다.',
-    LLM_TIMEOUT: '번역 모델의 응답이 너무 늦어 끊었습니다.',
-    LLM_UPSTREAM_ERROR: '번역 모델 쪽 일시 오류입니다. 다시 번역해 보세요.',
-    LLM_MODEL_UNAVAILABLE: '지금 이 모델을 쓸 수 없습니다.',
-    LLM_PARSE_ERROR: '번역 모델의 응답을 해석하지 못했습니다. 다시 번역해 보세요.',
+  // ── 화면 문구 (한/영). 함수는 인자를 받는 문구 ──
+  const I18N = {
+    ko: {
+      docTitle: '승정원일기 번역 작업대', sub: '번역 작업대',
+      import: '원문 불러오기', export: '내보내기', copyAll: '번역문 복사', new: '새 작업', keys: '키',
+      runAll: '전체 번역', stop: '멈춤', readings: '확정 인명 독음',
+      colSrc: '원문', colTgt: '번역', colSt: '상태',
+      secSeg: '문단', secNames: '인명', secNotes: '검토 메모', secMeta: '번역 정보', secKeys: '단축키',
+      kConfirm: '검토 완료 · 다음 문단', kTranslate: '이 문단 번역', kMove: '문단 이동',
+      lgOk: 'KB 확정', lgAmb: '후보 여럿', lgMiss: 'KB 미등재', lgLost: '확정했으나 번역문에 없음',
+      impTitle: '원문 불러오기', impSrc: '원문', impSrcHint: '줄바꿈과 ○로 문단을 나눕니다. 2,000자 넘는 문단은 。에서 끊습니다.',
+      impFile: '파일 선택', impFileHint: '.txt (UTF-8 · EUC-KR) — 창에 끌어 놓아도 됩니다',
+      impYear: '연도 (서기)', impYearHint: '동명이인을 활동 시기로 가릅니다. 문단마다 바꿀 수 있습니다.',
+      impAppend: '현재 작업 뒤에 붙이기', impOk: '불러오기', sample: '예시 원문', cancel: '취소', save: '저장',
+      setTitle: '키 설정', setApiHint: '발급받은 작업 키. 로컬 서버는 비워 둬도 됩니다.',
+      setLlmHint: '저장된 번역은 이 키 없이 나옵니다. 서버는 키를 저장하거나 기록하지 않습니다.',
+      setRemember: '탭을 닫을 때까지 기억', setForget: '키 지우기',
+      expTitle: '내보내기', expTxt: '번역문 (.txt)', expPair: '원문 · 번역 대조 (.txt)', expTsv: '표 (.tsv) — 인명 · 검토 상태 포함', expReviewed: '검토 완료한 문단만',
+      fAll: '전체', fTodo: '미번역', fLost: '인명 누락', fReview: '인명 확인', fUnrev: '검토 전',
+      stLoading: '번역 중', stFailed: '실패', stTodo: '미번역', stDone: '번역됨', stEdited: '수정함', stCached: '저장된 번역', stReview: '검토',
+      nLost: (n) => `인명 누락 ${n}`, nReview: (n) => `인명 확인 ${n}`, nOk: (n) => `인명 ${n}/${n}`,
+      ph: 'Alt+Enter로 번역',
+      emptyTitle: '원문이 없습니다', emptyBody: '승정원일기 한문을 불러오면 문단별로 번역하고, 인물 KB가 확정한 인명이 번역문에 들어갔는지 문단마다 표시합니다.',
+      filterEmpty: '조건에 맞는 문단이 없습니다',
+      noSel: '선택한 문단이 없습니다', segN: (n) => `${n}번 문단`, year: '연도', chars: '글자 수',
+      run: '번역', rerun: '다시 번역', copy: '복사', revert: '기계 번역으로 되돌리기',
+      noEnts: '찾은 인명 · 지명 없음', afterTr: '번역하면 표시됩니다', none: '없음', beforeTr: '번역 전',
+      mModel: '모델', mSource: '출처', mL2: '저장된 틀 (인명 교체)', mL1: '저장된 번역', mNew: '새 번역', mTokens: '토큰', mTime: '시간 (ms)', mKb: '인물 KB', mPrompt: '프롬프트',
+      eLoc: '지명', eIn: '반영', eOut: '누락', eMiss: '미등재', eAmb: '후보 여럿', eNer: '인식',
+      eInsert: (s) => `커서 위치에 「${s}」 넣기`,
+      eMissD: (p) => `KB에 없는 이름 — 번역 모델이 정한 음입니다. 인식 ${p}%`, eAmbD: '후보 전부를 번역 모델에 넘겼습니다. 문맥으로 확인하세요.',
+      'stage.SINGLE': '역색인 단일', 'stage.TIME': '활동 시기로 확정', 'stage.OFFICE': '관직으로 확정', 'stage.AMBIGUOUS': '후보 여럿', 'stage.MISS': 'KB 미등재',
+      progress: (n, d, r) => `${n} 문단 · 번역 ${d} · 검토 ${r}`, noSegs: '문단 없음',
+      kApi: 'API 키', kLlm: 'LLM 키',
+      'lat.ner': '인식', 'lat.link': 'KB', 'lat.prompt': '조립', 'lat.llm': '모델', 'lat.cache': '저장소', 'lat.total': '합계',
+      kbMiss: 'KB 미등재', uncertain: '불확실',
+      reign: (k, n) => `${k === 'injo' ? '인조' : '정조'} ${n}년`,
+      msgEditedKept: (n) => `${n}번: 수정본을 유지했습니다 — 새 기계 번역은 검사 패널에서 되돌리기`,
+      msgNothing: '번역할 문단이 없습니다', msgHalted: (n, m) => `${n}번: ${m} — 전체 번역을 멈췄습니다`,
+      msgNoSource: '불러올 원문이 없습니다', msgImported: (n) => `${n}개 문단을 불러왔습니다`, msgKeysCleared: '키를 지웠습니다',
+      msgNoExport: '내보낼 문단이 없습니다', msgExported: (n) => `${n}개 문단을 내보냈습니다`, msgNoCopy: '복사할 번역문이 없습니다',
+      msgCopiedAll: '번역문 전체를 복사했습니다', msgCopied: (n) => `${n}번 번역을 복사했습니다`, msgCopyFail: '복사하지 못했습니다 — 내보내기를 쓰세요',
+      confirmClear: '현재 작업을 지우고 새로 시작할까요? 내보내지 않은 번역은 사라집니다.', confirmRevert: '직접 고친 내용을 버리고 기계 번역으로 되돌릴까요?',
+      msgEmptyNoReview: '번역문이 비어 있어 검토 완료로 표시하지 않았습니다', msgLast: '마지막 문단입니다',
+      msgTooBig: '5MB가 넘는 파일은 나눠서 불러오세요', msgFileRead: (f) => `${f}을(를) 읽었습니다`, drop: '.txt 파일을 놓으면 원문으로 불러옵니다',
+      network: '서버에 연결하지 못했습니다', badReq: '요청 형식 오류', serverErr: (c) => `서버 오류 ${c}`,
+      limitSfx: (n) => ` (하루 ${n}회)`, retrySfx: (s) => ` · ${s}초 뒤 재시도`,
+      'err.API_KEY_REQUIRED': 'API 키가 필요합니다', 'err.UNKNOWN_API_KEY': '등록되지 않은 API 키', 'err.BYOK_REQUIRED': '저장된 번역 없음 — LLM 키가 필요합니다',
+      'err.TENANT_DAILY_LIMIT': '일일 호출 한도 초과', 'err.LLM_RATE_LIMITED': '번역 모델 분당 한도', 'err.LLM_QUOTA_DAILY': '번역 모델 일일 한도',
+      'err.LLM_SPEND_CAP': '번역 모델 지출 상한', 'err.LLM_KEY_REJECTED': 'LLM 키가 거부됐습니다', 'err.LLM_UPSTREAM_AUTH': '서버 측 모델 인증 오류',
+      'err.LLM_CONTENT_FILTERED': '번역 모델이 거절했습니다', 'err.NER_UNAVAILABLE': '인명 인식 서버 응답 없음', 'err.LLM_TIMEOUT': '번역 모델 시간 초과',
+      'err.LLM_UPSTREAM_ERROR': '번역 모델 일시 오류', 'err.LLM_MODEL_UNAVAILABLE': '모델을 쓸 수 없습니다', 'err.LLM_PARSE_ERROR': '응답을 해석하지 못했습니다',
+      tsvHead: ['번호', '연도', '원문', '번역', '기계 번역', '직접 수정', '검토 완료', '인명 점검', '확정 인명', '검토할 인명'],
+      tsvGrade: { ok: '반영', review: '검토 필요', lost: '누락' },
+      file: { txt: '승정원일기_번역', pair: '승정원일기_대조', tsv: '승정원일기_번역표' },
+    },
+    en: {
+      docTitle: 'Seungjeongwon Ilgi — Translation Workbench', sub: 'Translation workbench',
+      import: 'Import', export: 'Export', copyAll: 'Copy all', new: 'New', keys: 'Keys',
+      runAll: 'Translate all', stop: 'Stop', readings: 'Show KB readings',
+      colSrc: 'Source', colTgt: 'Translation', colSt: 'Status',
+      secSeg: 'Segment', secNames: 'Names', secNotes: 'Review notes', secMeta: 'Details', secKeys: 'Shortcuts',
+      kConfirm: 'Confirm · next segment', kTranslate: 'Translate segment', kMove: 'Move between segments',
+      lgOk: 'Confirmed by KB', lgAmb: 'Multiple candidates', lgMiss: 'Not in KB', lgLost: 'Confirmed but missing in translation',
+      impTitle: 'Import source', impSrc: 'Source text', impSrcHint: 'Split at line breaks and ○. Segments over 2,000 chars break at 。.',
+      impFile: 'Choose file', impFileHint: '.txt (UTF-8 · EUC-KR) — or drop it on the window',
+      impYear: 'Year (CE)', impYearHint: 'Used to tell namesakes apart by active period. Adjustable per segment.',
+      impAppend: 'Append to current work', impOk: 'Import', sample: 'Sample', cancel: 'Cancel', save: 'Save',
+      setTitle: 'Keys', setApiHint: 'Your issued tenant key. Leave empty for a local server.',
+      setLlmHint: 'Cached translations need no key. The server never stores or logs it.',
+      setRemember: 'Remember until this tab closes', setForget: 'Clear keys',
+      expTitle: 'Export', expTxt: 'Translation (.txt)', expPair: 'Source + translation (.txt)', expTsv: 'Table (.tsv) — with names and review status', expReviewed: 'Confirmed segments only',
+      fAll: 'All', fTodo: 'Untranslated', fLost: 'Name missing', fReview: 'Check names', fUnrev: 'Unconfirmed',
+      stLoading: 'Translating', stFailed: 'Failed', stTodo: 'Untranslated', stDone: 'Translated', stEdited: 'Edited', stCached: 'Cached', stReview: 'Confirm',
+      nLost: (n) => `${n} name${n > 1 ? 's' : ''} missing`, nReview: (n) => `Check ${n} name${n > 1 ? 's' : ''}`, nOk: (n) => `Names ${n}/${n}`,
+      ph: 'Alt+Enter to translate',
+      emptyTitle: 'No source yet', emptyBody: 'Import classical Chinese from the Seungjeongwon Ilgi. Each segment is translated, and names confirmed by the person KB are checked against the output.',
+      filterEmpty: 'No segments match this filter',
+      noSel: 'No segment selected', segN: (n) => `Segment ${n}`, year: 'Year', chars: 'Characters',
+      run: 'Translate', rerun: 'Retranslate', copy: 'Copy', revert: 'Revert to machine translation',
+      noEnts: 'No names or places found', afterTr: 'Shown after translation', none: 'None', beforeTr: 'Not translated',
+      mModel: 'Model', mSource: 'Source', mL2: 'Cached template (names swapped)', mL1: 'Cached', mNew: 'Fresh', mTokens: 'Tokens', mTime: 'Time (ms)', mKb: 'Person KB', mPrompt: 'Prompt',
+      eLoc: 'Place', eIn: 'Present', eOut: 'Missing', eMiss: 'Not in KB', eAmb: 'Candidates', eNer: 'NER',
+      eInsert: (s) => `Insert “${s}” at cursor`,
+      eMissD: (p) => `Not in KB — reading chosen by the model. NER ${p}%`, eAmbD: 'All candidates were passed to the model. Check against context.',
+      'stage.SINGLE': 'Unique index match', 'stage.TIME': 'Resolved by period', 'stage.OFFICE': 'Resolved by office', 'stage.AMBIGUOUS': 'Ambiguous', 'stage.MISS': 'Not in KB',
+      progress: (n, d, r) => `${n} segments · ${d} translated · ${r} confirmed`, noSegs: 'No segments',
+      kApi: 'API key', kLlm: 'LLM key',
+      'lat.ner': 'NER', 'lat.link': 'KB', 'lat.prompt': 'Prompt', 'lat.llm': 'Model', 'lat.cache': 'Cache', 'lat.total': 'Total',
+      kbMiss: 'Not in KB', uncertain: 'Uncertain',
+      reign: (k, n) => `${k === 'injo' ? 'Injo' : 'Jeongjo'} ${n}`,
+      msgEditedKept: (n) => `#${n}: kept your edit — revert from the inspector to see the new output`,
+      msgNothing: 'Nothing to translate', msgHalted: (n, m) => `#${n}: ${m} — stopped`,
+      msgNoSource: 'No source text', msgImported: (n) => `Imported ${n} segments`, msgKeysCleared: 'Keys cleared',
+      msgNoExport: 'Nothing to export', msgExported: (n) => `Exported ${n} segments`, msgNoCopy: 'Nothing to copy',
+      msgCopiedAll: 'Copied all translations', msgCopied: (n) => `Copied #${n}`, msgCopyFail: 'Copy failed — use Export',
+      confirmClear: 'Clear the current work? Unexported translations will be lost.', confirmRevert: 'Discard your edits and revert to the machine translation?',
+      msgEmptyNoReview: 'Empty translation — not confirmed', msgLast: 'Last segment',
+      msgTooBig: 'Over 5MB — split the file', msgFileRead: (f) => `Read ${f}`, drop: 'Drop a .txt file to import it',
+      network: 'Cannot reach the server', badReq: 'Bad request', serverErr: (c) => `Server error ${c}`,
+      limitSfx: (n) => ` (${n}/day)`, retrySfx: (s) => ` · retry in ${s}s`,
+      'err.API_KEY_REQUIRED': 'API key required', 'err.UNKNOWN_API_KEY': 'Unknown API key', 'err.BYOK_REQUIRED': 'Not cached — LLM key required',
+      'err.TENANT_DAILY_LIMIT': 'Daily call limit reached', 'err.LLM_RATE_LIMITED': 'Model rate limit', 'err.LLM_QUOTA_DAILY': 'Model daily quota',
+      'err.LLM_SPEND_CAP': 'Model spend cap', 'err.LLM_KEY_REJECTED': 'LLM key rejected', 'err.LLM_UPSTREAM_AUTH': 'Server-side model auth error',
+      'err.LLM_CONTENT_FILTERED': 'Declined by the model', 'err.NER_UNAVAILABLE': 'NER server not responding', 'err.LLM_TIMEOUT': 'Model timed out',
+      'err.LLM_UPSTREAM_ERROR': 'Temporary model error', 'err.LLM_MODEL_UNAVAILABLE': 'Model unavailable', 'err.LLM_PARSE_ERROR': 'Could not parse the response',
+      tsvHead: ['No', 'Year', 'Source', 'Translation', 'Machine translation', 'Edited', 'Confirmed', 'Name check', 'Confirmed names', 'Names to check'],
+      tsvGrade: { ok: 'present', review: 'check', lost: 'missing' },
+      file: { txt: 'sjw_translation', pair: 'sjw_parallel', tsv: 'sjw_table' },
+    },
   };
   // 다시 눌러도 같은 결과일 오류 — 전체 번역을 멈춘다.
   const HALTING = new Set(['API_KEY_REQUIRED', 'UNKNOWN_API_KEY', 'BYOK_REQUIRED', 'TENANT_DAILY_LIMIT',
     'LLM_QUOTA_DAILY', 'LLM_SPEND_CAP', 'LLM_KEY_REJECTED', 'LLM_RATE_LIMITED']);
+  const STAGE_CLS = { SINGLE: 'ok', TIME: 'ok', OFFICE: 'ok', AMBIGUOUS: 'info', MISS: 'warn' };
 
   // ── 상태 ──
-  const PREFS = 'sjw-workbench-prefs';
   let state = { segments: [], selected: null, selEnt: null, filter: 'all' };
-  let prefs = { reading: true };
   let keys = { api: '', llm: '', remember: false };
+  let prefs = { reading: true, lang: 'ko', theme: 'dark' };
   let running = null; // { abort: AbortController }
 
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const uid = () => Math.random().toString(36).slice(2, 10);
+  function t(k, ...a) {
+    const v = I18N[prefs.lang]?.[k] ?? I18N.ko[k];
+    return typeof v === 'function' ? v(...a) : (v ?? k);
+  }
+  // 오류는 코드로 저장하고 표시할 때 현재 언어로 바꾼다 — 언어를 바꿔도 옛 문구가 남지 않게.
+  function errText(err) {
+    if (!err) return '';
+    let s = I18N[prefs.lang][`err.${err.code}`] ? t(`err.${err.code}`)
+      : err.code === 'NETWORK' ? t('network') : err.status === 400 ? t('badReq') : t('serverErr', err.status || '');
+    if (err.limit) s += t('limitSfx', err.limit);
+    if (err.retry) s += t('retrySfx', err.retry);
+    return s;
+  }
 
   function load() {
     try {
@@ -532,9 +625,6 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       if (raw) prefs = { ...prefs, ...JSON.parse(raw) };
     } catch (_) { /* 기본값으로 */ }
   }
-  function savePrefs() {
-    try { localStorage.setItem(PREFS, JSON.stringify(prefs)); } catch (_) { /* 무시 */ }
-  }
   let saveTimer = null;
   function save() {
     clearTimeout(saveTimer);
@@ -550,17 +640,20 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       else sessionStorage.removeItem(KEYSTORE);
     } catch (_) { /* 무시 */ }
   }
+  function savePrefs() {
+    try { localStorage.setItem(PREFS, JSON.stringify(prefs)); } catch (_) { /* 무시 */ }
+  }
 
   // ── 원문 분할 ──
   function splitSource(raw) {
     const out = [];
     for (const line of raw.replace(/\r/g, '').split('\n')) {
       for (const part of line.split(/(?=○)/)) {
-        const t = part.trim();
-        if (!t || t === '○') continue;
-        if (t.length <= MAX_CHARS) { out.push(t); continue; }
+        const s0 = part.trim();
+        if (!s0 || s0 === '○') continue;
+        if (s0.length <= MAX_CHARS) { out.push(s0); continue; }
         let buf = '';
-        for (const s of t.split(/(?<=。)/)) {
+        for (const s of s0.split(/(?<=。)/)) {
           if ((buf + s).length > MAX_CHARS && buf) { out.push(buf); buf = ''; }
           buf += s;
           while (buf.length > MAX_CHARS) { out.push(buf.slice(0, MAX_CHARS)); buf = buf.slice(MAX_CHARS); }
@@ -614,16 +707,13 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       res = await fetch(API, { method: 'POST', headers, body: JSON.stringify(body), signal });
     } catch (e) {
       if (e.name === 'AbortError') throw e;
-      throw { code: 'NETWORK', message: '서버에 연결하지 못했습니다.' };
+      throw { code: 'NETWORK' };
     }
     let data = null;
     try { data = await res.json(); } catch (_) { /* 본문 없음 */ }
     if (!res.ok) {
-      const code = data && data.error || ('HTTP_' + res.status);
-      let message = ERRORS[code] || (res.status === 400 ? '요청 형식 오류입니다.' : `서버 오류 (${res.status})`);
-      if (code === 'TENANT_DAILY_LIMIT' && data.dailyCallLimit) message += ` (하루 ${data.dailyCallLimit}회)`;
-      if (data && data.retryAfterSeconds) message += ` ${data.retryAfterSeconds}초 뒤에 다시 시도하세요.`;
-      throw { code, message };
+      throw { code: data && data.error || ('HTTP_' + res.status), status: res.status,
+        limit: data && data.dailyCallLimit, retry: data && data.retryAfterSeconds };
     }
     return data;
   }
@@ -631,6 +721,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   async function runOne(seg, signal) {
     seg.status = 'loading'; seg.error = null;
     renderSeg(seg);
+    if (seg.id === state.selected) renderSide();
     try {
       const r = await translate(seg, signal);
       const edited = seg.out && seg.out !== seg.mt;
@@ -640,7 +731,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       seg.notes = (r.uncertainSpans || []);
       seg.meta = r.meta || null;
       seg.status = 'done';
-      if (edited) toast('직접 고친 번역은 그대로 두었습니다. 새 기계 번역은 「기계 번역으로 되돌리기」로 볼 수 있습니다.');
+      if (edited) message(t('msgEditedKept', num(seg)));
     } catch (e) {
       if (e && e.name === 'AbortError') { seg.status = seg.mt ? 'done' : 'idle'; }
       else { seg.status = 'error'; seg.error = e; }
@@ -653,7 +744,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   async function runAll() {
     if (running) return;
     const todo = state.segments.filter((s) => s.status !== 'done');
-    if (!todo.length) { toast('번역할 문단이 없습니다. 다시 번역하려면 문단의 「다시 번역」을 누르세요.'); return; }
+    if (!todo.length) { message(t('msgNothing')); return; }
     running = { abort: new AbortController() };
     renderToolbar();
     for (const seg of todo) {
@@ -661,8 +752,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       select(seg.id, false);
       const err = await runOne(seg, running.abort.signal);
       if (err && HALTING.has(err.code)) {
-        toast(err.message + ' 전체 번역을 멈췄습니다.');
-        if (err.code === 'BYOK_REQUIRED' || err.code === 'API_KEY_REQUIRED' || err.code === 'UNKNOWN_API_KEY' || err.code === 'LLM_KEY_REJECTED') openSettings();
+        message(t('msgHalted', num(seg), errText(err)));
+        if (['BYOK_REQUIRED', 'API_KEY_REQUIRED', 'UNKNOWN_API_KEY', 'LLM_KEY_REJECTED'].includes(err.code)) openSettings();
         break;
       }
     }
@@ -673,21 +764,20 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   // ── 렌더링 ──
   function highlight(seg) {
     const ents = uniqueEntities(seg);
-    let html = esc(seg.src);
+    const html = esc(seg.src);
     if (!ents.length) return html;
-    const { missing } = check(seg);
-    const lost = new Set(missing.map((e) => e.surface));
+    const lost = new Set(check(seg).missing.map((e) => e.surface));
     const sorted = [...ents].sort((a, b) => b.surface.length - a.surface.length);
     const re = new RegExp(sorted.map((e) => esc(e.surface).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'g');
     const bySurface = new Map(ents.map((e) => [esc(e.surface), e]));
     return html.replace(re, (m) => {
       const e = bySurface.get(m);
-      let cls = 'loc';
+      let cls = '';
       if (e.type === 'PER') {
-        cls = lost.has(e.surface) ? 'lost' : isConfirmed(e) ? 'ok' : e.ambiguous ? 'amb' : e.linkStage === 'MISS' ? 'miss' : 'loc';
+        cls = lost.has(e.surface) ? 'lost' : isConfirmed(e) ? 'ok' : e.ambiguous ? 'amb' : e.linkStage === 'MISS' ? 'miss' : '';
       }
       const sel = state.selected === seg.id && state.selEnt === e.surface ? ' sel' : '';
-      const title = e.type === 'PER' ? (e.resolvedName ? `${e.resolvedName} (${e.kbId})` : (STAGE[e.linkStage]?.label || '')) : (e.type === 'LOC' ? '지명' : e.type);
+      const title = e.type === 'PER' ? (e.resolvedName ? `${e.resolvedName} · ${e.kbId}` : t(`stage.${e.linkStage}`)) : (e.type === 'LOC' ? t('eLoc') : e.type);
       const markHtml = `<mark class="ent ${cls}${sel}" data-ent="${esc(e.surface)}" title="${esc(title)}">${m}</mark>`;
       // KB가 확정한 이름만 독음을 단다 — 후보·미등재는 번역가가 판단할 몫이라 답처럼 보이게 하지 않는다
       return isConfirmed(e) ? `<ruby class="reading ${cls}">${markHtml}<rt>${esc(e.resolvedName)}</rt></ruby>` : markHtml;
@@ -696,11 +786,11 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
 
   // ── 걸러 보기 ──
   const FILTERS = [
-    { key: 'all', label: '전체', test: () => true },
-    { key: 'todo', label: '미번역', test: (s) => !s.out },
-    { key: 'lost', label: '인명 누락', cls: 'bad', test: (s) => check(s).grade === 'lost' },
-    { key: 'review', label: '인명 확인', cls: 'warn', test: (s) => check(s).grade === 'review' },
-    { key: 'unreviewed', label: '검토 전', test: (s) => !s.reviewed },
+    { key: 'all', label: 'fAll', test: () => true },
+    { key: 'todo', label: 'fTodo', test: (s) => !s.out },
+    { key: 'lost', label: 'fLost', dot: 'bad', test: (s) => check(s).grade === 'lost' },
+    { key: 'review', label: 'fReview', dot: 'warn', test: (s) => check(s).grade === 'review' },
+    { key: 'unreviewed', label: 'fUnrev', test: (s) => !s.reviewed },
   ];
   function passes(seg) { return (FILTERS.find((f) => f.key === state.filter) || FILTERS[0]).test(seg); }
   // 걸러 보기는 필터를 바꿀 때·번역이 끝날 때만 다시 적용한다 — 고치는 중인 문단이 손 밑에서 사라지지 않게.
@@ -716,86 +806,71 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (note) note.hidden = shown > 0 || !state.segments.length;
   }
 
-  function gradeChip(seg) {
+  function line(dotCls, text, title) {
+    return `<span class="l"${title ? ` title="${esc(title)}"` : ''}><span class="d ${dotCls}"></span>${text}</span>`;
+  }
+  function statusCell(seg) {
     const c = check(seg);
-    if (seg.status === 'loading') return '<span class="chip info"><span class="dot"></span>번역 중</span>';
-    if (seg.status === 'error') return '<span class="chip bad"><span class="dot"></span>실패</span>';
-    if (!c.grade) return '<span class="chip">대기</span>';
-    const unsure = c.miss.length + c.amb.length;
-    if (c.grade === 'lost') return `<span class="chip bad" title="KB가 확정한 인물의 이름이 번역문에 없습니다"><span class="dot"></span>인명 누락 ${c.missing.length}명</span>`;
-    if (c.grade === 'review') return `<span class="chip warn" title="KB에 없거나 후보가 여럿인 인물이 있습니다"><span class="dot"></span>인명 확인 ${unsure}명</span>`;
-    return `<span class="chip ok" title="KB가 확정한 인물이 모두 번역문에 있습니다"><span class="dot"></span>${c.confirmed.length ? `인명 ${c.confirmed.length}명 반영` : '인명 없음'}</span>`;
+    let s;
+    if (seg.status === 'loading') s = line('b-info', t('stLoading'));
+    else if (seg.status === 'error') s = line('b-bad', `<span class="c-bad">${t('stFailed')}</span>`, errText(seg.error));
+    else if (!seg.out) s = line('', `<span class="c-mute">${t('stTodo')}</span>`);
+    else s = line('b-ok', seg.mt && seg.out !== seg.mt ? `${t('stDone')} · ${t('stEdited')}` : t('stDone'));
+    let names = '';
+    if (c.grade === 'lost') names = line('b-bad', `<span class="c-bad">${t('nLost', c.missing.length)}</span>`);
+    else if (c.grade === 'review') names = line('b-warn', `<span class="c-warn">${t('nReview', c.miss.length + c.amb.length)}</span>`);
+    else if (c.grade === 'ok' && c.confirmed.length) names = line('b-ok', t('nOk', c.confirmed.length));
+    const cached = seg.meta && seg.meta.cacheHit ? `<span class="l c-mute">${t('stCached')}</span>` : '';
+    return `${s}${names}${cached}
+      <label class="chk ${seg.reviewed ? 'on' : ''}" style="margin-top:4px"><input type="checkbox" data-role="reviewed" ${seg.reviewed ? 'checked' : ''}>${t('stReview')}</label>`;
   }
 
   function segHtml(seg, i) {
-    const m = seg.meta;
-    const edited = seg.mt && seg.out !== seg.mt;
-    const yearHint = seg.year ? reignLabel(seg.year) : '';
     return `
-      <div class="num">${i + 1}</div>
+      <div class="num mono">${String(i + 1).padStart(2, '0')}</div>
       <div class="src hanmun" lang="zh-Hant">${highlight(seg)}</div>
-      <div class="tgt">
-        <textarea rows="2" data-role="out" aria-label="${i + 1}번 문단 번역" placeholder="${seg.status === 'loading' ? '' : '번역 전입니다. Alt+Enter로 번역하거나 직접 입력하세요.'}">${esc(seg.out)}</textarea>
-      </div>
-      <div class="foot">
-        ${gradeChip(seg)}
-        ${m && m.cacheHit ? `<span class="chip" title="이미 번역해 둔 결과입니다. 번역 모델을 부르지 않았습니다.">저장된 번역</span>` : ''}
-        ${edited ? '<span class="chip info">직접 수정함</span>' : ''}
-        ${seg.status === 'error' ? `<span class="err">${esc(seg.error.message)}</span>` : ''}
-        <span class="spacer"></span>
-        <span class="year" title="동명이인을 활동 시기로 가릴 때 씁니다">연도 <input type="number" data-role="year" value="${esc(seg.year || '')}" min="1392" max="1910"> <span>${esc(yearHint)}</span></span>
-        <label class="chk"><input type="checkbox" data-role="reviewed" ${seg.reviewed ? 'checked' : ''}> 검토 완료</label>
-        ${seg.out ? '<button class="btn sm ghost" type="button" data-role="copy" title="이 문단 번역 복사">복사</button>' : ''}
-        <button class="btn sm" type="button" data-role="run" ${seg.status === 'loading' || running ? 'disabled' : ''}>${seg.status === 'done' ? '다시 번역' : '번역'}</button>
-      </div>`;
+      <div class="tgt"><textarea rows="2" data-role="out" aria-label="${i + 1}" placeholder="${seg.status === 'loading' ? '' : esc(t('ph'))}">${esc(seg.out)}</textarea></div>
+      <div class="st">${statusCell(seg)}</div>`;
   }
 
   function renderSeg(seg) {
     const el = document.querySelector(`.seg[data-id="${seg.id}"]`);
     if (!el) return renderSegments();
-    const i = state.segments.indexOf(seg);
     const hadFocus = document.activeElement && el.contains(document.activeElement) && document.activeElement.dataset.role === 'out';
     const caret = hadFocus ? document.activeElement.selectionStart : null;
     el.className = `seg${state.selected === seg.id ? ' active' : ''}${seg.status === 'loading' ? ' loading' : ''}`;
-    el.innerHTML = segHtml(seg, i);
+    el.innerHTML = segHtml(seg, state.segments.indexOf(seg));
     const ta = el.querySelector('textarea');
     autosize(ta);
     if (hadFocus) { ta.focus(); ta.setSelectionRange(caret, caret); }
   }
 
-  // 입력 중에는 textarea를 다시 그리지 않는다 — 원문 강조와 상태 칩만 갱신.
+  // 입력 중에는 textarea를 다시 그리지 않는다 — 원문 강조와 상태 칸만 갱신.
   function refreshSegChrome(seg) {
     const el = document.querySelector(`.seg[data-id="${seg.id}"]`);
     if (!el) return;
     el.querySelector('.src').innerHTML = highlight(seg);
-    const foot = el.querySelector('.foot');
-    const first = foot.firstElementChild;
-    const tmp = document.createElement('div');
-    tmp.innerHTML = gradeChip(seg);
-    foot.replaceChild(tmp.firstElementChild, first);
-    const editedChip = [...foot.querySelectorAll('.chip.info')].find((c) => c.textContent === '직접 수정함');
-    const edited = seg.mt && seg.out !== seg.mt;
-    if (edited && !editedChip) foot.firstElementChild.insertAdjacentHTML('afterend', '<span class="chip info">직접 수정함</span>');
-    if (!edited && editedChip) editedChip.remove();
+    el.querySelector('.st').innerHTML = statusCell(seg);
   }
 
   function renderSegments() {
     const box = $('#segments');
-    $('#colhead').hidden = !state.segments.length;
+    $('#cols').hidden = !state.segments.length;
     if (!state.segments.length) {
       box.innerHTML = `
-        <div class="empty">
-          <h2>번역할 원문을 불러오세요</h2>
-          <p>승정원일기 한문을 붙여 넣으면 문단별로 나눠 번역합니다. 원문에 나온 인물은 인물 KB에서 찾아 이름을 확정하고, 번역문에 그 이름이 제대로 들어갔는지 문단마다 표시합니다.</p>
+        <div class="empty"><div class="box">
+          <div class="glyph hanmun">譯</div>
+          <h2>${t('emptyTitle')}</h2>
+          <p>${t('emptyBody')}</p>
           <div class="acts">
-            <button class="btn primary" type="button" data-act="import">원문 붙여 넣기</button>
-            <button class="btn" type="button" data-act="sample">예시로 시작</button>
+            <button class="btn primary" type="button" data-act="import"><svg class="i"><use href="#i-import"/></svg>${t('import')}</button>
+            <button class="btn outline" type="button" data-act="sample">${t('sample')}</button>
           </div>
-        </div>`;
+        </div></div>`;
       return;
     }
     box.innerHTML = state.segments.map((seg) => `<div class="seg" data-id="${seg.id}"></div>`).join('')
-      + '<p class="filter-empty" id="filter-empty" hidden>이 조건에 맞는 문단이 없습니다.</p>';
+      + `<div class="filter-empty" id="filter-empty" hidden>${t('filterEmpty')}</div>`;
     state.segments.forEach(renderSeg);
     applyFilter();
   }
@@ -806,91 +881,98 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     box.innerHTML = FILTERS.map((f) => {
       const n = state.segments.filter(f.test).length;
       const on = state.filter === f.key;
-      return `<button type="button" class="filter ${f.cls || ''}" data-filter="${f.key}" aria-pressed="${on}" ${!n && !on && f.key !== 'all' ? 'disabled' : ''}>${f.label} <b>${n}</b></button>`;
+      const dot = f.dot && n ? `<span class="dot b-${f.dot}"></span>` : '';
+      return `<button type="button" class="tab" data-filter="${f.key}" aria-pressed="${on}" ${!n && !on && f.key !== 'all' ? 'disabled' : ''}>${dot}${t(f.label)}<span class="n mono">${n}</span></button>`;
     }).join('');
   }
 
   function renderSide() {
     const seg = current();
-    const entBox = $('#ent-panel'), noteBox = $('#note-panel'), metaBox = $('#meta-panel');
+    const segBox = $('#seg-panel'), entBox = $('#ent-panel'), noteBox = $('#note-panel'), metaBox = $('#meta-panel');
     if (!seg) {
       $('#ent-count').textContent = ''; $('#note-count').textContent = '';
-      entBox.innerHTML = noteBox.innerHTML = metaBox.innerHTML = '<p class="empty-note">문단을 선택하면 여기에 나옵니다.</p>';
+      segBox.innerHTML = `<span class="note">${t('noSel')}</span>`;
+      entBox.innerHTML = noteBox.innerHTML = metaBox.innerHTML = '<span class="note">—</span>';
       return;
     }
-    const i = state.segments.indexOf(seg) + 1;
+    const edited = seg.mt && seg.out !== seg.mt;
+    segBox.innerHTML = `
+      <div class="big">${t('segN', num(seg))}</div>
+      <dl class="kv">
+        <dt>${t('year')}</dt><dd><input class="input mono" type="number" data-role="seg-year" value="${esc(seg.year || '')}" min="1392" max="1910"> <span class="c-mute" id="seg-reign">${esc(reignLabel(seg.year))}</span></dd>
+        <dt>${t('chars')}</dt><dd class="mono">${seg.src.length}</dd>
+      </dl>
+      <div class="actions">
+        <button class="btn outline sm" type="button" data-act="run" ${seg.status === 'loading' || running ? 'disabled' : ''}><svg class="i"><use href="#i-redo"/></svg>${seg.status === 'done' ? t('rerun') : t('run')}<kbd>Alt</kbd><kbd>↵</kbd></button>
+        <button class="btn outline sm" type="button" data-act="copy" ${seg.out ? '' : 'disabled'}><svg class="i"><use href="#i-copy"/></svg>${t('copy')}</button>
+        ${edited ? `<button class="btn outline sm" type="button" data-act="revert"><svg class="i"><use href="#i-undo"/></svg>${t('revert')}</button>` : ''}
+      </div>
+      ${seg.status === 'error' ? `<div class="err">${esc(errText(seg.error))}</div>` : ''}`;
+
     const ents = uniqueEntities(seg);
-    $('#ent-count').textContent = ents.length ? `${i}번 문단 · ${ents.length}` : `${i}번 문단`;
-    if (seg.status !== 'done' && !ents.length) {
-      entBox.innerHTML = '<p class="empty-note">번역하면 원문의 인명·지명을 찾아 보여 줍니다.</p>';
-    } else if (!ents.length) {
-      entBox.innerHTML = '<p class="empty-note">이 문단에서 찾은 인명·지명이 없습니다.</p>';
+    $('#ent-count').textContent = ents.length ? String(ents.length) : '';
+    if (!ents.length) {
+      entBox.innerHTML = `<span class="note">${seg.status === 'done' ? t('noEnts') : t('afterTr')}</span>`;
     } else {
-      const order = (e) => e.type !== 'PER' ? 4 : !nameReflected(seg.out, e.resolvedName) && isConfirmed(e) ? 0 : e.linkStage === 'MISS' ? 1 : e.ambiguous ? 2 : 3;
-      entBox.innerHTML = [...ents].sort((a, b) => order(a) - order(b)).map((e) => entCard(seg, e)).join('');
+      const order = (e) => e.type !== 'PER' ? 4 : isConfirmed(e) && !nameReflected(seg.out, e.resolvedName) ? 0 : e.linkStage === 'MISS' ? 1 : e.ambiguous ? 2 : 3;
+      entBox.innerHTML = `<div class="ents">${[...ents].sort((a, b) => order(a) - order(b)).map((e) => entRow(seg, e)).join('')}</div>`;
     }
 
     const notes = seg.notes || [];
     $('#note-count').textContent = notes.length ? String(notes.length) : '';
     noteBox.innerHTML = notes.length
-      ? notes.map((n) => `<div style="margin-bottom:6px"><span class="hanmun" style="font-size:16px">${esc(n.text)}</span> <span class="chip ${n.reason === 'KB_MISS' ? 'warn' : ''}">${esc(noteReason(n.reason))}</span></div>`).join('')
-      : `<p class="empty-note">${seg.status === 'done' ? '번역기가 따로 남긴 불확실한 구간이 없습니다.' : '번역하면 확인이 필요한 구간을 표시합니다.'}</p>`;
+      ? `<div style="display:grid;gap:6px">${notes.map((n) => `<div><span class="hanmun" style="font-size:15px">${esc(n.text)}</span> <span class="${n.reason === 'KB_MISS' ? 'c-warn' : 'c-mute'}" style="margin-left:6px">${esc(n.reason === 'KB_MISS' ? t('kbMiss') : (n.reason || t('uncertain')))}</span></div>`).join('')}</div>`
+      : `<span class="note">${seg.status === 'done' ? t('none') : t('afterTr')}</span>`;
 
     const m = seg.meta;
-    if (!m) { metaBox.innerHTML = '<p class="empty-note">아직 번역하지 않았습니다.</p>'; return; }
-    const lat = m.latencyMs || {};
-    const latStr = Object.entries(lat).map(([k, v]) => `${latName(k)} ${v}ms`).join(' · ');
+    if (!m) { metaBox.innerHTML = `<span class="note">${t('beforeTr')}</span>`; return; }
+    const lat = Object.entries(m.latencyMs || {}).map(([k, v]) => `${t(`lat.${k}`)} ${v}`).join(' · ');
     metaBox.innerHTML = `
       <dl class="kv">
-        <dt>번역 모델</dt><dd>${esc(m.model || '—')}</dd>
-        <dt>출처</dt><dd>${m.cacheHit ? (m.cacheHit === 'L2_TEMPLATE' ? '같은 틀의 저장된 번역 (인명만 교체)' : '저장된 번역') : '새로 번역'}</dd>
-        ${m.tokensIn != null ? `<dt>토큰</dt><dd>입력 ${m.tokensIn} · 출력 ${m.tokensOut ?? '—'}</dd>` : ''}
-        <dt>소요</dt><dd>${esc(latStr || '—')}</dd>
-        <dt>인물 KB</dt><dd>${esc(m.kbVersion || '—')}</dd>
-        <dt>프롬프트</dt><dd>${esc(m.promptVersion || '—')}</dd>
-      </dl>
-      ${seg.mt && seg.out !== seg.mt ? '<div style="margin-top:8px"><button class="btn sm" type="button" data-act="revert">기계 번역으로 되돌리기</button></div>' : ''}`;
+        <dt>${t('mModel')}</dt><dd class="mono">${esc(m.model || '—')}</dd>
+        <dt>${t('mSource')}</dt><dd>${m.cacheHit ? (m.cacheHit === 'L2_TEMPLATE' ? t('mL2') : t('mL1')) : t('mNew')}</dd>
+        ${m.tokensIn != null ? `<dt>${t('mTokens')}</dt><dd class="mono">${m.tokensIn} → ${m.tokensOut ?? '—'}</dd>` : ''}
+        <dt>${t('mTime')}</dt><dd class="mono">${esc(lat || '—')}</dd>
+        <dt>${t('mKb')}</dt><dd class="mono">${esc(m.kbVersion || '—')}</dd>
+        <dt>${t('mPrompt')}</dt><dd class="mono">${esc(m.promptVersion || '—')}</dd>
+      </dl>`;
   }
 
-  function entCard(seg, e) {
-    const sel = state.selEnt === e.surface ? ' sel' : '';
+  function entRow(seg, e) {
+    const sel = state.selEnt === e.surface;
+    const pct = Math.round((e.confidence || 0) * 100);
+    let s, det = '';
     if (e.type !== 'PER') {
-      return `<div class="ent-card${sel}" data-ent="${esc(e.surface)}">
-        <div class="row1"><span class="surface hanmun">${esc(e.surface)}</span><span class="chip">${e.type === 'LOC' ? '지명' : esc(e.type)}</span></div>
-      </div>`;
-    }
-    const st = STAGE[e.linkStage] || { label: e.linkStage || '—', cls: '' };
-    const confirmed = isConfirmed(e);
-    const reflected = confirmed && nameReflected(seg.out, e.resolvedName);
-    let status = '', why = '', acts = '';
-    if (confirmed) {
-      status = reflected ? '<span class="chip ok">번역문에 있음</span>' : '<span class="chip bad">번역문에 없음</span>';
-      if (!reflected && seg.out) {
-        why = `KB가 「${esc(e.resolvedName)}」로 확정한 인물인데 번역문에서 이 이름을 찾지 못했습니다. 다른 음으로 옮겼거나 빠졌는지 확인하세요.`;
-        acts = `<div class="acts"><button class="btn sm" type="button" data-act="insert" data-name="${esc(e.resolvedName)}">커서 위치에 「${esc(e.resolvedName)}」 넣기</button></div>`;
+      s = `<span class="s">${t('eLoc')}</span>`;
+    } else if (isConfirmed(e)) {
+      const reflected = nameReflected(seg.out, e.resolvedName);
+      s = reflected ? `<span class="s"><span class="d b-ok"></span>${t('eIn')}</span>`
+        : seg.out ? `<span class="s c-bad"><span class="d b-bad"></span>${t('eOut')}</span>` : '<span class="s">—</span>';
+      if (sel) {
+        det = `<span class="mono">${esc(e.kbId)}</span> · ${esc(t(`stage.${e.linkStage}`))} · ${t('eNer')} ${pct}%`;
+        if (!reflected && seg.out) det += `<br><button class="btn primary sm" type="button" data-act="insert" data-name="${esc(e.resolvedName)}">${esc(t('eInsert', e.resolvedName))}</button>`;
       }
     } else if (e.linkStage === 'MISS') {
-      why = 'KB에 없는 이름이라 번역기가 음을 스스로 정했습니다. 음이 맞는지 직접 확인하세요.';
-    } else if (e.ambiguous) {
-      why = '같은 표기의 인물이 여럿이라 후보를 모두 번역기에 넘겼습니다. 문맥에 맞는 인물인지 확인하세요.';
+      s = `<span class="s c-warn"><span class="d b-warn"></span>${t('eMiss')}</span>`;
+      if (sel) det = esc(t('eMissD', pct));
+    } else {
+      s = `<span class="s c-info"><span class="d b-info"></span>${t('eAmb')}</span>`;
+      if (sel) det = esc(t('eAmbD'));
     }
-    return `<div class="ent-card${sel}" data-ent="${esc(e.surface)}">
-      <div class="row1"><span class="surface hanmun">${esc(e.surface)}</span>${confirmed ? `<span class="arrow">→</span><span class="name">${esc(e.resolvedName)}</span>` : ''}</div>
-      <div class="row2"><span class="chip ${st.cls}">${esc(st.label)}</span>${status}${e.kbId ? `<span class="chip" title="인물 KB 식별자">${esc(e.kbId)}</span>` : ''}<span class="chip" title="인명 인식 신뢰도">${Math.round((e.confidence || 0) * 100)}%</span></div>
-      ${why ? `<div class="why">${why}</div>` : ''}${acts}
-    </div>`;
+    const name = isConfirmed(e) ? `<span class="k">${esc(e.resolvedName)}</span>` : '';
+    return `<div class="ent${sel ? ' sel' : ''}" data-ent="${esc(e.surface)}"><span><span class="h hanmun">${esc(e.surface)}</span>${name}</span>${s}${det ? `<div class="det">${det}</div>` : ''}</div>`;
   }
 
   function renderProgress() {
     renderFilters();
     const n = state.segments.length;
-    const box = $('#progress');
-    if (!n) { box.innerHTML = ''; return; }
-    const done = state.segments.filter((s) => s.status === 'done' || s.out).length;
+    if (!n) { $('#sb-progress').textContent = t('noSegs'); $('#sb-meter').style.width = '0'; $('#sb-model').textContent = ''; return; }
+    const done = state.segments.filter((s) => s.out).length;
     const rev = state.segments.filter((s) => s.reviewed).length;
-    const lost = state.segments.filter((s) => check(s).grade === 'lost').length;
-    box.innerHTML = `<div class="bar" aria-hidden="true"><i style="width:${Math.round(rev / n * 100)}%"></i></div>
-      <span>${n}문단 · 번역 ${done} · 검토 완료 ${rev}${lost ? ` · <span style="color:var(--bad)">인명 누락 ${lost}</span>` : ''}</span>`;
+    $('#sb-progress').textContent = t('progress', n, done, rev);
+    $('#sb-meter').style.width = `${Math.round(rev / n * 100)}%`;
+    const last = [...state.segments].reverse().find((s) => s.meta && s.meta.model);
+    $('#sb-model').textContent = last ? `${last.meta.model}${last.meta.kbVersion ? ' · ' + last.meta.kbVersion : ''}` : '';
   }
 
   function renderToolbar() {
@@ -900,19 +982,32 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     $('#btn-run').disabled = !has;
     $('#btn-copy').disabled = $('#btn-export').disabled = $('#btn-clear').disabled = !has || !!running;
     $('#btn-import').disabled = !!running;
-    document.querySelectorAll('[data-role="run"]').forEach((b) => { b.disabled = !!running || b.closest('.seg').classList.contains('loading'); });
+    const r = $('#seg-panel [data-act="run"]');
+    if (r) r.disabled = !!running || current()?.status === 'loading';
   }
 
   function renderKeys() {
-    $('#keystate').innerHTML =
-      (keys.api ? '<span class="chip ok"><span class="dot"></span>API 키</span>' : '') +
-      (keys.llm ? '<span class="chip ok"><span class="dot"></span>LLM 키</span>' : '<span class="chip" title="미리 번역된 문장만 나옵니다">LLM 키 없음</span>');
+    const k = (on, label) => `<span class="k"><span class="d" style="background:${on ? 'var(--ok)' : 'var(--t3)'}"></span>${label}</span>`;
+    $('#sb-keys').innerHTML = k(keys.api, t('kApi')) + k(keys.llm, t('kLlm'));
   }
 
-  function renderAll() { renderSegments(); renderSide(); renderProgress(); renderToolbar(); renderKeys(); }
+  // 언어·테마를 바꾸면 정적 문구를 갈아 끼우고 동적 영역을 다시 그린다
+  function applyChrome() {
+    document.documentElement.lang = prefs.lang;
+    document.documentElement.dataset.theme = prefs.theme;
+    document.title = t('docTitle');
+    document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === prefs.lang)));
+    $('#theme-icon').setAttribute('href', prefs.theme === 'dark' ? '#i-sun' : '#i-moon');
+    document.body.classList.toggle('hide-reading', !prefs.reading);
+    $('#opt-reading').checked = prefs.reading;
+  }
+
+  function renderAll() { applyChrome(); renderSegments(); renderSide(); renderProgress(); renderToolbar(); renderKeys(); }
 
   // ── 보조 ──
   function current() { return state.segments.find((s) => s.id === state.selected) || null; }
+  function num(seg) { return state.segments.indexOf(seg) + 1; }
   function select(id, focus = true) {
     if (state.selected === id) return;
     const prev = current();
@@ -922,24 +1017,27 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (el) {
       el.classList.add('active');
       if (prev) refreshSegChrome(prev);
-      el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      el.scrollIntoView({ block: 'nearest' });
       if (focus) el.querySelector('textarea')?.focus();
     }
     renderSide(); save();
   }
-  function autosize(ta) { ta.style.height = 'auto'; ta.style.height = Math.max(72, ta.scrollHeight) + 'px'; }
+  function autosize(ta) { ta.style.height = 'auto'; ta.style.height = Math.max(60, ta.scrollHeight) + 'px'; }
   function reignLabel(y) {
     y = Number(y);
-    if (y >= 1623 && y <= 1649) return `인조 ${y - 1622}년`;
-    if (y >= 1777 && y <= 1800) return `정조 ${y - 1776}년`;
+    if (y >= 1623 && y <= 1649) return t('reign', 'injo', y - 1622);
+    if (y >= 1777 && y <= 1800) return t('reign', 'jeongjo', y - 1776);
     return '';
   }
-  function latName(k) { return ({ ner: '인명 인식', link: 'KB 조회', prompt: '조립', llm: '번역 모델', cache: '저장소', total: '합계' })[k] || k; }
-  function noteReason(r) { return ({ KB_MISS: 'KB 미등재 인물' })[r] || r || '불확실'; }
-  let toastTimer = null;
-  function toast(msg) {
-    const t = $('#toast'); t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+  let msgTimer = null;
+  function message(text) {
+    const el = $('#sb-msg');
+    el.textContent = text; el.classList.add('flash');
+    clearTimeout(msgTimer); msgTimer = setTimeout(() => el.classList.remove('flash'), 1600);
+  }
+  async function copyText(text, done) {
+    try { await navigator.clipboard.writeText(text); message(done); }
+    catch (_) { message(t('msgCopyFail')); }
   }
 
   // ── 대화상자 ──
@@ -948,7 +1046,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     $('#import-text').value = sample ? SAMPLE.text : '';
     $('#import-year').value = sample ? SAMPLE.year : (current()?.year || '');
     $('#import-append').checked = false;
-    $('#import-append').parentElement.hidden = !state.segments.length;
+    $('#import-append-row').hidden = !state.segments.length;
     updateYearHint();
     d.returnValue = '';
     d.showModal();
@@ -960,14 +1058,14 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   $('#dlg-import').addEventListener('close', () => {
     if ($('#dlg-import').returnValue !== 'ok') return;
     const parts = splitSource($('#import-text').value);
-    if (!parts.length) { toast('불러올 원문이 없습니다.'); return; }
+    if (!parts.length) { message(t('msgNoSource')); return; }
     const year = $('#import-year').value || null;
     const segs = parts.map((p) => newSegment(p, year));
     if ($('#import-append').checked) state.segments.push(...segs);
     else state.segments = segs;
-    state.selected = segs[0].id; state.selEnt = null;
+    state.selected = segs[0].id; state.selEnt = null; state.filter = 'all';
     renderAll(); save();
-    toast(`${segs.length}개 문단으로 나눴습니다.`);
+    message(t('msgImported', segs.length));
   });
 
   function openSettings() {
@@ -978,7 +1076,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   $('#btn-settings').addEventListener('click', openSettings);
   $('#btn-forget').addEventListener('click', () => {
     keys = { api: '', llm: '', remember: false }; saveKeys(); renderKeys();
-    $('#dlg-settings').close('cancel'); toast('키를 지웠습니다.');
+    $('#dlg-settings').close('cancel'); message(t('msgKeysCleared'));
   });
   $('#dlg-settings').addEventListener('close', () => {
     if ($('#dlg-settings').returnValue !== 'ok') return;
@@ -987,9 +1085,6 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   });
 
   // ── 내보내기 ──
-  function exportRows(onlyReviewed) {
-    return state.segments.filter((s) => !onlyReviewed || s.reviewed);
-  }
   function download(name, text, type) {
     const blob = new Blob(['﻿' + text], { type });
     const a = document.createElement('a');
@@ -1001,32 +1096,34 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   $('#dlg-export').addEventListener('close', () => {
     if ($('#dlg-export').returnValue !== 'ok') return;
     const fmt = document.querySelector('input[name=fmt]:checked').value;
-    const rows = exportRows($('#exp-reviewed').checked);
-    if (!rows.length) { toast('내보낼 문단이 없습니다.'); return; }
+    const rows = state.segments.filter((s) => !$('#exp-reviewed').checked || s.reviewed);
+    if (!rows.length) { message(t('msgNoExport')); return; }
     const stamp = new Date().toISOString().slice(0, 10);
+    const names = t('file');
     const cell = (s) => String(s ?? '').replace(/[\t\r\n]+/g, ' ');
-    if (fmt === 'txt') download(`승정원일기_번역_${stamp}.txt`, rows.map((s) => s.out).join('\n\n'), 'text/plain;charset=utf-8');
-    else if (fmt === 'pair') download(`승정원일기_대조_${stamp}.txt`, rows.map((s, i) => `[${i + 1}]\n${s.src}\n${s.out}`).join('\n\n'), 'text/plain;charset=utf-8');
+    if (fmt === 'txt') download(`${names.txt}_${stamp}.txt`, rows.map((s) => s.out).join('\n\n'), 'text/plain;charset=utf-8');
+    else if (fmt === 'pair') download(`${names.pair}_${stamp}.txt`, rows.map((s) => `[${num(s)}]\n${s.src}\n${s.out}`).join('\n\n'), 'text/plain;charset=utf-8');
     else {
-      const head = ['번호', '연도', '원문', '번역', '기계 번역', '직접 수정', '검토 완료', '인명 점검', '확정 인명', '검토할 인명'];
-      const body = rows.map((s, i) => {
+      const grade = t('tsvGrade');
+      const body = rows.map((s) => {
         const c = check(s);
-        return [i + 1, s.year || '', cell(s.src), cell(s.out), cell(s.mt), s.mt && s.out !== s.mt ? 'Y' : '', s.reviewed ? 'Y' : '',
-          ({ ok: '반영', review: '검토 필요', lost: '누락' })[c.grade] || '',
+        return [num(s), s.year || '', cell(s.src), cell(s.out), cell(s.mt), s.mt && s.out !== s.mt ? 'Y' : '', s.reviewed ? 'Y' : '',
+          grade[c.grade] || '',
           c.confirmed.map((e) => `${e.surface}=${e.resolvedName}`).join('; '),
           [...c.miss, ...c.amb].map((e) => e.surface).join('; ')].join('\t');
       });
-      download(`승정원일기_번역표_${stamp}.tsv`, [head.join('\t'), ...body].join('\n'), 'text/tab-separated-values;charset=utf-8');
+      download(`${names.tsv}_${stamp}.tsv`, [t('tsvHead').join('\t'), ...body].join('\n'), 'text/tab-separated-values;charset=utf-8');
     }
+    message(t('msgExported', rows.length));
   });
-  $('#btn-copy').addEventListener('click', async () => {
+  $('#btn-copy').addEventListener('click', () => {
     const text = state.segments.map((s) => s.out).filter(Boolean).join('\n\n');
-    if (!text) { toast('복사할 번역문이 없습니다.'); return; }
-    copyText(text, '번역문을 복사했습니다.');
+    if (!text) { message(t('msgNoCopy')); return; }
+    copyText(text, t('msgCopiedAll'));
   });
   $('#btn-clear').addEventListener('click', () => {
-    if (!confirm('지금 작업을 지우고 새로 시작할까요? 내보내지 않은 번역은 사라집니다.')) return;
-    state = { segments: [], selected: null, selEnt: null };
+    if (!confirm(t('confirmClear'))) return;
+    state = { segments: [], selected: null, selEnt: null, filter: 'all' };
     renderAll(); save();
   });
 
@@ -1034,6 +1131,12 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   $('#btn-import').addEventListener('click', () => openImport(false));
   $('#btn-run').addEventListener('click', runAll);
   $('#btn-stop').addEventListener('click', () => { running?.abort.abort(); });
+  document.querySelectorAll('[data-lang]').forEach((b) => b.addEventListener('click', () => {
+    prefs.lang = b.dataset.lang; savePrefs(); renderAll();
+  }));
+  $('#btn-theme').addEventListener('click', () => {
+    prefs.theme = prefs.theme === 'dark' ? 'light' : 'dark'; savePrefs(); applyChrome();
+  });
 
   $('#segments').addEventListener('click', (ev) => {
     const act = ev.target.closest('[data-act]')?.dataset.act;
@@ -1042,10 +1145,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     const segEl = ev.target.closest('.seg');
     if (!segEl) return;
     const seg = state.segments.find((s) => s.id === segEl.dataset.id);
-    if (ev.target.closest('[data-role="run"]')) { select(seg.id, false); runOne(seg); return; }
-    if (ev.target.closest('[data-role="copy"]')) { copyText(seg.out, `${state.segments.indexOf(seg) + 1}번 문단 번역을 복사했습니다.`); return; }
     const mark = ev.target.closest('mark.ent');
-    if (state.selected !== seg.id) select(seg.id, !mark && !ev.target.closest('input,label,button'));
+    if (state.selected !== seg.id) select(seg.id, !mark && !ev.target.closest('input,label'));
     if (mark) { state.selEnt = mark.dataset.ent; refreshSegChrome(seg); renderSide(); }
   });
   $('#segments').addEventListener('focusin', (ev) => {
@@ -1053,24 +1154,36 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (segEl && state.selected !== segEl.dataset.id) select(segEl.dataset.id, false);
   });
   $('#segments').addEventListener('input', (ev) => {
-    const segEl = ev.target.closest('.seg');
-    if (!segEl) return;
-    const seg = state.segments.find((s) => s.id === segEl.dataset.id);
-    const role = ev.target.dataset.role;
-    if (role === 'out') {
-      seg.out = ev.target.value; autosize(ev.target);
-      refreshSegChrome(seg); renderSide(); renderProgress();
-    } else if (role === 'year') {
-      seg.year = ev.target.value || null;
-      ev.target.nextElementSibling.textContent = reignLabel(seg.year);
-    }
-    save();
+    if (ev.target.dataset.role !== 'out') return;
+    const seg = state.segments.find((s) => s.id === ev.target.closest('.seg').dataset.id);
+    seg.out = ev.target.value; autosize(ev.target);
+    refreshSegChrome(seg); renderSide(); renderProgress(); save();
   });
+  function setReviewed(seg, on) {
+    seg.reviewed = on;
+    refreshSegChrome(seg); renderProgress(); save();
+  }
   $('#segments').addEventListener('change', (ev) => {
     if (ev.target.dataset.role !== 'reviewed') return;
-    const seg = state.segments.find((s) => s.id === ev.target.closest('.seg').dataset.id);
-    seg.reviewed = ev.target.checked;
-    renderProgress(); save();
+    setReviewed(state.segments.find((s) => s.id === ev.target.closest('.seg').dataset.id), ev.target.checked);
+  });
+
+  $('#seg-panel').addEventListener('input', (ev) => {
+    if (ev.target.dataset.role !== 'seg-year') return;
+    const seg = current(); if (!seg) return;
+    seg.year = ev.target.value || null;
+    $('#seg-reign').textContent = reignLabel(seg.year);
+    save();
+  });
+  $('#seg-panel').addEventListener('click', (ev) => {
+    const act = ev.target.closest('[data-act]')?.dataset.act;
+    const seg = current(); if (!seg || !act) return;
+    if (act === 'run' && !running && seg.status !== 'loading') runOne(seg);
+    if (act === 'copy') copyText(seg.out, t('msgCopied', num(seg)));
+    if (act === 'revert') {
+      if (!confirm(t('confirmRevert'))) return;
+      seg.out = seg.mt; renderSeg(seg); renderSide(); renderProgress(); save();
+    }
   });
 
   $('#ent-panel').addEventListener('mousedown', (ev) => {
@@ -1089,14 +1202,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       ta.dispatchEvent(new Event('input', { bubbles: true }));
       return;
     }
-    const card = ev.target.closest('.ent-card');
-    if (card) { state.selEnt = card.dataset.ent; refreshSegChrome(seg); renderSide(); }
-  });
-  $('#meta-panel').addEventListener('click', (ev) => {
-    if (!ev.target.closest('[data-act="revert"]')) return;
-    const seg = current(); if (!seg) return;
-    if (!confirm('직접 고친 내용을 버리고 기계 번역으로 되돌릴까요?')) return;
-    seg.out = seg.mt; renderSeg(seg); renderSide(); renderProgress(); save();
+    const row = ev.target.closest('.ent');
+    if (row) { state.selEnt = state.selEnt === row.dataset.ent ? null : row.dataset.ent; refreshSegChrome(seg); renderSide(); }
   });
 
   // 지금 보이는(걸러지지 않은) 문단 사이에서만 움직인다
@@ -1114,13 +1221,10 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     // CAT 도구 관례: Ctrl+Enter = 이 문단 확정(검토 완료) 후 다음으로
     if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter' && seg) {
       ev.preventDefault();
-      if (!seg.out) { toast('번역문이 비어 있어 검토 완료로 표시하지 않았습니다.'); return; }
-      seg.reviewed = true;
-      const box = document.querySelector(`.seg[data-id="${seg.id}"] [data-role="reviewed"]`);
-      if (box) box.checked = true;
-      renderProgress(); save();
+      if (!seg.out) { message(t('msgEmptyNoReview')); return; }
+      setReviewed(seg, true);
       const next = neighbor(seg, 1);
-      if (next) select(next.id, true); else toast('마지막 문단입니다.');
+      if (next) select(next.id, true); else message(t('msgLast'));
       return;
     }
     if (ev.altKey && ev.key === 'Enter' && seg && !running && seg.status !== 'loading') {
@@ -1140,17 +1244,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     state.filter = b.dataset.filter;
     renderFilters(); applyFilter();
   });
-
-  function applyReading() {
-    document.body.classList.toggle('hide-reading', !prefs.reading);
-    $('#opt-reading').checked = prefs.reading;
-  }
-  $('#opt-reading').addEventListener('change', (ev) => { prefs.reading = ev.target.checked; savePrefs(); applyReading(); });
-
-  async function copyText(text, done) {
-    try { await navigator.clipboard.writeText(text); toast(done); }
-    catch (_) { toast('복사하지 못했습니다. 내보내기를 쓰세요.'); }
-  }
+  $('#opt-reading').addEventListener('change', (ev) => { prefs.reading = ev.target.checked; savePrefs(); applyChrome(); });
 
   // ── 파일 불러오기 — 한국어 윈도우의 .txt는 EUC-KR(CP949)인 경우가 많아 UTF-8이 깨지면 그쪽으로 읽는다 ──
   async function readTextFile(file) {
@@ -1160,12 +1254,12 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   }
   async function importFile(file) {
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { toast('5MB가 넘는 파일은 나눠서 불러오세요.'); return; }
+    if (file.size > 5 * 1024 * 1024) { message(t('msgTooBig')); return; }
     const text = await readTextFile(file);
     if (!$('#dlg-import').open) openImport(false);
     const ta = $('#import-text');
     ta.value = ta.value ? ta.value.replace(/\s*$/, '\n') + text : text;
-    toast(`「${file.name}」을 불러왔습니다. 연도를 확인하고 불러오기를 누르세요.`);
+    message(t('msgFileRead', file.name));
   }
   $('#import-file').addEventListener('change', (ev) => { importFile(ev.target.files[0]); ev.target.value = ''; });
 
@@ -1175,8 +1269,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (!hasFiles(ev) || running) return;
     if (dragDepth++ === 0) {
       dropzone = document.createElement('div');
-      dropzone.className = 'dropzone';
-      dropzone.textContent = '.txt 파일을 놓으면 원문으로 불러옵니다';
+      dropzone.className = 'drop';
+      dropzone.textContent = t('drop');
       document.body.appendChild(dropzone);
     }
   });
@@ -1190,7 +1284,6 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
 
   load();
   if (state.segments.length && !current()) state.selected = state.segments[0].id;
-  applyReading();
   renderAll();
 })();
 </script>
