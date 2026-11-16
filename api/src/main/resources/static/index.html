@@ -8,7 +8,7 @@
   번역가용 작업 화면. 빌드 도구 없이 Spring static으로 서빙한다 (§7 "프론트엔드 완성도" 배제 —
   프레임워크를 들이지 않고 파일 하나로 끝낸다). API는 같은 오리진의 /api/v1/translations/sync만 쓴다.
 
-  키 취급 (ADR-020): Gemini 키(X-Llm-Key)는 기본적으로 메모리에만 둔다. "이 탭에서 기억"을 켤 때만
+  키 취급 (ADR-020): 요청자 LLM 키(X-Llm-Key)는 기본적으로 메모리에만 둔다. "이 탭에서 기억"을 켤 때만
   sessionStorage에 두고, localStorage에는 어떤 키도 쓰지 않는다. 작업 내용(원문·번역·검토 표시)만
   localStorage에 저장한다.
 -->
@@ -201,6 +201,47 @@ mark.ent.amb { border-color: var(--info); border-bottom-style: dotted; }
 mark.ent.loc { border-color: var(--line-strong); }
 mark.ent.lost { border-color: var(--bad); background: var(--bad-soft); }
 mark.ent.sel { background: var(--accent-soft); }
+/* KB가 확정한 독음 — 원문 위에 작게. 번역가가 사이드 패널을 보지 않고도 이름을 확인한다 */
+ruby.reading { ruby-position: over; }
+ruby.reading rt {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  font-size: 12px; line-height: 1; color: var(--ok); font-weight: 600; letter-spacing: 0;
+}
+ruby.reading.lost rt { color: var(--bad); }
+.hide-reading ruby.reading rt { display: none; }
+
+/* ── 상태 필터 ── */
+.filters { display: flex; gap: 6px; flex-wrap: wrap; margin: -4px 0 12px; }
+.filter {
+  display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
+  font-size: 12px; color: var(--muted); cursor: pointer;
+}
+.filter b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.filter[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.filter[aria-pressed="true"] b { color: var(--accent); }
+.filter.bad b { color: var(--bad); }
+.filter.warn b { color: var(--warn); }
+.filter:disabled { opacity: .45; cursor: default; }
+.filter-empty { color: var(--muted); font-size: 13px; padding: 24px; text-align: center; }
+
+/* 번역 중 — 빈 칸에 진행 표시 */
+.seg.loading .tgt { position: relative; }
+.seg.loading .tgt::after {
+  content: ""; position: absolute; left: 14px; right: 14px; top: 16px; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, var(--line) 0%, var(--panel-2) 50%, var(--line) 100%);
+  background-size: 200% 100%; animation: shimmer 1.1s linear infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .seg.loading .tgt::after { animation: none; } }
+
+/* 파일 끌어 놓기 */
+.dropzone {
+  position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border: 3px dashed var(--accent); font-size: 18px; font-weight: 600; color: var(--accent);
+  pointer-events: none;
+}
 
 /* ── 사이드 패널 ── */
 .side { position: sticky; top: 68px; align-self: start; display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 84px); overflow: auto; }
@@ -308,7 +349,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       <button class="btn" id="btn-export" type="button">내보내기</button>
       <button class="btn ghost" id="btn-clear" type="button">새 작업</button>
     </div>
-    <div class="colhead" id="colhead"><span></span><span>원문</span><span>번역 (직접 고칠 수 있습니다)</span></div>
+    <div class="filters" id="filters" role="toolbar" aria-label="문단 걸러 보기"></div>
+    <div class="colhead" id="colhead"><span></span><span>원문 <label style="font-weight:400;margin-left:8px;cursor:pointer"><input type="checkbox" id="opt-reading" checked> 확정 인명 독음 표시</label></span><span>번역 (직접 고칠 수 있습니다)</span></div>
     <div id="segments"></div>
   </section>
 
@@ -332,7 +374,8 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
         <span><mark class="ent amb hanmun">金某</mark>후보가 여러 명 — 문맥으로 판단</span>
         <span><mark class="ent miss hanmun">李某</mark>KB에 없는 인물 — 음을 직접 확인</span>
         <span><mark class="ent lost hanmun">鄭太和</mark>확정했는데 번역문에 이름이 없음</span>
-        <span style="margin-top:4px"><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> 지금 문단 번역 · <span class="kbd">Alt</span> + <span class="kbd">↑↓</span> 문단 이동</span>
+        <span style="margin-top:4px"><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> 검토 완료하고 다음 문단</span>
+        <span><span class="kbd">Alt</span> + <span class="kbd">Enter</span> 지금 문단 번역 · <span class="kbd">Alt</span> + <span class="kbd">↑↓</span> 문단 이동</span>
       </div>
     </div>
   </aside>
@@ -347,6 +390,10 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
         <textarea id="import-text" class="hanmun" placeholder="○ 吏曹參議鄭太和上疏。疏辭缺, 批答缺"></textarea>
         <small>줄바꿈과 ○ 표시를 기준으로 문단을 나눕니다. 2,000자가 넘는 문단은 마침표(。)에서 끊습니다.</small>
       </label>
+      <div class="inline" style="font-size:13px">
+        <label class="btn sm" style="cursor:pointer">텍스트 파일 고르기<input type="file" id="import-file" accept=".txt,text/plain" hidden></label>
+        <small style="color:var(--muted)">.txt 파일을 화면에 끌어 놓아도 됩니다 (UTF-8·EUC-KR 자동 인식)</small>
+      </div>
       <label class="field">
         <span>문서 연도 (서기)</span>
         <div class="inline">
@@ -378,7 +425,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
         <small>발급받은 작업 키입니다. 로컬 서버라면 비워 둬도 됩니다.</small>
       </label>
       <label class="field">
-        <span>본인 Gemini 키 (X-Llm-Key)</span>
+        <span>본인 LLM 키 (X-Llm-Key)</span>
         <input type="password" id="set-llm" autocomplete="off" spellcheck="false">
         <small>미리 번역해 둔 문장은 이 키 없이도 나옵니다. 처음 보는 문장은 이 키로 번역하며, 서버는 키를 저장하거나 기록하지 않습니다.</small>
       </label>
@@ -438,26 +485,28 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   const ERRORS = {
     API_KEY_REQUIRED: 'API 키가 필요한 서버입니다. 키 설정에서 입력하세요.',
     UNKNOWN_API_KEY: '등록되지 않은 API 키입니다.',
-    BYOK_REQUIRED: '미리 번역된 적 없는 문장입니다. 본인 Gemini 키를 넣으면 번역합니다.',
+    BYOK_REQUIRED: '미리 번역된 적 없는 문장입니다. 키 설정에 본인 LLM 키를 넣으면 번역합니다.',
     TENANT_DAILY_LIMIT: '오늘 쓸 수 있는 번역 횟수를 다 썼습니다.',
-    LLM_RATE_LIMITED: 'Gemini 분당 한도에 걸렸습니다.',
-    LLM_QUOTA_DAILY: 'Gemini 일일 한도를 다 썼습니다.',
-    LLM_SPEND_CAP: 'Gemini 지출 상한에 걸렸습니다.',
-    LLM_KEY_REJECTED: 'Gemini가 키를 거부했습니다. 키를 확인하세요.',
-    LLM_UPSTREAM_AUTH: '서버의 Gemini 인증에 문제가 있습니다.',
-    LLM_CONTENT_FILTERED: 'Gemini 콘텐츠 필터에 걸렸습니다.',
+    LLM_RATE_LIMITED: '번역 모델의 분당 한도에 걸렸습니다.',
+    LLM_QUOTA_DAILY: '번역 모델의 일일 한도를 다 썼습니다.',
+    LLM_SPEND_CAP: '번역 모델의 지출 상한에 걸렸습니다.',
+    LLM_KEY_REJECTED: '번역 모델이 키를 거부했습니다. 키를 확인하세요.',
+    LLM_UPSTREAM_AUTH: '서버의 번역 모델 인증에 문제가 있습니다.',
+    LLM_CONTENT_FILTERED: '번역 모델이 이 문장의 번역을 거절했습니다.',
     NER_UNAVAILABLE: '인명 인식 서버가 응답하지 않습니다.',
-    LLM_TIMEOUT: 'Gemini 응답이 너무 늦어 끊었습니다.',
-    LLM_UPSTREAM_ERROR: 'Gemini 쪽 오류입니다.',
+    LLM_TIMEOUT: '번역 모델의 응답이 너무 늦어 끊었습니다.',
+    LLM_UPSTREAM_ERROR: '번역 모델 쪽 일시 오류입니다. 다시 번역해 보세요.',
     LLM_MODEL_UNAVAILABLE: '지금 이 모델을 쓸 수 없습니다.',
-    LLM_PARSE_ERROR: 'Gemini 응답을 해석하지 못했습니다.',
+    LLM_PARSE_ERROR: '번역 모델의 응답을 해석하지 못했습니다. 다시 번역해 보세요.',
   };
   // 다시 눌러도 같은 결과일 오류 — 전체 번역을 멈춘다.
   const HALTING = new Set(['API_KEY_REQUIRED', 'UNKNOWN_API_KEY', 'BYOK_REQUIRED', 'TENANT_DAILY_LIMIT',
     'LLM_QUOTA_DAILY', 'LLM_SPEND_CAP', 'LLM_KEY_REJECTED', 'LLM_RATE_LIMITED']);
 
   // ── 상태 ──
-  let state = { segments: [], selected: null, selEnt: null };
+  const PREFS = 'sjw-workbench-prefs';
+  let state = { segments: [], selected: null, selEnt: null, filter: 'all' };
+  let prefs = { reading: true };
   let keys = { api: '', llm: '', remember: false };
   let running = null; // { abort: AbortController }
 
@@ -478,6 +527,13 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       const raw = sessionStorage.getItem(KEYSTORE);
       if (raw) keys = { ...JSON.parse(raw), remember: true };
     } catch (_) { /* 무시 */ }
+    try {
+      const raw = localStorage.getItem(PREFS);
+      if (raw) prefs = { ...prefs, ...JSON.parse(raw) };
+    } catch (_) { /* 기본값으로 */ }
+  }
+  function savePrefs() {
+    try { localStorage.setItem(PREFS, JSON.stringify(prefs)); } catch (_) { /* 무시 */ }
   }
   let saveTimer = null;
   function save() {
@@ -590,7 +646,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       else { seg.status = 'error'; seg.error = e; }
     }
     renderSeg(seg);
-    renderSide(); renderProgress(); save();
+    renderSide(); renderProgress(); applyFilter(); save();
     return seg.status === 'error' ? seg.error : null;
   }
 
@@ -632,8 +688,32 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       }
       const sel = state.selected === seg.id && state.selEnt === e.surface ? ' sel' : '';
       const title = e.type === 'PER' ? (e.resolvedName ? `${e.resolvedName} (${e.kbId})` : (STAGE[e.linkStage]?.label || '')) : (e.type === 'LOC' ? '지명' : e.type);
-      return `<mark class="ent ${cls}${sel}" data-ent="${esc(e.surface)}" title="${esc(title)}">${m}</mark>`;
+      const markHtml = `<mark class="ent ${cls}${sel}" data-ent="${esc(e.surface)}" title="${esc(title)}">${m}</mark>`;
+      // KB가 확정한 이름만 독음을 단다 — 후보·미등재는 번역가가 판단할 몫이라 답처럼 보이게 하지 않는다
+      return isConfirmed(e) ? `<ruby class="reading ${cls}">${markHtml}<rt>${esc(e.resolvedName)}</rt></ruby>` : markHtml;
     });
+  }
+
+  // ── 걸러 보기 ──
+  const FILTERS = [
+    { key: 'all', label: '전체', test: () => true },
+    { key: 'todo', label: '미번역', test: (s) => !s.out },
+    { key: 'lost', label: '인명 누락', cls: 'bad', test: (s) => check(s).grade === 'lost' },
+    { key: 'review', label: '인명 확인', cls: 'warn', test: (s) => check(s).grade === 'review' },
+    { key: 'unreviewed', label: '검토 전', test: (s) => !s.reviewed },
+  ];
+  function passes(seg) { return (FILTERS.find((f) => f.key === state.filter) || FILTERS[0]).test(seg); }
+  // 걸러 보기는 필터를 바꿀 때·번역이 끝날 때만 다시 적용한다 — 고치는 중인 문단이 손 밑에서 사라지지 않게.
+  function applyFilter() {
+    let shown = 0;
+    for (const seg of state.segments) {
+      const el = document.querySelector(`.seg[data-id="${seg.id}"]`);
+      if (!el) continue;
+      el.hidden = !passes(seg);
+      if (!el.hidden) shown++;
+    }
+    const note = $('#filter-empty');
+    if (note) note.hidden = shown > 0 || !state.segments.length;
   }
 
   function gradeChip(seg) {
@@ -655,16 +735,17 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
       <div class="num">${i + 1}</div>
       <div class="src hanmun" lang="zh-Hant">${highlight(seg)}</div>
       <div class="tgt">
-        <textarea rows="2" data-role="out" aria-label="${i + 1}번 문단 번역" placeholder="${seg.status === 'loading' ? '번역 중…' : '번역 전입니다. Ctrl+Enter로 번역하거나 직접 입력하세요.'}">${esc(seg.out)}</textarea>
+        <textarea rows="2" data-role="out" aria-label="${i + 1}번 문단 번역" placeholder="${seg.status === 'loading' ? '' : '번역 전입니다. Alt+Enter로 번역하거나 직접 입력하세요.'}">${esc(seg.out)}</textarea>
       </div>
       <div class="foot">
         ${gradeChip(seg)}
-        ${m && m.cacheHit ? `<span class="chip" title="이미 번역해 둔 결과입니다. Gemini를 부르지 않았습니다.">저장된 번역</span>` : ''}
+        ${m && m.cacheHit ? `<span class="chip" title="이미 번역해 둔 결과입니다. 번역 모델을 부르지 않았습니다.">저장된 번역</span>` : ''}
         ${edited ? '<span class="chip info">직접 수정함</span>' : ''}
         ${seg.status === 'error' ? `<span class="err">${esc(seg.error.message)}</span>` : ''}
         <span class="spacer"></span>
         <span class="year" title="동명이인을 활동 시기로 가릴 때 씁니다">연도 <input type="number" data-role="year" value="${esc(seg.year || '')}" min="1392" max="1910"> <span>${esc(yearHint)}</span></span>
         <label class="chk"><input type="checkbox" data-role="reviewed" ${seg.reviewed ? 'checked' : ''}> 검토 완료</label>
+        ${seg.out ? '<button class="btn sm ghost" type="button" data-role="copy" title="이 문단 번역 복사">복사</button>' : ''}
         <button class="btn sm" type="button" data-role="run" ${seg.status === 'loading' || running ? 'disabled' : ''}>${seg.status === 'done' ? '다시 번역' : '번역'}</button>
       </div>`;
   }
@@ -713,8 +794,20 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
         </div>`;
       return;
     }
-    box.innerHTML = state.segments.map((seg) => `<div class="seg" data-id="${seg.id}"></div>`).join('');
+    box.innerHTML = state.segments.map((seg) => `<div class="seg" data-id="${seg.id}"></div>`).join('')
+      + '<p class="filter-empty" id="filter-empty" hidden>이 조건에 맞는 문단이 없습니다.</p>';
     state.segments.forEach(renderSeg);
+    applyFilter();
+  }
+
+  function renderFilters() {
+    const box = $('#filters');
+    if (!state.segments.length) { box.innerHTML = ''; return; }
+    box.innerHTML = FILTERS.map((f) => {
+      const n = state.segments.filter(f.test).length;
+      const on = state.filter === f.key;
+      return `<button type="button" class="filter ${f.cls || ''}" data-filter="${f.key}" aria-pressed="${on}" ${!n && !on && f.key !== 'all' ? 'disabled' : ''}>${f.label} <b>${n}</b></button>`;
+    }).join('');
   }
 
   function renderSide() {
@@ -789,6 +882,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   }
 
   function renderProgress() {
+    renderFilters();
     const n = state.segments.length;
     const box = $('#progress');
     if (!n) { box.innerHTML = ''; return; }
@@ -812,7 +906,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   function renderKeys() {
     $('#keystate').innerHTML =
       (keys.api ? '<span class="chip ok"><span class="dot"></span>API 키</span>' : '') +
-      (keys.llm ? '<span class="chip ok"><span class="dot"></span>Gemini 키</span>' : '<span class="chip" title="미리 번역된 문장만 나옵니다">Gemini 키 없음</span>');
+      (keys.llm ? '<span class="chip ok"><span class="dot"></span>LLM 키</span>' : '<span class="chip" title="미리 번역된 문장만 나옵니다">LLM 키 없음</span>');
   }
 
   function renderAll() { renderSegments(); renderSide(); renderProgress(); renderToolbar(); renderKeys(); }
@@ -840,7 +934,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (y >= 1777 && y <= 1800) return `정조 ${y - 1776}년`;
     return '';
   }
-  function latName(k) { return ({ ner: '인명 인식', link: 'KB 조회', prompt: '조립', llm: 'Gemini', cache: '저장소', total: '합계' })[k] || k; }
+  function latName(k) { return ({ ner: '인명 인식', link: 'KB 조회', prompt: '조립', llm: '번역 모델', cache: '저장소', total: '합계' })[k] || k; }
   function noteReason(r) { return ({ KB_MISS: 'KB 미등재 인물' })[r] || r || '불확실'; }
   let toastTimer = null;
   function toast(msg) {
@@ -928,8 +1022,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
   $('#btn-copy').addEventListener('click', async () => {
     const text = state.segments.map((s) => s.out).filter(Boolean).join('\n\n');
     if (!text) { toast('복사할 번역문이 없습니다.'); return; }
-    try { await navigator.clipboard.writeText(text); toast('번역문을 복사했습니다.'); }
-    catch (_) { toast('복사하지 못했습니다. 내보내기를 쓰세요.'); }
+    copyText(text, '번역문을 복사했습니다.');
   });
   $('#btn-clear').addEventListener('click', () => {
     if (!confirm('지금 작업을 지우고 새로 시작할까요? 내보내지 않은 번역은 사라집니다.')) return;
@@ -950,6 +1043,7 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     if (!segEl) return;
     const seg = state.segments.find((s) => s.id === segEl.dataset.id);
     if (ev.target.closest('[data-role="run"]')) { select(seg.id, false); runOne(seg); return; }
+    if (ev.target.closest('[data-role="copy"]')) { copyText(seg.out, `${state.segments.indexOf(seg) + 1}번 문단 번역을 복사했습니다.`); return; }
     const mark = ev.target.closest('mark.ent');
     if (state.selected !== seg.id) select(seg.id, !mark && !ev.target.closest('input,label,button'));
     if (mark) { state.selEnt = mark.dataset.ent; refreshSegChrome(seg); renderSide(); }
@@ -1005,23 +1099,98 @@ dialog footer { padding: 12px 16px; border-top: 1px solid var(--line); display: 
     seg.out = seg.mt; renderSeg(seg); renderSide(); renderProgress(); save();
   });
 
+  // 지금 보이는(걸러지지 않은) 문단 사이에서만 움직인다
+  function neighbor(seg, dir) {
+    const visible = state.segments.filter((s) => !document.querySelector(`.seg[data-id="${s.id}"]`)?.hidden);
+    if (!visible.length) return null;
+    const i = seg ? visible.indexOf(seg) : -1;
+    if (i < 0) return visible[dir > 0 ? 0 : visible.length - 1];
+    return visible[i + dir] || null;
+  }
+
   document.addEventListener('keydown', (ev) => {
     if (document.querySelector('dialog[open]')) return;
     const seg = current();
-    if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter' && seg && !running && seg.status !== 'loading') {
+    // CAT 도구 관례: Ctrl+Enter = 이 문단 확정(검토 완료) 후 다음으로
+    if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter' && seg) {
+      ev.preventDefault();
+      if (!seg.out) { toast('번역문이 비어 있어 검토 완료로 표시하지 않았습니다.'); return; }
+      seg.reviewed = true;
+      const box = document.querySelector(`.seg[data-id="${seg.id}"] [data-role="reviewed"]`);
+      if (box) box.checked = true;
+      renderProgress(); save();
+      const next = neighbor(seg, 1);
+      if (next) select(next.id, true); else toast('마지막 문단입니다.');
+      return;
+    }
+    if (ev.altKey && ev.key === 'Enter' && seg && !running && seg.status !== 'loading') {
       ev.preventDefault(); runOne(seg); return;
     }
     if (ev.altKey && (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') && state.segments.length) {
       ev.preventDefault();
-      const i = seg ? state.segments.indexOf(seg) : -1;
-      const j = Math.min(state.segments.length - 1, Math.max(0, i + (ev.key === 'ArrowDown' ? 1 : -1)));
-      select(state.segments[j].id, true);
+      const next = neighbor(seg, ev.key === 'ArrowDown' ? 1 : -1);
+      if (next) select(next.id, true);
     }
   });
   window.addEventListener('resize', () => document.querySelectorAll('.seg textarea').forEach(autosize));
 
+  $('#filters').addEventListener('click', (ev) => {
+    const b = ev.target.closest('[data-filter]');
+    if (!b || b.disabled) return;
+    state.filter = b.dataset.filter;
+    renderFilters(); applyFilter();
+  });
+
+  function applyReading() {
+    document.body.classList.toggle('hide-reading', !prefs.reading);
+    $('#opt-reading').checked = prefs.reading;
+  }
+  $('#opt-reading').addEventListener('change', (ev) => { prefs.reading = ev.target.checked; savePrefs(); applyReading(); });
+
+  async function copyText(text, done) {
+    try { await navigator.clipboard.writeText(text); toast(done); }
+    catch (_) { toast('복사하지 못했습니다. 내보내기를 쓰세요.'); }
+  }
+
+  // ── 파일 불러오기 — 한국어 윈도우의 .txt는 EUC-KR(CP949)인 경우가 많아 UTF-8이 깨지면 그쪽으로 읽는다 ──
+  async function readTextFile(file) {
+    const buf = await file.arrayBuffer();
+    try { return new TextDecoder('utf-8', { fatal: true }).decode(buf).replace(/^﻿/, ''); }
+    catch (_) { return new TextDecoder('euc-kr').decode(buf); }
+  }
+  async function importFile(file) {
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('5MB가 넘는 파일은 나눠서 불러오세요.'); return; }
+    const text = await readTextFile(file);
+    if (!$('#dlg-import').open) openImport(false);
+    const ta = $('#import-text');
+    ta.value = ta.value ? ta.value.replace(/\s*$/, '\n') + text : text;
+    toast(`「${file.name}」을 불러왔습니다. 연도를 확인하고 불러오기를 누르세요.`);
+  }
+  $('#import-file').addEventListener('change', (ev) => { importFile(ev.target.files[0]); ev.target.value = ''; });
+
+  let dragDepth = 0, dropzone = null;
+  const hasFiles = (ev) => [...(ev.dataTransfer?.types || [])].includes('Files');
+  window.addEventListener('dragenter', (ev) => {
+    if (!hasFiles(ev) || running) return;
+    if (dragDepth++ === 0) {
+      dropzone = document.createElement('div');
+      dropzone.className = 'dropzone';
+      dropzone.textContent = '.txt 파일을 놓으면 원문으로 불러옵니다';
+      document.body.appendChild(dropzone);
+    }
+  });
+  window.addEventListener('dragleave', () => { if (dragDepth && --dragDepth === 0) dropzone?.remove(); });
+  window.addEventListener('dragover', (ev) => { if (hasFiles(ev)) ev.preventDefault(); });
+  window.addEventListener('drop', (ev) => {
+    if (!hasFiles(ev)) return;
+    ev.preventDefault(); dragDepth = 0; dropzone?.remove();
+    if (!running) importFile(ev.dataTransfer.files[0]);
+  });
+
   load();
   if (state.segments.length && !current()) state.selected = state.segments[0].id;
+  applyReading();
   renderAll();
 })();
 </script>
