@@ -111,7 +111,9 @@ curl -s -X POST localhost:8080/api/v1/translations/sync \
   -H 'Content-Type: application/json' -d '{"text":"以金瑬爲承旨","year":1623}'
 ```
 
-API 문서(Swagger UI)는 <http://localhost:8080/> 에서 열립니다.
+번역 작업대는 <http://localhost:8080/> 에서 열립니다. 원문을 붙여 넣으면 문단별로 번역하고, KB가 확정한 인명이
+번역문에 들어갔는지 문단마다 표시합니다. 번역문은 직접 고칠 수 있고 .txt/.tsv로 내보냅니다.
+API 문서(Swagger UI)는 <http://localhost:8080/swagger-ui.html> 에 있습니다.
 
 ## 공개 서빙 (2026-09-29 배포·검증, 현재는 내림)
 
