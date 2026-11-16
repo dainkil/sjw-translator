@@ -59,6 +59,14 @@ sjw:
         tier: T0
         unit-price-in-usd-per-mtok: 0      # 유료 제공 없음 — counterfactual 0
         unit-price-out-usd-per-mtok: 0
+      # Anthropic (ClaudeTranslator, 키는 ANTHROPIC_API_KEY). KB A/B 개정 등록의 번역 모델 (docs/benchmarks.md).
+      # 활성화는 GEMINI_MODEL=claude-sonnet-5-5 (활성 모델 변수 이름이 provider와 무관하게 이것이다).
+      # rpm·rpd 미실측 — 적응형 리미터가 initial-rpm에서 탐색한다.
+      - id: claude-sonnet-5-5
+        provider: anthropic
+        tier: T1
+        unit-price-in-usd-per-mtok: 2.00   # 실제 유료 단가 (Anthropic 공시가, 2026-11 기준)
+        unit-price-out-usd-per-mtok: 10.00
       # 가짜 provider (M6 mock, ADR-018 재검토 조건 이행) — 네트워크 0, quota 0. 활성화는 GEMINI_MODEL=fake-flash-lite.
       # 실측 대체가 아니라 실측이 불가능한 조건(429·503·REJECTED 유발, 부하)을 만드는 장치다. 결과는 캐시에 적재되지 않는다.
       - id: fake-flash-lite

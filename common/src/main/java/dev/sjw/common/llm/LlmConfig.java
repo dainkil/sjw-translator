@@ -36,11 +36,13 @@ public class LlmConfig {
         return TranslatorFactory.genAiClient(apiKey, timeoutMs);
     }
 
+    /** Anthropic 운영자 키는 provider: anthropic 모델을 쓸 때만 필요하다 — 비어 있어도 기동은 된다. */
     @Bean
     public TranslatorFactory translatorFactory(ChatClient.Builder builder, ModelRegistry registry,
                                                FakeProvider fake,
-                                               @Value("${sjw.llm.timeout-ms:60000}") int timeoutMs) {
-        return new TranslatorFactory(builder, registry, fake, timeoutMs);
+                                               @Value("${sjw.llm.timeout-ms:60000}") int timeoutMs,
+                                               @Value("${ANTHROPIC_API_KEY:}") String anthropicApiKey) {
+        return new TranslatorFactory(builder, registry, fake, timeoutMs, anthropicApiKey);
     }
 
     @Bean
