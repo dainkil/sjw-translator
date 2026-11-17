@@ -38,6 +38,7 @@ score_300.py(연구 시절 jsonl CLI)의 지표를 시스템 결과(Postgres)에
 import argparse
 import hashlib
 import json
+import re
 import statistics
 import sys
 import unicodedata
@@ -57,8 +58,16 @@ NAME_RECALL_TOLERANCE = 0.0   # 인명은 동등 요구 — 하락 0
 MIN_ITEMS = 10
 
 
+_JAVA_WS = re.compile(r"[ \t\n\x0b\f\r]+")
+
+
 def normalized_hash(text: str) -> str:
-    normalized = "".join(unicodedata.normalize("NFC", text).split())
+    """translation_job.normalized_hash와 같은 값 — TextHash.normalizedHash(Java)를 그대로 재현한다.
+
+    Java의 `\\s`는 ASCII 공백 6자뿐이다. 파이썬 `str.split()`은 U+00A0(NBSP) 등 유니코드 공백까지 지워서,
+    원문에 NBSP가 든 문장은 DB 결과와 짝지어지지 않고 채점에서 조용히 빠졌다 (eval300에서 7문장, 2026-11-17 발견).
+    """
+    normalized = _JAVA_WS.sub("", unicodedata.normalize("NFC", text))
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 

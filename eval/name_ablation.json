@@ -1,0 +1,116 @@
+{
+  "created": "2026-11-16T14:09:23+00:00",
+  "sample": "eval300_1925.json",
+  "n": 300,
+  "prompt_version": "main-4a1cb192",
+  "model": "claude-sonnet-5-5",
+  "preregistration": "docs/benchmarks.md#사전-등록--kb-주입-ab-재측정",
+  "frozen_sha256": {
+    "name_gold_300.json": "e7d238b08ff227079af5ccb2f6867ba03c1c04376b3523e922df2abe70f30af5",
+    "eval_exclusions.json": "2d84a8a9b4fcbcac037be364287587bbf1db8c2318c3078ba97a3147453710cc"
+  },
+  "runs": [
+    {
+      "round": 1,
+      "arm": "kb",
+      "batch_id": "0db17ad5-b691-4203-a83d-c1e2eb265131",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T14:09:42+00:00",
+      "completed_at": "2026-11-16T14:35:44+00:00",
+      "kb_version": [
+        "injo-fffabc78"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    },
+    {
+      "round": 1,
+      "arm": "nokb",
+      "batch_id": "624e4359-196d-4481-a90b-41cad874df21",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T14:36:05+00:00",
+      "completed_at": "2026-11-16T15:03:53+00:00",
+      "kb_version": [
+        "noop"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "nokb",
+      "batch_id": "239ade55-c300-49de-b42d-479663e70962",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T15:03:54+00:00",
+      "completed_at": "2026-11-16T15:31:11+00:00",
+      "kb_version": [
+        "noop"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "kb",
+      "batch_id": "ea970e14-e679-433d-acbc-65506a1c7abe",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T15:31:25+00:00",
+      "completed_at": "2026-11-16T15:56:58+00:00",
+      "kb_version": [
+        "injo-fffabc78"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "kb",
+      "batch_id": "a92752b8-d737-42ed-9165-cbd5f8100820",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T15:56:59+00:00",
+      "completed_at": "2026-11-16T16:22:46+00:00",
+      "kb_version": [
+        "injo-fffabc78"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "nokb",
+      "batch_id": "155f7554-b33a-4a42-81c9-a164eae47ece",
+      "status": "COMPLETED",
+      "submitted_at": "2026-11-16T16:23:01+00:00",
+      "completed_at": "2026-11-16T16:50:18+00:00",
+      "kb_version": [
+        "noop"
+      ],
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "prompt_version": [
+        "main-4a1cb192"
+      ]
+    }
+  ]
+}

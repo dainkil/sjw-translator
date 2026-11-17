@@ -31,6 +31,14 @@ def test_normalized_hash_ignores_whitespace_and_nfd():
     assert score_db.normalized_hash(nfd) == score_db.normalized_hash("김류가 아뢰었다")
 
 
+def test_normalized_hash_keeps_nbsp_like_java():
+    # Java `\s`는 U+00A0을 지우지 않는다. 기댓값은 Java(TextHash)가 translation_job에 쓴 값 (SJW-A07010170-00700).
+    # str.split()으로 지우면 이 문장이 DB 결과와 짝지어지지 않아 채점에서 빠졌다.
+    text = ("○ 答院曰, 依啓。李溟運削去仕版,\xa0"
+            "泰川縣監成戒愼越署經遞差事")
+    assert score_db.normalized_hash(text) == "0cb45291470e1ac855a47e86a288d176b8a4bedb5cc45b09804ddf3b5bcea583"
+
+
 def test_name_reflected_rules():
     assert score_db.name_reflected("김류를 승지로 제수하였다", "김류")           # 전체형
     assert score_db.name_reflected("문회가 아뢰기를", "정문회")                  # 성 생략, 이름부 2자
